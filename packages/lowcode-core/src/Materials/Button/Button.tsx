@@ -17,9 +17,15 @@ const Button: React.FC<IButtonProps> = ({
   ...props
 }) => {
   return (
-    <Root className={className} style={style} {...props}>
-      {text}
-      12
+    <Root
+      className={className}
+      style={style}
+      {...props}
+      onClick={() => {
+        console.log(123);
+      }}
+    >
+      {text || '默认值'}
     </Root>
   );
 };

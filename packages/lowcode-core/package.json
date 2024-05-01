@@ -12,6 +12,7 @@
   "dependencies": {
     "@arco-design/web-react": "^2.62.0",
     "@craftjs/core": "^0.2.5",
+    "ahooks": "^3.7.11",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",

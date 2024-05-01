@@ -1,26 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
+import ComponentWrapper from './ComponentWrapper';
 
 import { findComponentByType } from './core';
 interface IRendererProps {
   className?: string;
   style?: React.CSSProperties;
   // json 协议
-  jsonSchema: any;
+  schemaConfig: any;
 }
 
-const Root = styled.div``;
+const Root = styled.div`
+  .material-item-container {
+  }
+`;
 
 const Renderer: React.FC<IRendererProps> = ({
   className,
   style,
-  jsonSchema,
+  schemaConfig,
 }) => {
   return (
     <Root className={className} style={style}>
-      {jsonSchema.map((item) => {
+      {schemaConfig.map((item, index) => {
         const Component = findComponentByType(item.type);
-        return <Component />;
+        return (
+          <ComponentWrapper key={index} item={item}>
+            <Component {...item.props} />
+          </ComponentWrapper>
+        );
       })}
     </Root>
   );

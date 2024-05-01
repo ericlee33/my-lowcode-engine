@@ -1,7 +1,7 @@
 import { useDrag } from 'react-dnd';
-import { ItemTypes } from './ItemTypes';
-import { Button } from '@arco-design/web-react';
-import { MetaData } from '../Materials/_types';
+import { ItemTypes } from '../../ItemTypes';
+// import { Button } from '@arco-design/web-react';
+import { MetaData } from '../../../Materials/_types';
 
 const style = {
   border: '1px dashed gray',
@@ -10,7 +10,6 @@ const style = {
   marginRight: '1.5rem',
   marginBottom: '1.5rem',
   cursor: 'move',
-  float: 'left',
 };
 
 interface IDraggableItemProps {
@@ -27,7 +26,7 @@ const DraggableItem: React.FC<IDraggableItemProps> = ({ metaData }) => {
       // 获取 drop 通过 drop 回调 return 的数据
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        console.log(item, 333, dropResult);
+        // console.log(item, 333, dropResult);
       }
     },
     canDrag: true,
@@ -39,9 +38,9 @@ const DraggableItem: React.FC<IDraggableItemProps> = ({ metaData }) => {
   const opacity = isDragging ? 0.4 : 1;
 
   return (
-    <Button ref={drag} style={{ ...style, opacity }}>
+    <button ref={drag} style={{ ...style, opacity }}>
       {metaData.title}
-    </Button>
+    </button>
   );
 };
 
