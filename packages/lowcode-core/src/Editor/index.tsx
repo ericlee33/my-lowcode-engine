@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useDrag } from 'react-dnd';
-import { ItemTypes } from './ItemTypes';
 
-import { CanvasArea } from './CanvasArea';
-import { Box } from './Box';
+import Canvas from './Canvas';
+import MaterialPanel from './MaterialPanel';
+import '@arco-design/web-react/dist/css/arco.css';
+import { $$_editor_json_schema } from './constants/cache';
 
 interface IEditorProps {
   className?: string;
@@ -27,15 +27,25 @@ const Root = styled.div`
 `;
 
 const Editor: React.FC<IEditorProps> = () => {
+  const [jsonSchema, setJsonSchemat] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem($$_editor_json_schema)) ?? [];
+    } catch {
+      return [];
+    }
+  });
+  const onSave = (jsonSchema) => {
+    setJsonSchemat(jsonSchema);
+    localStorage.setItem($$_editor_json_schema, JSON.stringify(jsonSchema));
+  };
+
   return (
     <Root>
       <div className="left">
-        <Box name="Glass" />
-        <Box name="Banana" />
-        <Box name="Paper" />
+        <MaterialPanel />
       </div>
       <div className="center">
-        <CanvasArea />
+        <Canvas jsonSchema={jsonSchema} onSave={onSave} />
       </div>
       <div className="right"></div>
     </Root>

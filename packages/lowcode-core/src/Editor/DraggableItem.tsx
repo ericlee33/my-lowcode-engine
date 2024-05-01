@@ -1,5 +1,8 @@
 import { useDrag } from 'react-dnd';
-import { ItemTypes } from './ItemTypes.js';
+import { ItemTypes } from './ItemTypes';
+import { Button } from '@arco-design/web-react';
+import { MetaData } from '../Materials/_types';
+
 const style = {
   border: '1px dashed gray',
   backgroundColor: 'white',
@@ -9,16 +12,25 @@ const style = {
   cursor: 'move',
   float: 'left',
 };
-export const Box = function Box({ name }) {
+
+interface IDraggableItemProps {
+  metaData: MetaData;
+  component: React.FC<any>;
+}
+
+const DraggableItem: React.FC<IDraggableItemProps> = ({ metaData }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.BOX,
-    item: { name },
+    // 传递的信息
+    item: { type: metaData.type },
     end: (item, monitor) => {
+      // 获取 drop 通过 drop 回调 return 的数据
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
         console.log(item, 333, dropResult);
       }
     },
+    canDrag: true,
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
       handlerId: monitor.getHandlerId(),
@@ -27,8 +39,10 @@ export const Box = function Box({ name }) {
   const opacity = isDragging ? 0.4 : 1;
 
   return (
-    <div ref={drag} style={{ ...style, opacity }} data-testid={`box`}>
-      {name}
-    </div>
+    <Button ref={drag} style={{ ...style, opacity }}>
+      {metaData.title}
+    </Button>
   );
 };
+
+export default DraggableItem;
