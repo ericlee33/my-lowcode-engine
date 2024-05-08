@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { $$_editor_json_schema } from '../constants/cache';
 
 const SchemaContext = React.createContext<{
@@ -23,6 +23,10 @@ export const SchemaContextProvider: React.FC<ISchemaContextProvider> = ({
       return [];
     }
   });
+
+  useEffect(() => {
+    localStorage.setItem($$_editor_json_schema, JSON.stringify(schemaConfig));
+  }, [schemaConfig]);
 
   return (
     <SchemaContext.Provider

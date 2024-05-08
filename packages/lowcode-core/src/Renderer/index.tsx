@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import ComponentWrapper from './ComponentWrapper';
+import ScopedContextProvider from '../Editor/store/ScopedContext';
 
-import { findComponentByType } from './core';
 interface IRendererProps {
   className?: string;
   style?: React.CSSProperties;
@@ -22,14 +22,11 @@ const Renderer: React.FC<IRendererProps> = ({
 }) => {
   return (
     <Root className={className} style={style}>
-      {schemaConfig.map((item, index) => {
-        const Component = findComponentByType(item.type);
-        return (
-          <ComponentWrapper key={index} item={item}>
-            <Component {...item.props} />
-          </ComponentWrapper>
-        );
-      })}
+      <ScopedContextProvider>
+        {schemaConfig.map((item) => {
+          return <ComponentWrapper key={item.id} item={item} />;
+        })}
+      </ScopedContextProvider>
     </Root>
   );
 };

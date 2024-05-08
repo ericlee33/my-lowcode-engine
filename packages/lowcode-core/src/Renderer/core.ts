@@ -12,3 +12,13 @@ export const useConfigById = (id: string) => {
 
   return item;
 };
+
+export const dispatchEvent = (opts: {
+  event;
+  id;
+  schemaConfig;
+  componentContext;
+}) => {
+  const { id, componentContext } = opts;
+  componentContext['0.752'].switchChildNodeRender();
+};

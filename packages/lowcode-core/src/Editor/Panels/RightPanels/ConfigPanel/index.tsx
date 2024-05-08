@@ -40,17 +40,15 @@ const ConfigPanel: React.FC<IConfigPanelProps> = ({ className, style }) => {
       className={className}
       style={style}
       onValuesChange={(_, values) => {
-        setSchemaConfig((schemaConfig) => {
-          const curIndex = schemaConfig.findIndex(
-            (item) => item.id === selectedId
-          );
-          schemaConfig[curIndex].props = values;
+        const curIndex = schemaConfig.findIndex(
+          (item) => item.id === selectedId
+        );
+        schemaConfig[curIndex].props = values;
 
-          console.log(schemaConfig, 'schemaConfig');
-          return [...schemaConfig];
-        });
+        setSchemaConfig([...schemaConfig]);
       }}
     >
+      <span>id: {selectedId}</span>
       <div>配置器</div>
       {renderSetters()}
     </Root>

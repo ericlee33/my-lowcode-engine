@@ -34,10 +34,7 @@ const Root = styled.div`
 
 const Editor: React.FC<IEditorProps> = () => {
   const { schemaConfig, setSchemaConfig } = useSchemaContext();
-  const onSave = (jsonSchema) => {
-    setSchemaConfig(jsonSchema);
-    localStorage.setItem($$_editor_json_schema, JSON.stringify(jsonSchema));
-  };
+  const onSave = setSchemaConfig;
 
   const onClear = () => {
     localStorage.setItem($$_editor_json_schema, JSON.stringify([]));

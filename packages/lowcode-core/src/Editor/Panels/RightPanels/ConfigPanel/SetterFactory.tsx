@@ -6,11 +6,16 @@ interface ISetterRendererProps {
   className?: string;
   style?: React.CSSProperties;
   name?: string;
+  setter: any;
 }
 
-export const createSetter = ({ name }: ISetterRendererProps) => {
+export const createSetter = ({ name, setter }: ISetterRendererProps) => {
   const renderSetter = () => {
-    return <InputSetter />;
+    switch (setter.componentName) {
+      case 'StringSetter': {
+        return <InputSetter />;
+      }
+    }
   };
 
   return (

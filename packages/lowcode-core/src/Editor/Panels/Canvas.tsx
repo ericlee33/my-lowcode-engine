@@ -28,7 +28,7 @@ const Canvas: React.FC<ICanvasProps> = ({ schemaConfig, onSave }) => {
           ...schemaConfig,
           {
             type: item.type,
-            id: Math.random().toString(),
+            id: Math.random().toString().slice(0, 5),
           },
         ];
 
