@@ -12,7 +12,9 @@ interface IConfigPanelProps {
   style?: React.CSSProperties;
 }
 
-const Root = styled(Form)``;
+const Root = styled(Form)`
+  padding: 0 4px;
+`;
 
 const ConfigPanel: React.FC<IConfigPanelProps> = ({ className, style }) => {
   const [form] = Form.useForm();

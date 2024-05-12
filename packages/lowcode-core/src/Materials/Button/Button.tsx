@@ -38,7 +38,6 @@ const Button: React.FC<IButtonProps> = ({
   };
 
   useImperativeHandle(forwardedRef, () => ({
-    abc,
     switchChildNodeRender,
   }));
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import materials from '../../../Materials';
-import MaterialItem from './DraggableItem';
+import materials from '../../../../Materials';
+import MaterialItem from '../DraggableItem';
 
 interface IMaterialPanelProps {
   className?: string;

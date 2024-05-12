@@ -12,6 +12,16 @@ interface ISchemaContextProvider {
   children: React.ReactNode;
 }
 
+interface ISchemaControllerProps {}
+
+class SchemaController {
+  constructor(private readonly props: ISchemaControllerProps) {}
+
+  add() {
+    this.props;
+  }
+}
+
 export const SchemaContextProvider: React.FC<ISchemaContextProvider> = ({
   children,
 }) => {
