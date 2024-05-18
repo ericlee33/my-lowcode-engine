@@ -8,9 +8,7 @@ export const findComponentByType = (type: string) => {
 export const useConfigById = (id: string) => {
   const { schemaConfig } = useSchemaContext();
 
-  const item = schemaConfig.find((item) => item.id === id);
-
-  return item;
+  return schemaConfig.get(id);
 };
 
 export const dispatchEvent = (opts: {

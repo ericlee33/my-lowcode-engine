@@ -20,8 +20,14 @@ const Input: React.FC<IInputProps> = ({
     console.log('abc');
   };
 
+  const onClear = () => {
+    const { onChange } = props;
+    onChange('');
+  };
+
   useImperativeHandle(forwardedRef, () => ({
     abc,
+    onClear,
   }));
 
   return <Root className={className} style={style} {...props} />;

@@ -24,13 +24,10 @@ const Canvas: React.FC<ICanvasProps> = ({ schemaConfig, onSave }) => {
         }
         // monitor
       ) => {
-        const result = [
-          ...schemaConfig,
-          {
-            type: item.type,
-            id: Math.random().toString().slice(0, 5),
-          },
-        ];
+        const result = {
+          type: item.type,
+          id: Math.random().toString().slice(0, 5),
+        };
 
         onSave(result);
 
@@ -52,15 +49,22 @@ const Canvas: React.FC<ICanvasProps> = ({ schemaConfig, onSave }) => {
   );
 
   const overAndCanCrop = canDrop && isOver;
-  let border = '2px solid #e1e1e1';
+  const borderProps: React.CSSProperties = {
+    borderWidth: '0 1px 1px 1px',
+    borderStyle: 'solid',
+    borderColor: '#e1e1e1',
+  };
 
   if (overAndCanCrop) {
-    border = '2px dotted blue';
+    borderProps.borderWidth = '1px';
+    borderProps.borderStyle = 'dotted';
+    borderProps.borderColor = 'blue';
   } else if (canDrop) {
-    border = '2px solid blue';
+    borderProps.borderWidth = '1px';
+    borderProps.borderColor = 'blue';
   }
   return (
-    <div ref={drop} style={{ ...style, border }}>
+    <div ref={drop} style={{ ...style, ...borderProps }}>
       <Renderer schemaConfig={schemaConfig} />
     </div>
   );
