@@ -18,5 +18,5 @@ export const dispatchEvent = (opts: {
   componentContext;
 }) => {
   const { id, componentContext } = opts;
-  componentContext['0.752'].switchChildNodeRender();
+  componentContext['0.320'].switchChildNodeRender();
 };
