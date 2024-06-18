@@ -29,16 +29,10 @@ const Button: React.FC<IButtonProps> = ({
   const { componentContext } = useScoped();
 
   const switchChildNodeRender = () => {
-    console.log(id, 'render1');
-    // setRender((render) => {
-    //   console.log(render, 'render');
-    //   return !render;
-    // });
     setRender((render) => !render);
   };
 
   useImperativeHandle(forwardedRef, () => ({
-    abc,
     switchChildNodeRender,
   }));
 
