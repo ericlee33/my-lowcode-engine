@@ -5,11 +5,13 @@ import Canvas from './Panels/Canvas';
 import MaterialPanel from './Panels/Left/Material';
 import RightPanels from './Panels/Right';
 import '@arco-design/web-react/dist/css/arco.css';
-import { $$_editor_json_schema } from './constants/cache';
-import { useSchemaContext } from './store/SchemaContext';
 import { Button, Tabs } from '@arco-design/web-react';
 import { IconApps, IconSettings } from '@arco-design/web-react/icon';
 import SourceCodePanel from './Panels/Left/SourceCode';
+import SourceCodeEditor from './Panels/LeftPanels/SourceCodeEditor';
+import '@arco-design/web-react/dist/css/arco.css';
+import { $$_editor_json_schema } from './constants/cache';
+import { useSchemaContext } from './store/SchemaContext';
 
 interface IEditorProps {
   className?: string;
@@ -83,6 +85,36 @@ const Editor: React.FC<IEditorProps> = () => {
             预览
           </Button>
         </span>
+      <div className="left">
+        <div
+          style={{
+            color: '#1da',
+            borderBottom: '1px solid #e1e1e1',
+            fontSize: '20px',
+          }}
+        >
+          Eric's Low Code
+        </div>
+        <Tabs defaultActiveTab="widget">
+          <Tabs.TabPane key="widget" title="widget">
+            <MaterialPanel
+              style={{
+                marginTop: '10px',
+              }}
+            />
+            <div
+              onClick={() => {
+                onClear();
+                setSchemaConfig([]);
+              }}
+            >
+              清空
+            </div>
+          </Tabs.TabPane>
+          <Tabs.TabPane key="json" title="json">
+            <SourceCodeEditor />
+          </Tabs.TabPane>
+        </Tabs>
       </div>
       <div className="editor-area">
         <div className="left">
