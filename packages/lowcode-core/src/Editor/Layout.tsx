@@ -59,7 +59,7 @@ const Root = styled.div`
     }
 
     .right {
-      min-width: 300px;
+      width: 280px;
     }
 
     .arco-tabs {
@@ -85,37 +85,8 @@ const Editor: React.FC<IEditorProps> = () => {
             预览
           </Button>
         </span>
-      <div className="left">
-        <div
-          style={{
-            color: '#1da',
-            borderBottom: '1px solid #e1e1e1',
-            fontSize: '20px',
-          }}
-        >
-          Eric's Low Code
-        </div>
-        <Tabs defaultActiveTab="widget">
-          <Tabs.TabPane key="widget" title="widget">
-            <MaterialPanel
-              style={{
-                marginTop: '10px',
-              }}
-            />
-            <div
-              onClick={() => {
-                onClear();
-                setSchemaConfig([]);
-              }}
-            >
-              清空
-            </div>
-          </Tabs.TabPane>
-          <Tabs.TabPane key="json" title="json">
-            <SourceCodeEditor />
-          </Tabs.TabPane>
-        </Tabs>
       </div>
+      <div className="left"></div>
       <div className="editor-area">
         <div className="left">
           <Tabs defaultActiveTab="material" tabPosition="left" size="large">

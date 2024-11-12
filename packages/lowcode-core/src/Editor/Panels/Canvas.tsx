@@ -2,12 +2,22 @@ import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../ItemTypes';
 import materials from '../../Materials';
 import Renderer from '../../Renderer';
+import styled from 'styled-components';
+import { Responsive as ResponsiveGridLayout } from 'react-grid-layout';
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
 
 const style: React.CSSProperties = {
   height: '100%',
   color: 'white',
   textAlign: 'center',
 };
+
+const Root = styled.div`
+  .test-abc {
+    background: #e1e1e1;
+  }
+`;
 
 interface ICanvasProps {
   schemaConfig: any;
@@ -63,10 +73,41 @@ const Canvas: React.FC<ICanvasProps> = ({ schemaConfig, onSave }) => {
     borderProps.borderWidth = '1px';
     borderProps.borderColor = 'blue';
   }
+
+  const layout = [
+    { i: 'a', x: 0, y: 0, w: 1, h: 2, static: true },
+    { i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
+    { i: 'c', x: 4, y: 0, w: 1, h: 2 },
+  ];
+
+  // const onLayoutChange = () => {
+
+  // }
+
   return (
-    <div ref={drop} style={{ ...style, ...borderProps }}>
-      <Renderer schemaConfig={schemaConfig} />
-    </div>
+    <Root ref={drop} style={{ ...style, ...borderProps }}>
+      {/* <Renderer schemaConfig={schemaConfig} /> */}
+      <ResponsiveGridLayout
+        className="layout"
+        layout={layout}
+
+        rowHeight={30}
+        width={1200}
+        // onLayoutChange={(layout, layouts) =>
+        //   this.onLayoutChange(layout, layouts)
+        // }
+      >
+        <div className="test-abc" key="a">
+          a
+        </div>
+        <div className="test-abc" key="b">
+          b
+        </div>
+        <div className="test-abc" key="c">
+          c
+        </div>
+      </ResponsiveGridLayout>
+    </Root>
   );
 };
 

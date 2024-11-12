@@ -12,6 +12,8 @@ importers:
       '@monaco-editor/react': ^4.6.0
       '@types/react': ^18.2.66
       '@types/react-dom': ^18.2.22
+      '@types/react-grid-layout': ^1.3.5
+      '@types/uuid': ^9.0.8
       '@typescript-eslint/eslint-plugin': ^7.2.0
       '@typescript-eslint/parser': ^7.2.0
       '@vitejs/plugin-react-swc': ^3.5.0
@@ -28,14 +30,18 @@ importers:
       react-dnd: ^16.0.1
       react-dnd-html5-backend: ^16.0.1
       react-dom: ^18.2.0
+      react-grid-layout: ^1.4.4
+      react-resizable: ^3.0.5
       styled-components: ^6.1.8
       typescript: ^5.2.2
       use-immer: ^0.9.0
+      uuid: ^9.0.1
       vite: ^4.2.0
     dependencies:
       '@arco-design/web-react': 2.62.0_ryjoknqlpuvb23mbmysxwfrb6m
       '@craftjs/core': 0.2.5_react@18.3.1
       '@monaco-editor/react': 4.6.0_p4qxy7hi5tguivn65crh6eeuhu
+      '@types/react-grid-layout': 1.3.5
       ahooks: 3.7.11_react@18.3.1
       install: 0.13.0
       mobx: 6.13.5
@@ -46,11 +52,15 @@ importers:
       react-dnd: 16.0.1_omxgp22l5i4odgutx2pskcopxu
       react-dnd-html5-backend: 16.0.1
       react-dom: 18.3.1_react@18.3.1
+      react-grid-layout: 1.4.4_nnrd3gsncyragczmpvfhocinkq
+      react-resizable: 3.0.5_nnrd3gsncyragczmpvfhocinkq
       styled-components: 6.1.8_nnrd3gsncyragczmpvfhocinkq
       use-immer: 0.9.0_react@18.3.1
+      uuid: 9.0.1
     devDependencies:
       '@types/react': 18.3.1
       '@types/react-dom': 18.3.0
+      '@types/uuid': 9.0.8
       '@typescript-eslint/eslint-plugin': 7.7.1_z23mkqd7gzbipyxs63ket4booa
       '@typescript-eslint/parser': 7.7.1_te743w6atip6hhlha3uq43n2xe
       '@vitejs/plugin-react-swc': 3.6.0_vite@4.5.5
@@ -592,6 +602,12 @@ packages:
       '@types/react': 18.3.1
     dev: true
 
+  /@types/react-grid-layout/1.3.5:
+    resolution: {integrity: sha512-WH/po1gcEcoR6y857yAnPGug+ZhkF4PaTUxgAbwfeSH/QOgVSakKHBXoPGad/sEznmkiaK3pqHk+etdWisoeBQ==}
+    dependencies:
+      '@types/react': 18.3.1
+    dev: false
+
   /@types/react/18.3.1:
     resolution: {integrity: sha512-V0kuGBX3+prX+DQ/7r2qsv1NsdfnCLnTgnRJ1pYnxykBhGMz+qj+box5lq7XsO5mtZsBqpjwwTu/7wszPfMBcw==}
     dependencies:
@@ -605,6 +621,10 @@ packages:
   /@types/stylis/4.2.0:
     resolution: {integrity: sha512-n4sx2bqL0mW1tvDf/loQ+aMX7GQD3lc3fkCMC55VFNDu/vBOabO+LTIeXKM14xK0ppk5TUGcWRjiSpIlUpghKw==}
     dev: false
+
+  /@types/uuid/9.0.8:
+    resolution: {integrity: sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA==}
+    dev: true
 
   /@typescript-eslint/eslint-plugin/7.7.1_z23mkqd7gzbipyxs63ket4booa:
     resolution: {integrity: sha512-KwfdWXJBOviaBVhxO3p5TJiLpNuh2iyXyjmWN0f1nU87pwyvfS0EmjC6ukQVYVFJd/K1+0NWGPDXiyEyQorn0Q==}
@@ -863,6 +883,16 @@ packages:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
     dev: true
+
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
+    dev: false
+
+  /clsx/2.1.1:
+    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
+    engines: {node: '>=6'}
+    dev: false
 
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
@@ -1143,6 +1173,10 @@ packages:
 
   /fast-deep-equal/3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
+
+  /fast-equals/4.0.3:
+    resolution: {integrity: sha512-G3BSX9cfKttjr+2o1O22tYMLq0DPluZnYtq1rXumE1SpL/F/SLIfHx08WYQoWSIpeMYf8sRbJ8++71+v6Pnxfg==}
+    dev: false
 
   /fast-glob/3.3.2:
     resolution: {integrity: sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow==}
@@ -1753,6 +1787,18 @@ packages:
       scheduler: 0.23.2
     dev: false
 
+  /react-draggable/4.4.6_nnrd3gsncyragczmpvfhocinkq:
+    resolution: {integrity: sha512-LtY5Xw1zTPqHkVmtM3X8MUOxNDOUhv/khTgBgrUvwaS064bwVvxT+q5El0uUFNx5IEPKXuRejr7UqLwBIg5pdw==}
+    peerDependencies:
+      react: '>= 16.3.0'
+      react-dom: '>= 16.3.0'
+    dependencies:
+      clsx: 1.2.1
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-dom: 18.3.1_react@18.3.1
+    dev: false
+
   /react-fast-compare/3.2.2:
     resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
     dev: false
@@ -1776,12 +1822,40 @@ packages:
       use-sidecar: 1.1.2_omxgp22l5i4odgutx2pskcopxu
     dev: false
 
+  /react-grid-layout/1.4.4_nnrd3gsncyragczmpvfhocinkq:
+    resolution: {integrity: sha512-7+Lg8E8O8HfOH5FrY80GCIR1SHTn2QnAYKh27/5spoz+OHhMmEhU/14gIkRzJOtympDPaXcVRX/nT1FjmeOUmQ==}
+    peerDependencies:
+      react: '>= 16.3.0'
+      react-dom: '>= 16.3.0'
+    dependencies:
+      clsx: 2.1.1
+      fast-equals: 4.0.3
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-dom: 18.3.1_react@18.3.1
+      react-draggable: 4.4.6_nnrd3gsncyragczmpvfhocinkq
+      react-resizable: 3.0.5_nnrd3gsncyragczmpvfhocinkq
+      resize-observer-polyfill: 1.5.1
+    dev: false
+
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
 
   /react-is/18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
+    dev: false
+
+  /react-resizable/3.0.5_nnrd3gsncyragczmpvfhocinkq:
+    resolution: {integrity: sha512-vKpeHhI5OZvYn82kXOs1bC8aOXktGU5AmKAgaZS4F5JPburCtbmDPqE7Pzp+1kN4+Wb81LlF33VpGwWwtXem+w==}
+    peerDependencies:
+      react: '>= 16.3'
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-draggable: 4.4.6_nnrd3gsncyragczmpvfhocinkq
+    transitivePeerDependencies:
+      - react-dom
     dev: false
 
   /react-transition-group/4.4.5_nnrd3gsncyragczmpvfhocinkq:
@@ -2051,6 +2125,11 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.3.1
+    dev: false
+
+  /uuid/9.0.1:
+    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    hasBin: true
     dev: false
 
   /vite/4.5.5:
