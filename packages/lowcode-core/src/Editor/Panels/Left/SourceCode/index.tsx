@@ -44,6 +44,7 @@ const SourceCodePanel: React.FC<ISourceCodePanelProps> = ({
 }) => {
   const [ready, setReady] = useState(false);
   const { schemaConfig, setSchemaConfig } = useSchemaContext();
+  console.log(schemaConfig, 'schemaConfig');
   useEffect(() => {
     loader.init().then(/* ... */ () => setReady(true));
   }, []);
@@ -76,7 +77,7 @@ const SourceCodePanel: React.FC<ISourceCodePanelProps> = ({
           onChange={onChange}
           height="80vh"
           language="json"
-          value={JSON.stringify(schemaConfig, null, 2)}
+          value={JSON.stringify(schemaConfig.state, null, 2)}
         />
       )}
     </Root>

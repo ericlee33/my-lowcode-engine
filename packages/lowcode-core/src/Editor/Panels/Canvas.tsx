@@ -86,11 +86,10 @@ const Canvas: React.FC<ICanvasProps> = ({ schemaConfig, onSave }) => {
 
   return (
     <Root ref={drop} style={{ ...style, ...borderProps }}>
-      {/* <Renderer schemaConfig={schemaConfig} /> */}
+      <Renderer schemaConfig={schemaConfig} />
       <ResponsiveGridLayout
         className="layout"
         layout={layout}
-
         rowHeight={30}
         width={1200}
         // onLayoutChange={(layout, layouts) =>
