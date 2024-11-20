@@ -10,21 +10,31 @@ interface IInputProps extends InputProps {
 
 const Root = styled(ArcoInput)``;
 
-const Input: React.FC<IInputProps> = ({
-  className,
-  style,
-  forwardedRef,
-  ...props
-}) => {
+const Input: React.FC<IInputProps> & {
+  actions: any[];
+} = ({ className, style, forwardedRef, ...props }) => {
   const abc = () => {
     console.log('abc');
   };
 
+  const onClear = () => {
+    const { onChange } = props;
+    onChange('');
+  };
+
   useImperativeHandle(forwardedRef, () => ({
     abc,
+    onClear,
   }));
 
   return <Root className={className} style={style} {...props} />;
 };
+
+Input.actions = [
+  {
+    label: '清空',
+    value: 'onClear',
+  },
+];
 
 export default Input;

@@ -1,8 +1,8 @@
 import { MetaData } from '../_types';
 
 export const InputMeta: MetaData = {
-  type: 'Button',
-  title: '按钮',
+  type: 'Input',
+  title: '输入框',
   configure: {
     props: [
       {

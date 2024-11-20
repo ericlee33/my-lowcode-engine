@@ -12,11 +12,13 @@ interface IConfigPanelProps {
   style?: React.CSSProperties;
 }
 
-const Root = styled(Form)``;
+const Root = styled(Form)`
+  padding: 0 4px;
+`;
 
 const ConfigPanel: React.FC<IConfigPanelProps> = ({ className, style }) => {
   const [form] = Form.useForm();
-  const { schemaConfig, selectedId, setSchemaConfig } = useSchemaContext();
+  const { schemaConfig, selectedId } = useSchemaContext();
   const componentInfo = useConfigById(selectedId);
   const meta = getMetaByType(componentInfo?.type);
 
@@ -40,12 +42,12 @@ const ConfigPanel: React.FC<IConfigPanelProps> = ({ className, style }) => {
       className={className}
       style={style}
       onValuesChange={(_, values) => {
-        const curIndex = schemaConfig.findIndex(
-          (item) => item.id === selectedId
-        );
-        schemaConfig[curIndex].props = values;
-
-        setSchemaConfig([...schemaConfig]);
+        schemaConfig.update({
+          id: selectedId,
+          item: {
+            props: values,
+          },
+        });
       }}
     >
       <span>id: {selectedId}</span>

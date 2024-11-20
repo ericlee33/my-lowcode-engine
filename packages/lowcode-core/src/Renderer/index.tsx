@@ -20,10 +20,11 @@ const Renderer: React.FC<IRendererProps> = ({
   style,
   schemaConfig,
 }) => {
+  console.log(schemaConfig.state, 332);
   return (
     <Root className={className} style={style}>
       <ScopedContextProvider>
-        {schemaConfig.map((item) => {
+        {schemaConfig.state.map((item) => {
           return <ComponentWrapper key={item.id} item={item} />;
         })}
       </ScopedContextProvider>
