@@ -36,15 +36,15 @@ class EngineCore {
 		console.log(props, 24);
 		this.$schema = props.schema ?? EngineCore.DefaultSchema;
 
-		// const disposer = reaction(
-		// 	() => {
-		// 		return this.$schema;
-		// 	},
-		// 	($schema) => {
-		// 		console.log($schema, '4242');
-		// 		localStorage.setItem($$_editor_json_schema, JSON.stringify($schema));
-		// 	}
-		// );
+		const disposer = reaction(
+			() => {
+				return JSON.stringify(this.$schema);
+			},
+			($schema) => {
+				console.log($schema, '4242');
+				localStorage.setItem($$_editor_json_schema, $schema);
+			}
+		);
 	}
 
 	add(compoent: Element, id: string) {

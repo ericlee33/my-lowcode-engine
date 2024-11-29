@@ -32,6 +32,7 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
 		return nodes;
 	};
 
+	// return <>{renderElements(engineCore.schmea)}</>;
 	return <>{renderElements(engineCore.schmea)}</>;
 });
 
