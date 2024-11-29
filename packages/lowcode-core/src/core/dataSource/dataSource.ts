@@ -4,21 +4,23 @@ import { DataSourceField } from './_types';
 import { forEach } from 'lodash-es';
 
 class DataSource {
-  fields: Record<string, any>[] = [];
+	fields: Record<string, any>[] = [];
 
-  constructor() {
-    makeAutoObservable(this);
-  }
+	constructor() {
+		makeAutoObservable(this);
 
-  init() {
-    forEach(this.fields, (field) => {
-      field.init();
-    });
-  }
+		this.init();
+	}
 
-  register(field: DataSourceField) {
-    this.fields.push(new dataSourceField(field));
-  }
+	init() {
+		forEach(this.fields, (field) => {
+			field.init();
+		});
+	}
+
+	register(field: DataSourceField) {
+		this.fields.push(new dataSourceField(field));
+	}
 }
 
 export default DataSource;

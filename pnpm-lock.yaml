@@ -11,8 +11,8 @@ importers:
       '@craftjs/core': ^0.2.11
       '@monaco-editor/react': ^4.6.0
       '@types/lodash-es': ^4.17.12
-      '@types/react': ^18.3.12
-      '@types/react-dom': ^18.3.1
+      '@types/react': ^16
+      '@types/react-dom': ^16
       '@types/react-grid-layout': ^1.3.5
       '@types/uuid': ^9.0.8
       '@typescript-eslint/eslint-plugin': ^7.18.0
@@ -26,12 +26,13 @@ importers:
       lodash-es: ^4.17.21
       mobx: ^6.13.5
       mobx-react: ^9.1.1
+      mobx-react-lite: ^4.0.7
       monaco-editor: ^0.48.0
       npm: ^10.9.0
-      react: ^18.3.1
+      react: ^16.14.0
       react-dnd: ^16.0.1
       react-dnd-html5-backend: ^16.0.1
-      react-dom: ^18.3.1
+      react-dom: ^16.14.0
       react-grid-layout: ^1.5.0
       react-resizable: ^3.0.5
       styled-components: ^6.1.13
@@ -40,30 +41,31 @@ importers:
       uuid: ^9.0.1
       vite: ^4.5.5
     dependencies:
-      '@arco-design/web-react': registry.npmmirror.com/@arco-design/web-react/2.64.1_vsw25juzkyj7spaf6wjn5upvjq
-      '@craftjs/core': registry.npmmirror.com/@craftjs/core/0.2.11_react@18.3.1
-      '@monaco-editor/react': registry.npmmirror.com/@monaco-editor/react/4.6.0_p4qxy7hi5tguivn65crh6eeuhu
+      '@arco-design/web-react': registry.npmmirror.com/@arco-design/web-react/2.64.1_eu6xtb7kyj6xprlfwv5vt4xwjy
+      '@craftjs/core': registry.npmmirror.com/@craftjs/core/0.2.11_react@16.14.0
+      '@monaco-editor/react': registry.npmmirror.com/@monaco-editor/react/4.6.0_aqav23jxmanb7hehsvrcekfhqu
       '@types/react-grid-layout': registry.npmmirror.com/@types/react-grid-layout/1.3.5
-      ahooks: registry.npmmirror.com/ahooks/3.8.1_react@18.3.1
+      ahooks: registry.npmmirror.com/ahooks/3.8.1_react@16.14.0
       install: registry.npmmirror.com/install/0.13.0
       lodash-es: registry.npmmirror.com/lodash-es/4.17.21
       mobx: registry.npmmirror.com/mobx/6.13.5
-      mobx-react: registry.npmmirror.com/mobx-react/9.1.1_4du6hmh5obecsnitoasjoyfjkq
+      mobx-react: registry.npmmirror.com/mobx-react/9.1.1_cvr33yxz7nhbxney4umws763gu
+      mobx-react-lite: registry.npmmirror.com/mobx-react-lite/4.0.7_cvr33yxz7nhbxney4umws763gu
       monaco-editor: registry.npmmirror.com/monaco-editor/0.48.0
       npm: registry.npmmirror.com/npm/10.9.0
-      react: registry.npmmirror.com/react/18.3.1
-      react-dnd: registry.npmmirror.com/react-dnd/16.0.1_ryhct6r6jz2fex4xfo2quarxhi
+      react: registry.npmmirror.com/react/16.14.0
+      react-dnd: registry.npmmirror.com/react-dnd/16.0.1_3jd5knsyk77j2tir3u5v3semqu
       react-dnd-html5-backend: registry.npmmirror.com/react-dnd-html5-backend/16.0.1
-      react-dom: registry.npmmirror.com/react-dom/18.3.1_react@18.3.1
-      react-grid-layout: registry.npmmirror.com/react-grid-layout/1.5.0_nnrd3gsncyragczmpvfhocinkq
-      react-resizable: registry.npmmirror.com/react-resizable/3.0.5_nnrd3gsncyragczmpvfhocinkq
-      styled-components: registry.npmmirror.com/styled-components/6.1.13_nnrd3gsncyragczmpvfhocinkq
-      use-immer: registry.npmmirror.com/use-immer/0.9.0_react@18.3.1
+      react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
+      react-grid-layout: registry.npmmirror.com/react-grid-layout/1.5.0_wcqkhtmu7mswc6yz4uyexck3ty
+      react-resizable: registry.npmmirror.com/react-resizable/3.0.5_wcqkhtmu7mswc6yz4uyexck3ty
+      styled-components: registry.npmmirror.com/styled-components/6.1.13_wcqkhtmu7mswc6yz4uyexck3ty
+      use-immer: registry.npmmirror.com/use-immer/0.9.0_immer@9.0.21+react@16.14.0
       uuid: registry.npmmirror.com/uuid/9.0.1
     devDependencies:
       '@types/lodash-es': registry.npmmirror.com/@types/lodash-es/4.17.12
-      '@types/react': registry.npmmirror.com/@types/react/18.3.12
-      '@types/react-dom': registry.npmmirror.com/@types/react-dom/18.3.1
+      '@types/react': registry.npmmirror.com/@types/react/16.14.62
+      '@types/react-dom': registry.npmmirror.com/@types/react-dom/16.9.24
       '@types/uuid': registry.npmmirror.com/@types/uuid/9.0.8
       '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/7.18.0_rz5hw6b3it6x2cgnsjtseofawe
       '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/7.18.0_inylsuzpwuenpw7p6e7ggu4qmy
@@ -84,7 +86,7 @@ packages:
       color: registry.npmmirror.com/color/3.2.1
     dev: false
 
-  registry.npmmirror.com/@arco-design/web-react/2.64.1_vsw25juzkyj7spaf6wjn5upvjq:
+  registry.npmmirror.com/@arco-design/web-react/2.64.1_eu6xtb7kyj6xprlfwv5vt4xwjy:
     resolution: {integrity: sha512-fBD3m5vAywHA41DFiIHhVpRJVuEb27rXcn8kKcVC4OHN20NLCqJ8keLfyghSvy7A3+RVUSEsOtJMlpDB8PzHGw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@arco-design/web-react/-/web-react-2.64.1.tgz}
     id: registry.npmmirror.com/@arco-design/web-react/2.64.1
     name: '@arco-design/web-react'
@@ -101,11 +103,11 @@ packages:
       dayjs: registry.npmmirror.com/dayjs/1.11.13
       lodash: registry.npmmirror.com/lodash/4.17.21
       number-precision: registry.npmmirror.com/number-precision/1.6.0
-      react: registry.npmmirror.com/react/18.3.1
-      react-dom: registry.npmmirror.com/react-dom/18.3.1_react@18.3.1
-      react-focus-lock: registry.npmmirror.com/react-focus-lock/2.13.2_ryhct6r6jz2fex4xfo2quarxhi
+      react: registry.npmmirror.com/react/16.14.0
+      react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
+      react-focus-lock: registry.npmmirror.com/react-focus-lock/2.13.2_3jd5knsyk77j2tir3u5v3semqu
       react-is: registry.npmmirror.com/react-is/18.3.1
-      react-transition-group: registry.npmmirror.com/react-transition-group/4.4.5_nnrd3gsncyragczmpvfhocinkq
+      react-transition-group: registry.npmmirror.com/react-transition-group/4.4.5_wcqkhtmu7mswc6yz4uyexck3ty
       resize-observer-polyfill: registry.npmmirror.com/resize-observer-polyfill/1.5.1
       scroll-into-view-if-needed: registry.npmmirror.com/scroll-into-view-if-needed/2.2.31
       shallowequal: registry.npmmirror.com/shallowequal/1.1.0
@@ -122,7 +124,7 @@ packages:
       regenerator-runtime: registry.npmmirror.com/regenerator-runtime/0.14.1
     dev: false
 
-  registry.npmmirror.com/@craftjs/core/0.2.11_react@18.3.1:
+  registry.npmmirror.com/@craftjs/core/0.2.11_react@16.14.0:
     resolution: {integrity: sha512-WbaQgOWqFnfcSo9HwS7VJ71ITYVxW51Jb0QH7zJRqh1rjdwNZfyTm5+7rhB6Xm4hdZcp+QMoLhdWodNcEgwc1Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@craftjs/core/-/core-0.2.11.tgz}
     id: registry.npmmirror.com/@craftjs/core/0.2.11
     name: '@craftjs/core'
@@ -130,14 +132,14 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
     dependencies:
-      '@craftjs/utils': registry.npmmirror.com/@craftjs/utils/0.2.4_react@18.3.1
+      '@craftjs/utils': registry.npmmirror.com/@craftjs/utils/0.2.4_react@16.14.0
       debounce: registry.npmmirror.com/debounce/1.2.1
       lodash: registry.npmmirror.com/lodash/4.17.21
-      react: registry.npmmirror.com/react/18.3.1
+      react: registry.npmmirror.com/react/16.14.0
       tiny-invariant: registry.npmmirror.com/tiny-invariant/1.3.3
     dev: false
 
-  registry.npmmirror.com/@craftjs/utils/0.2.4_react@18.3.1:
+  registry.npmmirror.com/@craftjs/utils/0.2.4_react@16.14.0:
     resolution: {integrity: sha512-TJ0mm7rTacQK/875E5+SzvL90RXMFFQYDLuriawDe7i85Ha9K2vy3ap1sUEqrPCotL1KuaOx+d3CjLFFR6PTmg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@craftjs/utils/-/utils-0.2.4.tgz}
     id: registry.npmmirror.com/@craftjs/utils/0.2.4
     name: '@craftjs/utils'
@@ -148,7 +150,7 @@ packages:
       immer: registry.npmmirror.com/immer/9.0.21
       lodash: registry.npmmirror.com/lodash/4.17.21
       nanoid: registry.npmmirror.com/nanoid/3.3.7
-      react: registry.npmmirror.com/react/18.3.1
+      react: registry.npmmirror.com/react/16.14.0
       shallowequal: registry.npmmirror.com/shallowequal/1.1.0
       tiny-invariant: registry.npmmirror.com/tiny-invariant/1.3.3
     dev: false
@@ -501,7 +503,7 @@ packages:
       state-local: registry.npmmirror.com/state-local/1.0.7
     dev: false
 
-  registry.npmmirror.com/@monaco-editor/react/4.6.0_p4qxy7hi5tguivn65crh6eeuhu:
+  registry.npmmirror.com/@monaco-editor/react/4.6.0_aqav23jxmanb7hehsvrcekfhqu:
     resolution: {integrity: sha512-RFkU9/i7cN2bsq/iTkurMWOEErmYcY6JiQI3Jn+WeR/FGISH8JbHERjpS9oRuSOPvDMJI0Z8nJeKkbOs9sBYQw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@monaco-editor/react/-/react-4.6.0.tgz}
     id: registry.npmmirror.com/@monaco-editor/react/4.6.0
     name: '@monaco-editor/react'
@@ -513,8 +515,8 @@ packages:
     dependencies:
       '@monaco-editor/loader': registry.npmmirror.com/@monaco-editor/loader/1.4.0_monaco-editor@0.48.0
       monaco-editor: registry.npmmirror.com/monaco-editor/0.48.0
-      react: registry.npmmirror.com/react/18.3.1
-      react-dom: registry.npmmirror.com/react-dom/18.3.1_react@18.3.1
+      react: registry.npmmirror.com/react/16.14.0
+      react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
     dev: false
 
   registry.npmmirror.com/@nodelib/fs.scandir/2.1.5:
@@ -736,12 +738,12 @@ packages:
     name: '@types/prop-types'
     version: 15.7.13
 
-  registry.npmmirror.com/@types/react-dom/18.3.1:
-    resolution: {integrity: sha512-qW1Mfv8taImTthu4KoXgDfLuk4bydU6Q/TkADnDWWHwi4NX4BR+LWfTp2sVmTqRrsHvyDDTelgelxJ+SsejKKQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/react-dom/-/react-dom-18.3.1.tgz}
+  registry.npmmirror.com/@types/react-dom/16.9.24:
+    resolution: {integrity: sha512-Gcmq2JTDheyWn/1eteqyzzWKSqDjYU6KYsIvH7thb7CR5OYInAWOX+7WnKf6PaU/cbdOc4szJItcDEJO7UGmfA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/react-dom/-/react-dom-16.9.24.tgz}
     name: '@types/react-dom'
-    version: 18.3.1
+    version: 16.9.24
     dependencies:
-      '@types/react': registry.npmmirror.com/@types/react/18.3.12
+      '@types/react': registry.npmmirror.com/@types/react/16.14.62
     dev: true
 
   registry.npmmirror.com/@types/react-grid-layout/1.3.5:
@@ -749,16 +751,22 @@ packages:
     name: '@types/react-grid-layout'
     version: 1.3.5
     dependencies:
-      '@types/react': registry.npmmirror.com/@types/react/18.3.12
+      '@types/react': registry.npmmirror.com/@types/react/16.14.62
     dev: false
 
-  registry.npmmirror.com/@types/react/18.3.12:
-    resolution: {integrity: sha512-D2wOSq/d6Agt28q7rSI3jhU7G6aiuzljDGZ2hTZHIkrTLUI+AF3WMeKkEZ9nN2fkBAlcktT6vcZjDFiIhMYEQw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/react/-/react-18.3.12.tgz}
+  registry.npmmirror.com/@types/react/16.14.62:
+    resolution: {integrity: sha512-BWf7hqninZav6nerxXj+NeZT/mTpDeG6Lk2zREHAy63CrnXoOGPGtNqTFYFN/sqpSaREDP5otVV88axIXmKfGA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/react/-/react-16.14.62.tgz}
     name: '@types/react'
-    version: 18.3.12
+    version: 16.14.62
     dependencies:
       '@types/prop-types': registry.npmmirror.com/@types/prop-types/15.7.13
+      '@types/scheduler': registry.npmmirror.com/@types/scheduler/0.16.8
       csstype: registry.npmmirror.com/csstype/3.1.3
+
+  registry.npmmirror.com/@types/scheduler/0.16.8:
+    resolution: {integrity: sha512-WZLiwShhwLRmeV6zH+GkbOFT6Z6VklCItrDioxUnv+u4Ll+8vKeFySoFyK/0ctcRpOmwAicELfmys1sDc/Rw+A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/scheduler/-/scheduler-0.16.8.tgz}
+    name: '@types/scheduler'
+    version: 0.16.8
 
   registry.npmmirror.com/@types/stylis/4.2.5:
     resolution: {integrity: sha512-1Xve+NMN7FWjY14vLoY5tL3BVEQ/n42YLwaqJIPYhotZ9uBHt87VceMwWQpzmdEt2TNXIorIFG+YeCUUW7RInw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/stylis/-/stylis-4.2.5.tgz}
@@ -959,7 +967,7 @@ packages:
     hasBin: true
     dev: true
 
-  registry.npmmirror.com/ahooks/3.8.1_react@18.3.1:
+  registry.npmmirror.com/ahooks/3.8.1_react@16.14.0:
     resolution: {integrity: sha512-JoP9+/RWO7MnI/uSKdvQ8WB10Y3oo1PjLv+4Sv4Vpm19Z86VUMdXh+RhWvMGxZZs06sq2p0xVtFk8Oh5ZObsoA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ahooks/-/ahooks-3.8.1.tgz}
     id: registry.npmmirror.com/ahooks/3.8.1
     name: ahooks
@@ -973,7 +981,7 @@ packages:
       intersection-observer: registry.npmmirror.com/intersection-observer/0.12.2
       js-cookie: registry.npmmirror.com/js-cookie/3.0.5
       lodash: registry.npmmirror.com/lodash/4.17.21
-      react: registry.npmmirror.com/react/18.3.1
+      react: registry.npmmirror.com/react/16.14.0
       react-fast-compare: registry.npmmirror.com/react-fast-compare/3.2.2
       resize-observer-polyfill: registry.npmmirror.com/resize-observer-polyfill/1.5.1
       screenfull: registry.npmmirror.com/screenfull/5.2.0
@@ -1858,7 +1866,7 @@ packages:
       brace-expansion: registry.npmmirror.com/brace-expansion/2.0.1
     dev: true
 
-  registry.npmmirror.com/mobx-react-lite/4.0.7_4du6hmh5obecsnitoasjoyfjkq:
+  registry.npmmirror.com/mobx-react-lite/4.0.7_cvr33yxz7nhbxney4umws763gu:
     resolution: {integrity: sha512-RjwdseshK9Mg8On5tyJZHtGD+J78ZnCnRaxeQDSiciKVQDUbfZcXhmld0VMxAwvcTnPEHZySGGewm467Fcpreg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/mobx-react-lite/-/mobx-react-lite-4.0.7.tgz}
     id: registry.npmmirror.com/mobx-react-lite/4.0.7
     name: mobx-react-lite
@@ -1875,12 +1883,12 @@ packages:
         optional: true
     dependencies:
       mobx: registry.npmmirror.com/mobx/6.13.5
-      react: registry.npmmirror.com/react/18.3.1
-      react-dom: registry.npmmirror.com/react-dom/18.3.1_react@18.3.1
-      use-sync-external-store: registry.npmmirror.com/use-sync-external-store/1.2.2_react@18.3.1
+      react: registry.npmmirror.com/react/16.14.0
+      react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
+      use-sync-external-store: registry.npmmirror.com/use-sync-external-store/1.2.2_react@16.14.0
     dev: false
 
-  registry.npmmirror.com/mobx-react/9.1.1_4du6hmh5obecsnitoasjoyfjkq:
+  registry.npmmirror.com/mobx-react/9.1.1_cvr33yxz7nhbxney4umws763gu:
     resolution: {integrity: sha512-gVV7AdSrAAxqXOJ2bAbGa5TkPqvITSzaPiiEkzpW4rRsMhSec7C2NBCJYILADHKp2tzOAIETGRsIY0UaCV5aEw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/mobx-react/-/mobx-react-9.1.1.tgz}
     id: registry.npmmirror.com/mobx-react/9.1.1
     name: mobx-react
@@ -1897,9 +1905,9 @@ packages:
         optional: true
     dependencies:
       mobx: registry.npmmirror.com/mobx/6.13.5
-      mobx-react-lite: registry.npmmirror.com/mobx-react-lite/4.0.7_4du6hmh5obecsnitoasjoyfjkq
-      react: registry.npmmirror.com/react/18.3.1
-      react-dom: registry.npmmirror.com/react-dom/18.3.1_react@18.3.1
+      mobx-react-lite: registry.npmmirror.com/mobx-react-lite/4.0.7_cvr33yxz7nhbxney4umws763gu
+      react: registry.npmmirror.com/react/16.14.0
+      react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
     dev: false
 
   registry.npmmirror.com/mobx/6.13.5:
@@ -2170,7 +2178,7 @@ packages:
     version: 1.2.3
     dev: true
 
-  registry.npmmirror.com/react-clientside-effect/1.2.6_react@18.3.1:
+  registry.npmmirror.com/react-clientside-effect/1.2.6_react@16.14.0:
     resolution: {integrity: sha512-XGGGRQAKY+q25Lz9a/4EPqom7WRjz3z9R2k4jhVKA/puQFH/5Nt27vFZYql4m4NVNdUvX8PS3O7r/Zzm7cjUlg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-clientside-effect/-/react-clientside-effect-1.2.6.tgz}
     id: registry.npmmirror.com/react-clientside-effect/1.2.6
     name: react-clientside-effect
@@ -2179,7 +2187,7 @@ packages:
       react: ^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@babel/runtime': registry.npmmirror.com/@babel/runtime/7.26.0
-      react: registry.npmmirror.com/react/18.3.1
+      react: registry.npmmirror.com/react/16.14.0
     dev: false
 
   registry.npmmirror.com/react-dnd-html5-backend/16.0.1:
@@ -2190,7 +2198,7 @@ packages:
       dnd-core: registry.npmmirror.com/dnd-core/16.0.1
     dev: false
 
-  registry.npmmirror.com/react-dnd/16.0.1_ryhct6r6jz2fex4xfo2quarxhi:
+  registry.npmmirror.com/react-dnd/16.0.1_3jd5knsyk77j2tir3u5v3semqu:
     resolution: {integrity: sha512-QeoM/i73HHu2XF9aKksIUuamHPDvRglEwdHL4jsp784BgUuWcg6mzfxT0QDdQz8Wj0qyRKx2eMg8iZtWvU4E2Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-dnd/-/react-dnd-16.0.1.tgz}
     id: registry.npmmirror.com/react-dnd/16.0.1
     name: react-dnd
@@ -2210,27 +2218,29 @@ packages:
     dependencies:
       '@react-dnd/invariant': registry.npmmirror.com/@react-dnd/invariant/4.0.2
       '@react-dnd/shallowequal': registry.npmmirror.com/@react-dnd/shallowequal/4.0.2
-      '@types/react': registry.npmmirror.com/@types/react/18.3.12
+      '@types/react': registry.npmmirror.com/@types/react/16.14.62
       dnd-core: registry.npmmirror.com/dnd-core/16.0.1
       fast-deep-equal: registry.npmmirror.com/fast-deep-equal/3.1.3
       hoist-non-react-statics: registry.npmmirror.com/hoist-non-react-statics/3.3.2
-      react: registry.npmmirror.com/react/18.3.1
+      react: registry.npmmirror.com/react/16.14.0
     dev: false
 
-  registry.npmmirror.com/react-dom/18.3.1_react@18.3.1:
-    resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-dom/-/react-dom-18.3.1.tgz}
-    id: registry.npmmirror.com/react-dom/18.3.1
+  registry.npmmirror.com/react-dom/16.14.0_react@16.14.0:
+    resolution: {integrity: sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-dom/-/react-dom-16.14.0.tgz}
+    id: registry.npmmirror.com/react-dom/16.14.0
     name: react-dom
-    version: 18.3.1
+    version: 16.14.0
     peerDependencies:
-      react: ^18.3.1
+      react: ^16.14.0
     dependencies:
       loose-envify: registry.npmmirror.com/loose-envify/1.4.0
-      react: registry.npmmirror.com/react/18.3.1
-      scheduler: registry.npmmirror.com/scheduler/0.23.2
+      object-assign: registry.npmmirror.com/object-assign/4.1.1
+      prop-types: registry.npmmirror.com/prop-types/15.8.1
+      react: registry.npmmirror.com/react/16.14.0
+      scheduler: registry.npmmirror.com/scheduler/0.19.1
     dev: false
 
-  registry.npmmirror.com/react-draggable/4.4.6_nnrd3gsncyragczmpvfhocinkq:
+  registry.npmmirror.com/react-draggable/4.4.6_wcqkhtmu7mswc6yz4uyexck3ty:
     resolution: {integrity: sha512-LtY5Xw1zTPqHkVmtM3X8MUOxNDOUhv/khTgBgrUvwaS064bwVvxT+q5El0uUFNx5IEPKXuRejr7UqLwBIg5pdw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-draggable/-/react-draggable-4.4.6.tgz}
     id: registry.npmmirror.com/react-draggable/4.4.6
     name: react-draggable
@@ -2241,8 +2251,8 @@ packages:
     dependencies:
       clsx: registry.npmmirror.com/clsx/1.2.1
       prop-types: registry.npmmirror.com/prop-types/15.8.1
-      react: registry.npmmirror.com/react/18.3.1
-      react-dom: registry.npmmirror.com/react-dom/18.3.1_react@18.3.1
+      react: registry.npmmirror.com/react/16.14.0
+      react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
     dev: false
 
   registry.npmmirror.com/react-fast-compare/3.2.2:
@@ -2251,7 +2261,7 @@ packages:
     version: 3.2.2
     dev: false
 
-  registry.npmmirror.com/react-focus-lock/2.13.2_ryhct6r6jz2fex4xfo2quarxhi:
+  registry.npmmirror.com/react-focus-lock/2.13.2_3jd5knsyk77j2tir3u5v3semqu:
     resolution: {integrity: sha512-T/7bsofxYqnod2xadvuwjGKHOoL5GH7/EIPI5UyEvaU/c2CcphvGI371opFtuY/SYdbMsNiuF4HsHQ50nA/TKQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-focus-lock/-/react-focus-lock-2.13.2.tgz}
     id: registry.npmmirror.com/react-focus-lock/2.13.2
     name: react-focus-lock
@@ -2264,16 +2274,16 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': registry.npmmirror.com/@babel/runtime/7.26.0
-      '@types/react': registry.npmmirror.com/@types/react/18.3.12
+      '@types/react': registry.npmmirror.com/@types/react/16.14.62
       focus-lock: registry.npmmirror.com/focus-lock/1.3.5
       prop-types: registry.npmmirror.com/prop-types/15.8.1
-      react: registry.npmmirror.com/react/18.3.1
-      react-clientside-effect: registry.npmmirror.com/react-clientside-effect/1.2.6_react@18.3.1
-      use-callback-ref: registry.npmmirror.com/use-callback-ref/1.3.2_ryhct6r6jz2fex4xfo2quarxhi
-      use-sidecar: registry.npmmirror.com/use-sidecar/1.1.2_ryhct6r6jz2fex4xfo2quarxhi
+      react: registry.npmmirror.com/react/16.14.0
+      react-clientside-effect: registry.npmmirror.com/react-clientside-effect/1.2.6_react@16.14.0
+      use-callback-ref: registry.npmmirror.com/use-callback-ref/1.3.2_3jd5knsyk77j2tir3u5v3semqu
+      use-sidecar: registry.npmmirror.com/use-sidecar/1.1.2_3jd5knsyk77j2tir3u5v3semqu
     dev: false
 
-  registry.npmmirror.com/react-grid-layout/1.5.0_nnrd3gsncyragczmpvfhocinkq:
+  registry.npmmirror.com/react-grid-layout/1.5.0_wcqkhtmu7mswc6yz4uyexck3ty:
     resolution: {integrity: sha512-WBKX7w/LsTfI99WskSu6nX2nbJAUD7GD6nIXcwYLyPpnslojtmql2oD3I2g5C3AK8hrxIarYT8awhuDIp7iQ5w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-grid-layout/-/react-grid-layout-1.5.0.tgz}
     id: registry.npmmirror.com/react-grid-layout/1.5.0
     name: react-grid-layout
@@ -2285,10 +2295,10 @@ packages:
       clsx: registry.npmmirror.com/clsx/2.1.1
       fast-equals: registry.npmmirror.com/fast-equals/4.0.3
       prop-types: registry.npmmirror.com/prop-types/15.8.1
-      react: registry.npmmirror.com/react/18.3.1
-      react-dom: registry.npmmirror.com/react-dom/18.3.1_react@18.3.1
-      react-draggable: registry.npmmirror.com/react-draggable/4.4.6_nnrd3gsncyragczmpvfhocinkq
-      react-resizable: registry.npmmirror.com/react-resizable/3.0.5_nnrd3gsncyragczmpvfhocinkq
+      react: registry.npmmirror.com/react/16.14.0
+      react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
+      react-draggable: registry.npmmirror.com/react-draggable/4.4.6_wcqkhtmu7mswc6yz4uyexck3ty
+      react-resizable: registry.npmmirror.com/react-resizable/3.0.5_wcqkhtmu7mswc6yz4uyexck3ty
       resize-observer-polyfill: registry.npmmirror.com/resize-observer-polyfill/1.5.1
     dev: false
 
@@ -2304,7 +2314,7 @@ packages:
     version: 18.3.1
     dev: false
 
-  registry.npmmirror.com/react-resizable/3.0.5_nnrd3gsncyragczmpvfhocinkq:
+  registry.npmmirror.com/react-resizable/3.0.5_wcqkhtmu7mswc6yz4uyexck3ty:
     resolution: {integrity: sha512-vKpeHhI5OZvYn82kXOs1bC8aOXktGU5AmKAgaZS4F5JPburCtbmDPqE7Pzp+1kN4+Wb81LlF33VpGwWwtXem+w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-resizable/-/react-resizable-3.0.5.tgz}
     id: registry.npmmirror.com/react-resizable/3.0.5
     name: react-resizable
@@ -2313,13 +2323,13 @@ packages:
       react: '>= 16.3'
     dependencies:
       prop-types: registry.npmmirror.com/prop-types/15.8.1
-      react: registry.npmmirror.com/react/18.3.1
-      react-draggable: registry.npmmirror.com/react-draggable/4.4.6_nnrd3gsncyragczmpvfhocinkq
+      react: registry.npmmirror.com/react/16.14.0
+      react-draggable: registry.npmmirror.com/react-draggable/4.4.6_wcqkhtmu7mswc6yz4uyexck3ty
     transitivePeerDependencies:
       - react-dom
     dev: false
 
-  registry.npmmirror.com/react-transition-group/4.4.5_nnrd3gsncyragczmpvfhocinkq:
+  registry.npmmirror.com/react-transition-group/4.4.5_wcqkhtmu7mswc6yz4uyexck3ty:
     resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-transition-group/-/react-transition-group-4.4.5.tgz}
     id: registry.npmmirror.com/react-transition-group/4.4.5
     name: react-transition-group
@@ -2332,17 +2342,19 @@ packages:
       dom-helpers: registry.npmmirror.com/dom-helpers/5.2.1
       loose-envify: registry.npmmirror.com/loose-envify/1.4.0
       prop-types: registry.npmmirror.com/prop-types/15.8.1
-      react: registry.npmmirror.com/react/18.3.1
-      react-dom: registry.npmmirror.com/react-dom/18.3.1_react@18.3.1
+      react: registry.npmmirror.com/react/16.14.0
+      react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
     dev: false
 
-  registry.npmmirror.com/react/18.3.1:
-    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react/-/react-18.3.1.tgz}
+  registry.npmmirror.com/react/16.14.0:
+    resolution: {integrity: sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react/-/react-16.14.0.tgz}
     name: react
-    version: 18.3.1
+    version: 16.14.0
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: registry.npmmirror.com/loose-envify/1.4.0
+      object-assign: registry.npmmirror.com/object-assign/4.1.1
+      prop-types: registry.npmmirror.com/prop-types/15.8.1
     dev: false
 
   registry.npmmirror.com/redux/4.2.1:
@@ -2407,12 +2419,13 @@ packages:
       queue-microtask: registry.npmmirror.com/queue-microtask/1.2.3
     dev: true
 
-  registry.npmmirror.com/scheduler/0.23.2:
-    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/scheduler/-/scheduler-0.23.2.tgz}
+  registry.npmmirror.com/scheduler/0.19.1:
+    resolution: {integrity: sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/scheduler/-/scheduler-0.19.1.tgz}
     name: scheduler
-    version: 0.23.2
+    version: 0.19.1
     dependencies:
       loose-envify: registry.npmmirror.com/loose-envify/1.4.0
+      object-assign: registry.npmmirror.com/object-assign/4.1.1
     dev: false
 
   registry.npmmirror.com/screenfull/5.2.0:
@@ -2503,7 +2516,7 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  registry.npmmirror.com/styled-components/6.1.13_nnrd3gsncyragczmpvfhocinkq:
+  registry.npmmirror.com/styled-components/6.1.13_wcqkhtmu7mswc6yz4uyexck3ty:
     resolution: {integrity: sha512-M0+N2xSnAtwcVAQeFEsGWFFxXDftHUD7XrKla06QbpUMmbmtFBMMTcKWvFXtWxuD5qQkB8iU5gk6QASlx2ZRMw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/styled-components/-/styled-components-6.1.13.tgz}
     id: registry.npmmirror.com/styled-components/6.1.13
     name: styled-components
@@ -2519,8 +2532,8 @@ packages:
       css-to-react-native: registry.npmmirror.com/css-to-react-native/3.2.0
       csstype: registry.npmmirror.com/csstype/3.1.3
       postcss: registry.npmmirror.com/postcss/8.4.38
-      react: registry.npmmirror.com/react/18.3.1
-      react-dom: registry.npmmirror.com/react-dom/18.3.1_react@18.3.1
+      react: registry.npmmirror.com/react/16.14.0
+      react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
       shallowequal: registry.npmmirror.com/shallowequal/1.1.0
       stylis: registry.npmmirror.com/stylis/4.3.2
       tslib: registry.npmmirror.com/tslib/2.6.2
@@ -2618,7 +2631,7 @@ packages:
       punycode: registry.npmmirror.com/punycode/2.3.1
     dev: true
 
-  registry.npmmirror.com/use-callback-ref/1.3.2_ryhct6r6jz2fex4xfo2quarxhi:
+  registry.npmmirror.com/use-callback-ref/1.3.2_3jd5knsyk77j2tir3u5v3semqu:
     resolution: {integrity: sha512-elOQwe6Q8gqZgDA8mrh44qRTQqpIHDcZ3hXTLjBe1i4ph8XpNJnO+aQf3NaG+lriLopI4HMx9VjQLfPQ6vhnoA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/use-callback-ref/-/use-callback-ref-1.3.2.tgz}
     id: registry.npmmirror.com/use-callback-ref/1.3.2
     name: use-callback-ref
@@ -2631,12 +2644,12 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': registry.npmmirror.com/@types/react/18.3.12
-      react: registry.npmmirror.com/react/18.3.1
+      '@types/react': registry.npmmirror.com/@types/react/16.14.62
+      react: registry.npmmirror.com/react/16.14.0
       tslib: registry.npmmirror.com/tslib/2.8.1
     dev: false
 
-  registry.npmmirror.com/use-immer/0.9.0_react@18.3.1:
+  registry.npmmirror.com/use-immer/0.9.0_immer@9.0.21+react@16.14.0:
     resolution: {integrity: sha512-/L+enLi0nvuZ6j4WlyK0US9/ECUtV5v9RUbtxnn5+WbtaXYUaOBoKHDNL9I5AETdurQ4rIFIj/s+Z5X80ATyKw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/use-immer/-/use-immer-0.9.0.tgz}
     id: registry.npmmirror.com/use-immer/0.9.0
     name: use-immer
@@ -2645,10 +2658,11 @@ packages:
       immer: '>=2.0.0'
       react: ^16.8.0 || ^17.0.1 || ^18.0.0
     dependencies:
-      react: registry.npmmirror.com/react/18.3.1
+      immer: registry.npmmirror.com/immer/9.0.21
+      react: registry.npmmirror.com/react/16.14.0
     dev: false
 
-  registry.npmmirror.com/use-sidecar/1.1.2_ryhct6r6jz2fex4xfo2quarxhi:
+  registry.npmmirror.com/use-sidecar/1.1.2_3jd5knsyk77j2tir3u5v3semqu:
     resolution: {integrity: sha512-epTbsLuzZ7lPClpz2TyryBfztm7m+28DlEv2ZCQ3MDr5ssiwyOwGH/e5F9CkfWjJ1t4clvI58yF822/GUkjjhw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/use-sidecar/-/use-sidecar-1.1.2.tgz}
     id: registry.npmmirror.com/use-sidecar/1.1.2
     name: use-sidecar
@@ -2661,13 +2675,13 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': registry.npmmirror.com/@types/react/18.3.12
+      '@types/react': registry.npmmirror.com/@types/react/16.14.62
       detect-node-es: registry.npmmirror.com/detect-node-es/1.1.0
-      react: registry.npmmirror.com/react/18.3.1
+      react: registry.npmmirror.com/react/16.14.0
       tslib: registry.npmmirror.com/tslib/2.8.1
     dev: false
 
-  registry.npmmirror.com/use-sync-external-store/1.2.2_react@18.3.1:
+  registry.npmmirror.com/use-sync-external-store/1.2.2_react@16.14.0:
     resolution: {integrity: sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/use-sync-external-store/-/use-sync-external-store-1.2.2.tgz}
     id: registry.npmmirror.com/use-sync-external-store/1.2.2
     name: use-sync-external-store
@@ -2675,7 +2689,7 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      react: registry.npmmirror.com/react/18.3.1
+      react: registry.npmmirror.com/react/16.14.0
     dev: false
 
   registry.npmmirror.com/uuid/9.0.1:

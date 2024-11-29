@@ -1,35 +1,38 @@
 import React from 'react';
-import styled from 'styled-components';
-import ComponentWrapper from './ComponentWrapper';
-import ScopedContextProvider from '../Editor/store/ScopedContext';
+import EngineCore, { Element } from '../core/model/EngineCore';
+import Materials from '../Materials';
+import { observer } from 'mobx-react';
 
-interface IRendererProps {
-  className?: string;
-  style?: React.CSSProperties;
-  // json 协议
-  schemaConfig: any;
-}
-
-const Root = styled.div`
-  .material-item-container {
-  }
-`;
-
-const Renderer: React.FC<IRendererProps> = ({
-  className,
-  style,
-  schemaConfig,
-}) => {
-  console.log(schemaConfig.state, 332);
-  return (
-    <Root className={className} style={style}>
-      <ScopedContextProvider>
-        {schemaConfig.state.map((item) => {
-          return <ComponentWrapper key={item.id} item={item} />;
-        })}
-      </ScopedContextProvider>
-    </Root>
-  );
+type IRendererProps = {
+	engineCore: EngineCore;
 };
+
+const Renderer: React.FC<IRendererProps> = observer((props) => {
+	const { engineCore } = props;
+	console.log(engineCore, '23');
+
+	const renderElements = (elements: Element[]) => {
+		const nodes: React.ReactElement[] = [];
+		for (let element of elements) {
+			const material = Materials.find(
+				(material) => material.meta.type === element.type
+			);
+
+			nodes.push(
+				React.createElement(
+					material.component,
+					{
+						parentId: element.id,
+						engineCore,
+					},
+					renderElements(element.children)
+				)
+			);
+		}
+		return nodes;
+	};
+
+	return <>{renderElements(engineCore.schmea)}</>;
+});
 
 export default Renderer;

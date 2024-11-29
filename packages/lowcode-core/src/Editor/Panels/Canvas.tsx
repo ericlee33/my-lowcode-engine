@@ -1,12 +1,13 @@
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../ItemTypes';
 import materials from '../../Materials';
-import Renderer from '../../Renderer';
+import Renderer from '../../Renderer/legacy';
 import styled from 'styled-components';
 import Layout, {
 	// Responsive as ResponsiveGridLayout,
 	WidthProvider,
 } from 'react-grid-layout';
+import EngineCore from '../../core/model/EngineCore';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
@@ -26,11 +27,11 @@ const Root = styled.div`
 `;
 
 interface ICanvasProps {
-	schemaConfig: any;
+	schema: EngineCore;
 	onSave: (schemaConfig: any) => void;
 }
 
-const Canvas: React.FC<ICanvasProps> = ({ schemaConfig, onSave }) => {
+const Canvas: React.FC<ICanvasProps> = ({ schema, onSave }) => {
 	const [{ canDrop, isOver }, drop] = useDrop(
 		() => ({
 			accept: ItemTypes.BOX,
@@ -61,7 +62,7 @@ const Canvas: React.FC<ICanvasProps> = ({ schemaConfig, onSave }) => {
 				// }>(),
 			}),
 		}),
-		[schemaConfig]
+		[schema]
 	);
 
 	const overAndCanCrop = canDrop && isOver;
@@ -95,8 +96,8 @@ const Canvas: React.FC<ICanvasProps> = ({ schemaConfig, onSave }) => {
 			ref={drop}
 			style={{ ...style, ...borderProps }}
 		>
-			<Renderer schemaConfig={schemaConfig} />
-			<GridLayout
+			<Renderer schema={schema} />
+			{/* <GridLayout
 				className="layout"
 				layout={layout}
 				rowHeight={30}
@@ -123,7 +124,7 @@ const Canvas: React.FC<ICanvasProps> = ({ schemaConfig, onSave }) => {
 				>
 					c
 				</div>
-			</GridLayout>
+			</GridLayout> */}
 		</Root>
 	);
 };
