@@ -110,7 +110,7 @@ const Editor: React.FC<IEditorProps> = (props) => {
 							<div
 								onClick={() => {
 									onClear();
-									schema.reset();
+									engineCore.reset();
 								}}
 							>
 								清空

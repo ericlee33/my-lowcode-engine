@@ -19,7 +19,7 @@ const Editor: React.FC<IEditorProps> = () => {
 		engineCore.current = new EngineCore({
 			schema: cachedSchema,
 		});
-		console.log('444', engineCore.current, cachedSchema, 'engineCore.current');
+
 		setReady(true);
 	}, []);
 	return ready && <Layout engineCore={engineCore.current} />;

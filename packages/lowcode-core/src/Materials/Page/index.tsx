@@ -1,5 +1,3 @@
 import Page from './Page';
-import { InputMeta } from './meta';
-
-export const meta = InputMeta;
+export { meta } from './meta';
 export const component = Page;

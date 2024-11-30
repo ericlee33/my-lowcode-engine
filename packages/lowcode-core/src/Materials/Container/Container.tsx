@@ -1,5 +1,7 @@
 import React, { Children, forwardRef, useImperativeHandle } from 'react';
 import styled from 'styled-components';
+import { useDrop } from '../../Editor/hooks/useDrop';
+import { ItemTypes } from '../../Editor/ItemTypes';
 
 interface IContainerProps {
 	className?: string;
@@ -8,7 +10,8 @@ interface IContainerProps {
 
 const Root = styled.div`
 	border: 1px solid #e1e1e1;
-	height: 100px;
+	min-height: 30px;
+	padding: 10px;
 `;
 
 const Container = forwardRef<
@@ -18,12 +21,31 @@ const Container = forwardRef<
 	} & {
 		children: React.ReactNode;
 	}
->(({ className, style, ...props }, ref) => {
+>(({ className, style, engineCore, parentId, ...props }, ref) => {
+	const [{ canDrop, isOver }, drop] = useDrop({
+		accept: ItemTypes.BOX,
+		onDrop: (
+			element,
+			item: {
+				type: string;
+			}
+			// monitor
+		) => {
+			engineCore.add(element, parentId);
+
+			return {
+				test: '123',
+			};
+		},
+		deps: [engineCore],
+	});
+
 	const { children } = props;
 	useImperativeHandle(ref, () => ({}));
 
 	return (
 		<Root
+			ref={drop}
 			className={className}
 			style={style}
 			{...props}

@@ -1,6 +1,6 @@
 import { MetaData } from '../_types';
 
-export const InputMeta: MetaData = {
+export const meta: MetaData = {
 	type: 'page',
 	title: '页面',
 	configure: {
@@ -24,5 +24,6 @@ export const InputMeta: MetaData = {
 				},
 			},
 		],
+		notShowInMenu: true,
 	},
 };

@@ -1,8 +1,8 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
 import styled from 'styled-components';
-import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../../Editor/ItemTypes';
 import EngineCore from '../../core/model/EngineCore';
+import { useDrop } from '../../Editor/hooks/useDrop';
 
 interface IContainerProps {
 	className?: string;
@@ -13,45 +13,30 @@ interface IContainerProps {
 
 const Root = styled.div`
 	border: 1px solid #e1e1e1;
-	height: 100px;
+	height: 100vh;
+	padding: 10px;
 `;
 
 const Page = forwardRef<{}, IContainerProps>((props, ref) => {
 	const { className, style, children, engineCore, parentId } = props;
 
-	const [{ canDrop, isOver }, drop] = useDrop(
-		() => ({
-			accept: ItemTypes.BOX,
-			drop: (
-				item: {
-					type: string;
-				}
-				// monitor
-			) => {
-				const element = {
-					type: item.type,
-					id: Math.random().toString().slice(0, 5),
-					children: [],
-				};
+	const [{ canDrop, isOver }, drop] = useDrop({
+		accept: ItemTypes.BOX,
+		onDrop: (
+			element,
+			item: {
+				type: string;
+			}
+			// monitor
+		) => {
+			engineCore.add(element, parentId);
 
-				engineCore.add(element, parentId);
-
-				return {
-					test: '123',
-				};
-			},
-			collect: (monitor) => ({
-				isOver: monitor.isOver(),
-				canDrop: monitor.canDrop(),
-				// // 获取来自拖拽组件的数据
-				// item: monitor.getItem<{
-				//   metaData: MetaData;
-				//   component: React.ComponentType;
-				// }>(),
-			}),
-		}),
-		[engineCore]
-	);
+			return {
+				test: '123',
+			};
+		},
+		deps: [engineCore],
+	});
 
 	return (
 		<Root
