@@ -21,6 +21,7 @@ const Page = forwardRef<{}, IContainerProps>((props, ref) => {
 	const nodeRef = useRef();
 	const { className, style, children, engineCore, parentId } = props;
 
+	// -> hover 既放置，接下来做排序
 	const [{ canDrop, isOver }, { nodeRef: _nodeRef }] = useDrop({
 		accept: ItemTypes.BOX,
 		onDrop: (

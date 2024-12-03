@@ -52,12 +52,23 @@ class EngineCore {
 	}
 
 	add(compoent: Element, id: string) {
-		const target = this.traverse(this.$schema, id);
+		const [target] = this.traverse(this.$schema, id);
 		target.children.push(compoent);
 	}
 
 	remove(id: string) {
 		return this.$remove(this.$schema, id);
+	}
+
+	swap(aId: string, bId: string) {
+		const [eleA, aFatherNode] = this.traverse(this.$schema, aId);
+		const [eleB, bFatherNode] = this.traverse(this.$schema, bId);
+
+		const aIdx = aFatherNode.findIndex((item) => item.id === aId);
+		// console.log(aId, bId, aFatherNode, bFatherNode, 44);
+		aFatherNode.splice(aIdx, 1, eleB);
+		const bIdx = bFatherNode.findIndex((item) => item.id === bId);
+		bFatherNode.splice(bIdx, 1, eleA);
 	}
 
 	$remove(children: Element[], id: string) {
@@ -73,10 +84,10 @@ class EngineCore {
 		console.error('没有找到 remove 元素');
 	}
 
-	private traverse(children: Element[], id: string): Element {
+	private traverse(children: Element[], id: string): [Element, Element[]] {
 		const compoent = find(children, (compoent) => compoent.id === id);
 		if (compoent) {
-			return compoent;
+			return [compoent, children];
 		}
 
 		for (const component of children) {
