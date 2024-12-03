@@ -24,6 +24,7 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
 					{
 						parentId: element.id,
 						engineCore,
+						id: element.id,
 					},
 					renderElements(element.children)
 				)

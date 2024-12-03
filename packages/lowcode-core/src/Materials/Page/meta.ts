@@ -24,6 +24,6 @@ export const meta: MetaData = {
 				},
 			},
 		],
-		notShowInMenu: true,
+		// notShowInMenu: true,
 	},
 };

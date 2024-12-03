@@ -74,7 +74,14 @@ const Editor: React.FC<IEditorProps> = (props) => {
 	const { engineCore } = props;
 
 	const onClear = () => {
-		localStorage.setItem($$_editor_json_schema, JSON.stringify([]));
+		localStorage.setItem(
+			$$_editor_json_schema,
+			JSON.stringify({
+				type: 'Page',
+				children: [],
+				id: 'fdkafkd',
+			})
+		);
 	};
 
 	return (
@@ -106,6 +113,7 @@ const Editor: React.FC<IEditorProps> = (props) => {
 								style={{
 									marginTop: '10px',
 								}}
+								engineCore={engineCore}
 							/>
 							<div
 								onClick={() => {

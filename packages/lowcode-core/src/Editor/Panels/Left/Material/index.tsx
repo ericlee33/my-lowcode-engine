@@ -12,7 +12,11 @@ const Root = styled.div`
 	cursor: 'move';
 `;
 
-const MaterialPanel: React.FC<IMaterialPanelProps> = ({ className, style }) => {
+const MaterialPanel: React.FC<IMaterialPanelProps> = ({
+	className,
+	style,
+	engineCore,
+}) => {
 	return (
 		<Root
 			className={className}
@@ -25,6 +29,7 @@ const MaterialPanel: React.FC<IMaterialPanelProps> = ({ className, style }) => {
 						metaData={material.meta}
 						component={material.component}
 						key={index}
+						engineCore={engineCore}
 					/>
 				);
 			})}
