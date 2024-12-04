@@ -10,6 +10,7 @@ import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker'
 import { loader } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor';
 import EngineCore from '../../../../core/model/EngineCore';
+import { observer } from 'mobx-react';
 
 self.MonacoEnvironment = {
 	getWorker(_, label) {
@@ -39,52 +40,50 @@ interface ISourceCodePanelProps {
 
 const Root = styled.div``;
 
-const SourceCodePanel: React.FC<ISourceCodePanelProps> = ({
-	className,
-	style,
-	engineCore,
-}) => {
-	const [ready, setReady] = useState(false);
-	useEffect(() => {
-		loader.init().then(/* ... */ () => setReady(true));
-	}, []);
+const SourceCodePanel: React.FC<ISourceCodePanelProps> = observer(
+	({ className, style, engineCore }) => {
+		const [ready, setReady] = useState(false);
+		useEffect(() => {
+			loader.init().then(/* ... */ () => setReady(true));
+		}, []);
 
-	const onChange = (value) => {
-		// setSchemaConfig(JSON.parse(value));
-	};
+		const onChange = (value) => {
+			// setSchemaConfig(JSON.parse(value));
+		};
 
-	return (
-		<Root
-			className={className}
-			style={style}
-		>
-			{!ready ? (
-				'loading'
-			) : (
-				<Editor
-					options={{
-						lineNumbers: 'off',
-						glyphMargin: false,
-						tabSize: 2,
-						wordWrap: 'on',
-						lineDecorationsWidth: 0,
-						lineNumbersMinChars: 0,
-						selectOnLineNumbers: true,
-						scrollBeyondLastLine: false,
-						folding: true,
-						minimap: {
-							enabled: false,
-						},
-						// readOnly: disabled
-					}}
-					onChange={onChange}
-					height="80vh"
-					language="json"
-					value={JSON.stringify(engineCore.schmea, null, 2)}
-				/>
-			)}
-		</Root>
-	);
-};
+		return (
+			<Root
+				className={className}
+				style={style}
+			>
+				{!ready ? (
+					'loading'
+				) : (
+					<Editor
+						options={{
+							lineNumbers: 'off',
+							glyphMargin: false,
+							tabSize: 2,
+							wordWrap: 'on',
+							lineDecorationsWidth: 0,
+							lineNumbersMinChars: 0,
+							selectOnLineNumbers: true,
+							scrollBeyondLastLine: false,
+							folding: true,
+							minimap: {
+								enabled: false,
+							},
+							// readOnly: disabled
+						}}
+						onChange={onChange}
+						height="80vh"
+						language="json"
+						value={JSON.stringify(engineCore.schmea, null, 2)}
+					/>
+				)}
+			</Root>
+		);
+	}
+);
 
 export default SourceCodePanel;

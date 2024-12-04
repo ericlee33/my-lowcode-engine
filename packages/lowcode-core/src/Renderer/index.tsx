@@ -9,9 +9,11 @@ type IRendererProps = {
 
 const Renderer: React.FC<IRendererProps> = observer((props) => {
 	const { engineCore } = props;
-	console.log(engineCore, '23');
 
-	const renderElements = (elements: Element[]) => {
+	const renderElements = (
+		elements: Element[],
+		parentId: undefined | string
+	) => {
 		const nodes: React.ReactElement[] = [];
 		for (let element of elements) {
 			const material = Materials.find(
@@ -22,11 +24,11 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
 				React.createElement(
 					material.component,
 					{
-						parentId: element.id,
+						parentId,
 						engineCore,
 						id: element.id,
 					},
-					renderElements(element.children)
+					renderElements(element.children, element.id)
 				)
 			);
 		}
@@ -34,7 +36,7 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
 	};
 
 	// return <>{renderElements(engineCore.schmea)}</>;
-	return <>{renderElements(engineCore.schmea)}</>;
+	return <>{renderElements(engineCore.schmea, undefined)}</>;
 });
 
 export default Renderer;

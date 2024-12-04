@@ -16,10 +16,10 @@ interface IButtonProps extends ButtonProps {
 	style?: React.CSSProperties;
 	text?: string;
 	id: string;
+	parentId: string;
 	ref: React.ForwardedRef<ThisType<typeof Button>>;
 	forwardedRef: React.ForwardedRef<ThisType<typeof Button>>;
 	engineCore: EngineCore;
-	parentId: string;
 }
 
 const Root = styled(ArcoButton)``;
@@ -57,11 +57,11 @@ const Button: React.FC<IButtonProps> = ({
 	// 	});
 	// };
 
-	const [{ isDragging }, drag] = useDrag(
+	const [{ isDragging, opacity }, drag] = useDrag(
 		() => ({
 			type: ItemTypes.BOX,
 			// 传递的信息
-			item: () => ({ type: ButtonMeta.type, id: parentId, children: [] }),
+			item: () => ({ type: ButtonMeta.type, id: id, children: [] }),
 			end: (item, monitor) => {
 				// 获取 drop 通过 drop 回调 return 的数据
 				const dropResult = monitor.getDropResult();
@@ -77,54 +77,62 @@ const Button: React.FC<IButtonProps> = ({
 			collect: (monitor) => ({
 				isDragging: monitor.isDragging(),
 				handlerId: monitor.getHandlerId(),
+				opacity: monitor.isDragging() ? 0 : 1,
 			}),
 		}),
-		[parentId]
+		[id]
 	);
 
 	const [{ canDrop, isOver }, { nodeRef: _nodeRef }] = useDrop({
 		accept: ItemTypes.BOX,
-		deps: [engineCore, parentId],
+		deps: [engineCore, id],
 		moveCard: (
 			/** 抛来的 element */
 			element: Element,
-			/** 当前拖拽元素的 id */
+			/** 当前被释放元素的 id */
 			id: string
 		) => {
-			/**
-			 * 1、如果此时拖拽的组件是 Box 组件，则 dragIndex 为 undefined，则此时修改，则此时修改 cardList 中的占位元素的位置即可
-			 * 2、如果此时拖拽的组件是 Card 组件，则 dragIndex 不为 undefined，此时替换 dragIndex 和 hoverIndex 位置的元素即可
-			 */
 			const hasElement = engineCore.has(element.id);
+			if (element.id === id) {
+				// return engineCore.remove(element.id);
+				return;
+			}
 
 			if (!hasElement) {
-				engineCore.add(element, parentId);
+				engineCore.add({ ...element, parentId }, id);
 			} else {
-				console.log(element.id, id, 'element.id');
+				console.log(element.id, id, 'idd');
+				// 删除
 				engineCore.remove(element.id);
+				// 插入
 				engineCore.insertAfter(element, id);
 			}
 		},
 		ref: nodeRef,
-		id: parentId,
+		id: id,
 	});
 
 	return (
 		<div
 			style={{
 				marginBottom: 10,
+				// opacity: opacity,
+				border: isOver ? '1px solid blue' : '',
 			}}
 			ref={drag(_nodeRef)}
 		>
-			<Root
+			<div
+				onClick={(e) => {
+					e.preventDefault();
+				}}
 				className={className}
 				style={style}
 				{...props}
 				// onClick={onClick}
 			>
-				{text || `默认值${parentId}`}
+				{text || `默认值${id}`}
 				{/* {render ? '隐藏的孩子' : ''} */}
-			</Root>
+			</div>
 		</div>
 	);
 };

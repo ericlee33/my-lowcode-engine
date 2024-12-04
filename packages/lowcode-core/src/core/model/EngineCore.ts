@@ -10,6 +10,7 @@ export type Element = {
 	type: string;
 	props?: Record<string, any>;
 	children: Element[];
+	parentId: string | null;
 };
 
 type SchemaControllerProps = {
@@ -22,6 +23,7 @@ class EngineCore {
 			type: 'page',
 			id: generateId(),
 			children: [],
+			parentId: null,
 		},
 	];
 
@@ -49,7 +51,8 @@ class EngineCore {
 	}
 
 	has(id: string) {
-		return !!this.traverse(this.$schema, id);
+		const element = this.traverse(this.$schema, id)[0];
+		return !!element;
 	}
 
 	add(compoent: Element, id: string) {
@@ -71,20 +74,15 @@ class EngineCore {
 		const [, bFatherNode] = this.traverse(this.$schema, bId);
 		const [eleA] = this.traverse(this.$schema, aId);
 
-		console.log(eleA, eleB, 'elemntA');
-
 		const bIdx = bFatherNode.findIndex((item) => item.id === bId);
 		bFatherNode.splice(bIdx, 1, eleA);
-		console.log(aIdx, bIdx, 'aId', 'bId');
-
-		console.log(bFatherNode, 'bFatherNode');
 	}
 
 	insertAfter(element: Element, id: string) {
 		const [, parent] = this.traverse(this.$schema, id);
 		const insertIndex = parent.findIndex((item) => item.id === id);
-		console.log(parent, insertIndex, 'insertIndex', element);
-		parent.splice(insertIndex + 1, 0, element);
+		console.log(parent[0].id, parent, id, insertIndex, 'insertIndex');
+		parent.splice(insertIndex, 0, element);
 	}
 
 	$remove(children: Element[], id: string) {
@@ -108,6 +106,8 @@ class EngineCore {
 		for (const component of children) {
 			return this.traverse(component.children, id);
 		}
+
+		return [null, []];
 	}
 
 	reset() {
