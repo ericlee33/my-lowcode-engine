@@ -85,7 +85,7 @@ class EngineCore {
 	insertAfter(element: Element, id: string) {
 		const [, parent] = this.traverse(this.$schema, id);
 		const insertIndex = parent.findIndex((item) => item.id === id);
-		console.log(parent[0].id, parent, id, insertIndex, 'insertIndex');
+		// console.log(parent[0].id, parent, id, insertIndex, 'insertIndex');
 		parent.splice(insertIndex, 0, element);
 	}
 

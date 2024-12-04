@@ -101,7 +101,6 @@ const Button: React.FC<IButtonProps> = ({
 			if (!hasElement) {
 				engineCore.add({ ...element, parentId }, id);
 			} else {
-				console.log(element.parentId, parentId, 'parentId');
 				// parent 相同，需要特殊处理
 				if (element.parentId === parentId) {
 					const parent = engineCore.get(element.parentId);
@@ -110,7 +109,6 @@ const Button: React.FC<IButtonProps> = ({
 						(item) => item.id === element.id
 					);
 					engineCore.remove(element.id);
-					console.log(dropIdx, dragIdx, 'dragIdx');
 
 					if (dragIdx < dropIdx) {
 						engineCore.insertAfterParentIdx(
