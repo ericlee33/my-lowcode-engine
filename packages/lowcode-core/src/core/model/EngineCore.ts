@@ -4,109 +4,121 @@ import { find, map, findIndex, forEach } from 'lodash-es';
 import { $$_editor_json_schema } from '../../Editor/constants/cache';
 
 export type Element = {
-  /** uuid */
-  id: string;
-  /** widget type */
-  type: string;
-  props?: Record<string, any>;
-  children: Element[];
+	/** uuid */
+	id: string;
+	/** widget type */
+	type: string;
+	props?: Record<string, any>;
+	children: Element[];
 };
 
 type SchemaControllerProps = {
-  schema?: Element[];
+	schema?: Element[];
 };
 
 class EngineCore {
-  static DefaultSchema = [
-    {
-      type: 'page',
-      id: generateId(),
-      children: [],
-    },
-  ];
+	static DefaultSchema = [
+		{
+			type: 'page',
+			id: generateId(),
+			children: [],
+		},
+	];
 
-  get schmea() {
-    return this.$schema;
-  }
+	get schmea() {
+		return this.$schema;
+	}
 
-  private $schema: Element[];
-  private $disposers = [];
+	private $schema: Element[];
+	private $disposers = [];
 
-  constructor(props: SchemaControllerProps) {
-    makeAutoObservable(this);
-    this.$schema = props.schema ?? EngineCore.DefaultSchema;
+	constructor(props: SchemaControllerProps) {
+		makeAutoObservable(this);
+		this.$schema = props.schema ?? EngineCore.DefaultSchema;
 
-    const disposer = reaction(
-      () => {
-        return JSON.stringify(this.$schema);
-      },
-      ($schema) => {
-        localStorage.setItem($$_editor_json_schema, $schema);
-      }
-    );
+		const disposer = reaction(
+			() => {
+				return JSON.stringify(this.$schema);
+			},
+			($schema) => {
+				localStorage.setItem($$_editor_json_schema, $schema);
+			}
+		);
 
-    this.$disposers.push(disposer);
-  }
+		this.$disposers.push(disposer);
+	}
 
-  has(id: string) {
-    return !!this.traverse(this.$schema, id);
-  }
+	has(id: string) {
+		return !!this.traverse(this.$schema, id);
+	}
 
-  add(compoent: Element, id: string) {
-    const [target] = this.traverse(this.$schema, id);
-    target.children.push(compoent);
-  }
+	add(compoent: Element, id: string) {
+		const [target] = this.traverse(this.$schema, id);
+		target.children.push(compoent);
+	}
 
-  remove(id: string) {
-    return this.$remove(this.$schema, id);
-  }
+	remove(id: string) {
+		return this.$remove(this.$schema, id);
+	}
 
-  swap(aId: string, bId: string) {
-    const [eleA, aFatherNode] = this.traverse(this.$schema, aId);
-    const [eleB] = this.traverse(this.$schema, bId);
+	swap(aId: string, bId: string) {
+		const [, aFatherNode] = this.traverse(this.$schema, aId);
+		const [eleB] = this.traverse(this.$schema, bId);
 
-    const aIdx = aFatherNode.findIndex((item) => item.id === aId);
-    aFatherNode.splice(aIdx, 1, eleB);
-    const [, bFatherNode] = this.traverse(this.$schema, bId);
+		const aIdx = aFatherNode.findIndex((item) => item.id === aId);
+		aFatherNode.splice(aIdx, 1, eleB);
 
-    console.log(eleA, eleB, 'elemntA');
-    const bIdx = bFatherNode.findIndex((item) => item.id === bId);
-    bFatherNode.splice(bIdx, 1, eleA);
-    console.log(bFatherNode, 'bFatherNode');
-  }
+		const [, bFatherNode] = this.traverse(this.$schema, bId);
+		const [eleA] = this.traverse(this.$schema, aId);
 
-  $remove(children: Element[], id: string) {
-    const compoentIndex = findIndex(children, (compoent) => compoent.id === id);
-    if (compoentIndex > -1) {
-      return children.splice(compoentIndex, 1);
-    }
-    for (const component of children) {
-      return this.$remove(component.children, id);
-    }
+		console.log(eleA, eleB, 'elemntA');
 
-    console.error('没有找到 remove 元素');
-  }
+		const bIdx = bFatherNode.findIndex((item) => item.id === bId);
+		bFatherNode.splice(bIdx, 1, eleA);
+		console.log(aIdx, bIdx, 'aId', 'bId');
 
-  private traverse(children: Element[], id: string): [Element, Element[]] {
-    const compoent = find(children, (compoent) => compoent.id === id);
-    if (compoent) {
-      return [compoent, children];
-    }
+		console.log(bFatherNode, 'bFatherNode');
+	}
 
-    for (const component of children) {
-      return this.traverse(component.children, id);
-    }
-  }
+	insertAfter(element: Element, id: string) {
+		const [, parent] = this.traverse(this.$schema, id);
+		const insertIndex = parent.findIndex((item) => item.id === id);
+		console.log(parent, insertIndex, 'insertIndex', element);
+		parent.splice(insertIndex + 1, 0, element);
+	}
 
-  reset() {
-    this.$schema = EngineCore.DefaultSchema;
-  }
+	$remove(children: Element[], id: string) {
+		const compoentIndex = findIndex(children, (compoent) => compoent.id === id);
+		if (compoentIndex > -1) {
+			return children.splice(compoentIndex, 1);
+		}
+		for (const component of children) {
+			return this.$remove(component.children, id);
+		}
 
-  destroy() {
-    forEach(this.$disposers, (disposer) => {
-      disposer();
-    });
-  }
+		console.error('没有找到 remove 元素');
+	}
+
+	private traverse(children: Element[], id: string): [Element, Element[]] {
+		const compoent = find(children, (compoent) => compoent.id === id);
+		if (compoent) {
+			return [compoent, children];
+		}
+
+		for (const component of children) {
+			return this.traverse(component.children, id);
+		}
+	}
+
+	reset() {
+		this.$schema = EngineCore.DefaultSchema;
+	}
+
+	destroy() {
+		forEach(this.$disposers, (disposer) => {
+			disposer();
+		});
+	}
 }
 
 export default EngineCore;
