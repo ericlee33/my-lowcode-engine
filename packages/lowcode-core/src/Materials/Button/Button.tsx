@@ -61,7 +61,7 @@ const Button: React.FC<IButtonProps> = ({
 		() => ({
 			type: ItemTypes.BOX,
 			// 传递的信息
-			item: () => ({ type: ButtonMeta.type, id: id, children: [] }),
+			item: () => ({ type: ButtonMeta.type, id: id, children: [], parentId }),
 			end: (item, monitor) => {
 				// 获取 drop 通过 drop 回调 return 的数据
 				const dropResult = monitor.getDropResult();
@@ -101,7 +101,28 @@ const Button: React.FC<IButtonProps> = ({
 			if (!hasElement) {
 				engineCore.add({ ...element, parentId }, id);
 			} else {
-				console.log(element.id, id, 'idd');
+				console.log(element.parentId, parentId, 'parentId');
+				// parent 相同，需要特殊处理
+				if (element.parentId === parentId) {
+					const parent = engineCore.get(element.parentId);
+					const dropIdx = parent.children.findIndex((item) => item.id === id);
+					const dragIdx = parent.children.findIndex(
+						(item) => item.id === element.id
+					);
+					engineCore.remove(element.id);
+					console.log(dropIdx, dragIdx, 'dragIdx');
+
+					if (dragIdx < dropIdx) {
+						engineCore.insertAfterParentIdx(
+							element,
+							parent.children,
+							dropIdx + 1
+						);
+					} else {
+						engineCore.insertAfterParentIdx(element, parent.children, dropIdx);
+					}
+					return;
+				}
 				// 删除
 				engineCore.remove(element.id);
 				// 插入

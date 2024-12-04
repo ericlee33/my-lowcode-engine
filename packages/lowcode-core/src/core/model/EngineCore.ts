@@ -55,6 +55,10 @@ class EngineCore {
 		return !!element;
 	}
 
+	get(id: string): Element | null {
+		return this.traverse(this.$schema, id)[0];
+	}
+
 	add(compoent: Element, id: string) {
 		const [target] = this.traverse(this.$schema, id);
 		target.children.push(compoent);
@@ -85,10 +89,17 @@ class EngineCore {
 		parent.splice(insertIndex, 0, element);
 	}
 
+	insertAfterParentIdx(element: Element, parent: Element[], idx: number) {
+		// console.log(parent[0].id, parent, id, insertIndex, 'insertIndex');
+		parent.splice(idx, 0, element);
+	}
+
 	$remove(children: Element[], id: string) {
 		const compoentIndex = findIndex(children, (compoent) => compoent.id === id);
 		if (compoentIndex > -1) {
-			return children.splice(compoentIndex, 1);
+			children.splice(compoentIndex, 1);
+
+			return;
 		}
 		for (const component of children) {
 			return this.$remove(component.children, id);
