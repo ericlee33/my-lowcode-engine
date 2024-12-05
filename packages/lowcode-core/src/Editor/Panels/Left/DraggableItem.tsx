@@ -4,6 +4,8 @@ import { ItemTypes } from '../../ItemTypes';
 import { MetaData } from '../../../Materials/_types';
 import { generateId } from '../../../utils';
 import EngineCore from '../../../core/model/EngineCore';
+import { useEffect } from 'react';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 
 const style = {
 	border: '1px dashed gray',
@@ -24,7 +26,7 @@ const DraggableItem: React.FC<IDraggableItemProps> = ({
 	metaData,
 	engineCore,
 }) => {
-	const [{ isDragging }, drag] = useDrag(() => ({
+	const [{ isDragging }, drag, preview] = useDrag(() => ({
 		type: ItemTypes.BOX,
 		// 传递的信息
 		item: () => ({ type: metaData.type, id: generateId(), children: [] }),
@@ -32,7 +34,6 @@ const DraggableItem: React.FC<IDraggableItemProps> = ({
 			// 获取 drop 通过 drop 回调 return 的数据
 			const dropResult = monitor.getDropResult();
 			if (!monitor.didDrop()) {
-				console.log(item.id, 'ididd');
 				engineCore.remove(item.id);
 			}
 			if (item && dropResult) {
@@ -45,7 +46,12 @@ const DraggableItem: React.FC<IDraggableItemProps> = ({
 			handlerId: monitor.getHandlerId(),
 		}),
 	}));
-	const opacity = isDragging ? 0.4 : 1;
+	const opacity = isDragging ? 0 : 1;
+	console.log(opacity, 'opacity');
+
+	useEffect(() => {
+		preview(getEmptyImage(), { captureDraggingState: true });
+	}, []);
 
 	return (
 		<button

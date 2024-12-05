@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { SchemaContextProvider } from './store/SchemaContext';
 import Layout from './Layout';
 import EngineCore from '../core/model/EngineCore';
 import { $$_editor_json_schema } from './constants/cache';
