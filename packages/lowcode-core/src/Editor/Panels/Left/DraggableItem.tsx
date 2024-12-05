@@ -7,19 +7,22 @@ import Engine from '../../../core/model/Engine';
 import { useEffect } from 'react';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import styled from 'styled-components';
+import { IconApps } from '@arco-design/web-react/icon';
 
 const StyledMaterial = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid #e1e1e1;
-	font-size: 12px;
+	border: 1px solid #d1d1d1;
+	border-radius: 2px;
+	font-size: 14px;
 	white-space: nowrap;
 	background-color: white;
 	padding: 0.5rem 1rem;
 	cursor: move;
-	flex: 1;
-	height: 60px;
+	width: 46%;
+	height: 36px;
+	box-sizing: border-box;
 `;
 interface IDraggableItemProps {
 	metaData: MetaData;
@@ -59,7 +62,16 @@ const DraggableItem: React.FC<IDraggableItemProps> = ({ metaData, engine }) => {
 		preview(getEmptyImage(), { captureDraggingState: true });
 	}, []);
 
-	return <StyledMaterial ref={drag}>{metaData.title}</StyledMaterial>;
+	return (
+		<StyledMaterial ref={drag}>
+			<IconApps
+				style={{
+					marginRight: 14,
+				}}
+			/>
+			{metaData.title}
+		</StyledMaterial>
+	);
 };
 
 export default DraggableItem;

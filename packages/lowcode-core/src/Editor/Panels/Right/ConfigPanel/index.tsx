@@ -52,15 +52,14 @@ const ConfigPanel: React.FC<IConfigPanelProps> = observer((props) => {
 					engine.setElementProps(element, values);
 				}}
 			>
-				<h4>基本信息</h4>
+				<div>基本信息</div>
 				<Form.Item label="id">
 					<Input
 						disabled
 						value={engine.selectedId}
 					/>
 				</Form.Item>
-				<Divider />
-				<h4>组件配置</h4>
+				<div>组件配置</div>
 				{renderSetters()}
 			</Form>
 		</Root>

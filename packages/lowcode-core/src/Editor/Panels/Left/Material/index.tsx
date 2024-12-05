@@ -12,11 +12,16 @@ interface IMaterialPanelProps {
 }
 
 const Root = styled.div`
-	padding: 0 4px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 0 10px;
+	height: 90vh;
 
 	.material-list {
 		display: flex;
-		gap: 4px;
+		gap: 10px;
+		flex-wrap: wrap;
 	}
 `;
 
@@ -27,24 +32,27 @@ const MaterialPanel: React.FC<IMaterialPanelProps> = ({
 }) => {
 	return (
 		<Root>
-			<h3>物料列表</h3>
-			<div className="material-list">
-				<CustomDragLayer />
-				{materials.map((material, index) => {
-					if (material.meta.configure?.notShowInMenu) return;
-					return (
-						<MaterialItem
-							metaData={material.meta}
-							component={material.component}
-							key={index}
-							engine={engine}
-						/>
-					);
-				})}
+			<div>
+				<h3>物料列表</h3>
+				<div className="material-list">
+					<CustomDragLayer />
+					{materials.map((material, index) => {
+						if (material.meta.configure?.notShowInMenu) return;
+						return (
+							<MaterialItem
+								metaData={material.meta}
+								component={material.component}
+								key={index}
+								engine={engine}
+							/>
+						);
+					})}
+				</div>
 			</div>
 			<Button
 				style={{
 					marginTop: 20,
+					width: '80px',
 				}}
 				status="danger"
 				onClick={() => {

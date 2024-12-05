@@ -1,6 +1,6 @@
 import { useDrop } from 'react-dnd';
-import { ItemTypes } from '../ItemTypes';
-import materials from '../../materials';
+import { ItemTypes } from '../../editor/ItemTypes';
+import materials from '../../editor';
 import Renderer from '../../renderer/legacy';
 import styled from 'styled-components';
 import Layout, {

@@ -44,11 +44,11 @@ const SourceCodePanel: React.FC<ISourceCodePanelProps> = observer(
 	({ className, style, engine }) => {
 		const [ready, setReady] = useState(false);
 		useEffect(() => {
-			loader.init().then(/* ... */ () => setReady(true));
+			loader.init().then(() => setReady(true));
 		}, []);
 
 		const onChange = (value) => {
-			// setSchemaConfig(JSON.parse(value));
+			engine.reset(JSON.parse(value));
 		};
 
 		return (
@@ -77,7 +77,7 @@ const SourceCodePanel: React.FC<ISourceCodePanelProps> = observer(
 							// readOnly: disabled
 						}}
 						onChange={onChange}
-						height="80vh"
+						height="93vh"
 						language="json"
 						value={JSON.stringify(engine.schmea, null, 2)}
 					/>

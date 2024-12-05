@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Canvas from './panels/Canvas';
+import Canvas from '../materials/Canvas/Canvas';
 import MaterialPanel from './panels/Left/Material';
 import RightPanels from './panels/Right';
 import '@arco-design/web-react/dist/css/arco.css';

@@ -130,8 +130,8 @@ class Engine {
 		};
 	}
 
-	reset() {
-		this.$schema = Engine.DefaultSchema;
+	reset(schema?) {
+		this.$schema = schema ?? Engine.DefaultSchema;
 	}
 
 	setSelectedId(id: string) {

@@ -21,17 +21,19 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
 				(material) => material.meta.type === element.type
 			);
 
-			const Component = (props) => (
-				<DropWrapper
-					type={material.meta.type}
-					parentId={parentId}
-					id={element.id}
-					engine={engine}
-					dev={material.meta?.dev}
-				>
-					{React.createElement(material.component, props)}
-				</DropWrapper>
-			);
+			const Component = !material
+				? () => <div>不存在${element.type}物料</div>
+				: (props) => (
+						<DropWrapper
+							type={material.meta.type}
+							parentId={parentId}
+							id={element.id}
+							engine={engine}
+							dev={material.meta?.dev}
+						>
+							{React.createElement(material.component, props)}
+						</DropWrapper>
+				  );
 
 			nodes.push(
 				React.createElement(
