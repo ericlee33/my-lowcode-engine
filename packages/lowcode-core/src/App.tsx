@@ -1,13 +1,13 @@
-import Editor from './Editor';
+import Editor from './editor';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 function App() {
-  return (
-    <DndProvider backend={HTML5Backend}>
-      <Editor />
-    </DndProvider>
-  );
+	return (
+		<DndProvider backend={HTML5Backend}>
+			<Editor />
+		</DndProvider>
+	);
 }
 
 export default App;

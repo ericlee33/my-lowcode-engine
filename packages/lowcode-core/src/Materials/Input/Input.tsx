@@ -5,32 +5,38 @@ import { Input as ArcoInput, InputProps } from '@arco-design/web-react';
 interface IInputProps extends InputProps {
 	className?: string;
 	style?: React.CSSProperties;
-	forwardedRef: React.ForwardedRef<ThisType<typeof Input>>;
+	initialValue: any;
+	value: any;
+	onChange: (value: any) => void;
 }
 
 const Root = styled(ArcoInput)``;
 
 const Input: React.FC<IInputProps> & {
 	actions: any[];
-} = ({ className, style, forwardedRef, ...props }) => {
-	const abc = () => {
-		console.log('abc');
-	};
+} = (props) => {
+	const { onChange, style, className, componentConfig } = props;
+	const { initialValue } = componentConfig ?? {};
 
-	const onClear = () => {
-		const { onChange } = props;
-		onChange('');
-	};
+	// const abc = () => {
+	// 	console.log('abc');
+	// };
 
-	useImperativeHandle(forwardedRef, () => ({
-		abc,
-		onClear,
-	}));
+	// const onClear = () => {
+	// 	const { onChange } = props;
+	// 	onChange('');
+	// };
+
+	// useImperativeHandle(forwardedRef, () => ({
+	// 	abc,
+	// 	onClear,
+	// }));
 
 	return (
 		<Root
 			className={className}
 			style={style}
+			defaultValue={initialValue}
 		/>
 	);
 };

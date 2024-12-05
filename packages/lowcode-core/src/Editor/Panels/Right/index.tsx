@@ -4,24 +4,19 @@ import { Tabs } from '@arco-design/web-react';
 import ConfigPanel from './ConfigPanel';
 import EventPanel from './EventPanel';
 
-interface IRightPanelsProps {
-	className?: string;
-	style?: React.CSSProperties;
-}
+interface IRightPanelsProps {}
 
 const Root = styled(Tabs)``;
 
-const RightPanels: React.FC<IRightPanelsProps> = ({ className, style }) => {
+const RightPanels: React.FC<IRightPanelsProps> = (props) => {
+	const { engine } = props;
 	return (
-		<Root
-			className={className}
-			style={style}
-		>
+		<Root>
 			<Tabs.TabPane
 				key="config"
 				title="属性"
 			>
-				{/* <ConfigPanel key={selectedId} /> */}
+				<ConfigPanel engine={engine} />
 			</Tabs.TabPane>
 			<Tabs.TabPane
 				key="event"

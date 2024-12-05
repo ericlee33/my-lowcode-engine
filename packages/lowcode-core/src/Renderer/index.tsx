@@ -1,14 +1,15 @@
 import React from 'react';
-import EngineCore, { Element } from '../core/model/EngineCore';
-import Materials from '../Materials';
+import Engine, { Element } from '../core/model/Engine';
+import Materials from '../materials';
 import { observer } from 'mobx-react';
+import DropWrapper from '../editor/core/DropWrapper';
 
 type IRendererProps = {
-	engineCore: EngineCore;
+	engine: Engine;
 };
 
 const Renderer: React.FC<IRendererProps> = observer((props) => {
-	const { engineCore } = props;
+	const { engine } = props;
 
 	const renderElements = (
 		elements: Element[],
@@ -20,13 +21,26 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
 				(material) => material.meta.type === element.type
 			);
 
+			const Component = (props) => (
+				<DropWrapper
+					type={material.meta.type}
+					parentId={parentId}
+					id={element.id}
+					engine={engine}
+					dev={material.meta?.dev}
+				>
+					{React.createElement(material.component, props)}
+				</DropWrapper>
+			);
+
 			nodes.push(
 				React.createElement(
-					material.component,
+					Component,
 					{
 						parentId,
-						engineCore,
+						engine,
 						id: element.id,
+						componentConfig: element.props ?? {},
 					},
 					renderElements(element.children, element.id)
 				)
@@ -35,8 +49,7 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
 		return nodes;
 	};
 
-	// return <>{renderElements(engineCore.schmea)}</>;
-	return <>{renderElements(engineCore.schmea, undefined)}</>;
+	return <>{renderElements(engine.schmea, undefined)}</>;
 });
 
 export default Renderer;

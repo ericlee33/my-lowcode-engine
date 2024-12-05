@@ -19,4 +19,9 @@ export type MetaData = {
 		}[];
 		notShowInMenu?: boolean;
 	};
+	/** 开发环境 */
+	dev?: {
+		dragable?: boolean;
+		dropable?: boolean;
+	};
 };

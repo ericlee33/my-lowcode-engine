@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Canvas from './Panels/Canvas';
-import MaterialPanel from './Panels/Left/Material';
-import RightPanels from './Panels/Right';
+import Canvas from './panels/Canvas';
+import MaterialPanel from './panels/Left/Material';
+import RightPanels from './panels/Right';
 import '@arco-design/web-react/dist/css/arco.css';
 import { Button, Tabs } from '@arco-design/web-react';
 import { IconApps, IconSettings } from '@arco-design/web-react/icon';
-import SourceCodePanel from './Panels/Left/SourceCode';
+import SourceCodePanel from './panels/Left/SourceCode';
 import '@arco-design/web-react/dist/css/arco.css';
 import { $$_editor_json_schema } from './constants/cache';
-import { useSchemaContext } from './store/SchemaContext';
-import EngineCore from '../core/model/EngineCore';
-import Renderer from '../Renderer';
+import Engine from '../core/model/Engine';
+import Renderer from '../renderer';
+import { generateId } from '../utils';
 
 interface IEditorProps {
 	className?: string;
 	style?: React.CSSProperties;
-	engineCore: EngineCore;
+	engine: Engine;
 }
 
 const Root = styled.div`
@@ -28,11 +28,22 @@ const Root = styled.div`
 		width: 100%;
 		height: 40px;
 		display: flex;
+		align-items: center;
 		justify-content: space-between;
 		border-bottom: 1px solid #e1e1e1;
 
 		.logo {
-			color: #1da;
+			margin-left: 4px;
+			color: #b0b0b0;
+			background: radial-gradient(
+				495.98% 195.09% at 144.79% 10.71%,
+				#ff8a01 0,
+				#b051b9 22.37%,
+				#672bff 45.54%,
+				#06f 99.99%
+			);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
 			font-size: 20px;
 		}
 
@@ -71,18 +82,7 @@ const Root = styled.div`
 `;
 
 const Editor: React.FC<IEditorProps> = (props) => {
-	const { engineCore } = props;
-
-	const onClear = () => {
-		localStorage.setItem(
-			$$_editor_json_schema,
-			JSON.stringify({
-				type: 'Page',
-				children: [],
-				id: 'fdkafkd',
-			})
-		);
-	};
+	const { engine } = props;
 
 	return (
 		<Root>
@@ -90,7 +90,7 @@ const Editor: React.FC<IEditorProps> = (props) => {
 				<span className="logo">Eric's Low Code</span>
 				<span className="btns">
 					<Button
-						type="primary"
+						type="outline"
 						onClick={() => {}}
 					>
 						预览
@@ -113,31 +113,19 @@ const Editor: React.FC<IEditorProps> = (props) => {
 								style={{
 									marginTop: '10px',
 								}}
-								engineCore={engineCore}
+								engine={engine}
 							/>
-							<div
-								onClick={() => {
-									onClear();
-									engineCore.reset();
-								}}
-							>
-								清空
-							</div>
 						</Tabs.TabPane>
 						<Tabs.TabPane title={<IconSettings />}>
-							<SourceCodePanel engineCore={engineCore} />
+							<SourceCodePanel engine={engine} />
 						</Tabs.TabPane>
 					</Tabs>
 				</div>
 				<div className="center">
-					<Renderer engineCore={engineCore} />
-					{/* <Canvas
-						schema={schema}
-						// onSave={onSave}
-					/> */}
+					<Renderer engine={engine} />
 				</div>
 				<div className="right">
-					<RightPanels />
+					<RightPanels engine={engine} />
 				</div>
 			</div>
 		</Root>

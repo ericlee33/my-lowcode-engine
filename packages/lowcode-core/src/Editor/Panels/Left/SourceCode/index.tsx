@@ -9,7 +9,7 @@ import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
 import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 import { loader } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor';
-import EngineCore from '../../../../core/model/EngineCore';
+import Engine from '../../../../core/model/Engine';
 import { observer } from 'mobx-react';
 
 self.MonacoEnvironment = {
@@ -35,13 +35,13 @@ loader.config({ monaco });
 interface ISourceCodePanelProps {
 	className?: string;
 	style?: React.CSSProperties;
-	engineCore: EngineCore;
+	engine: Engine;
 }
 
 const Root = styled.div``;
 
 const SourceCodePanel: React.FC<ISourceCodePanelProps> = observer(
-	({ className, style, engineCore }) => {
+	({ className, style, engine }) => {
 		const [ready, setReady] = useState(false);
 		useEffect(() => {
 			loader.init().then(/* ... */ () => setReady(true));
@@ -73,12 +73,13 @@ const SourceCodePanel: React.FC<ISourceCodePanelProps> = observer(
 							minimap: {
 								enabled: false,
 							},
+							contextmenu: false,
 							// readOnly: disabled
 						}}
 						onChange={onChange}
 						height="80vh"
 						language="json"
-						value={JSON.stringify(engineCore.schmea, null, 2)}
+						value={JSON.stringify(engine.schmea, null, 2)}
 					/>
 				)}
 			</Root>

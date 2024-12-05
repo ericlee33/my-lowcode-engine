@@ -1,7 +1,7 @@
 import React, { Children, forwardRef, useImperativeHandle } from 'react';
 import styled from 'styled-components';
-import { useDrop } from '../../Editor/hooks/useDrop';
-import { ItemTypes } from '../../Editor/ItemTypes';
+import { useDrop } from '../../editor/hooks/useDrop';
+import { ItemTypes } from '../../editor/ItemTypes';
 
 interface IContainerProps {
 	className?: string;
@@ -21,7 +21,7 @@ const Container = forwardRef<
 	} & {
 		children: React.ReactNode;
 	}
->(({ className, style, engineCore, parentId, ...props }, ref) => {
+>(({ className, style, engine, parentId, ...props }, ref) => {
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: ItemTypes.BOX,
 		onDrop: (
@@ -31,13 +31,13 @@ const Container = forwardRef<
 			}
 			// monitor
 		) => {
-			engineCore.add(element, parentId);
+			engine.add(element, parentId);
 
 			return {
 				test: '123',
 			};
 		},
-		deps: [engineCore],
+		deps: [engine],
 	});
 
 	const { children } = props;

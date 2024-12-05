@@ -1,13 +1,13 @@
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../ItemTypes';
-import materials from '../../Materials';
-import Renderer from '../../Renderer/legacy';
+import materials from '../../materials';
+import Renderer from '../../renderer/legacy';
 import styled from 'styled-components';
 import Layout, {
 	// Responsive as ResponsiveGridLayout,
 	WidthProvider,
 } from 'react-grid-layout';
-import EngineCore from '../../core/model/EngineCore';
+import Engine from '../../core/model/Engine';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
@@ -27,7 +27,7 @@ const Root = styled.div`
 `;
 
 interface ICanvasProps {
-	schema: EngineCore;
+	schema: Engine;
 	onSave: (schemaConfig: any) => void;
 }
 

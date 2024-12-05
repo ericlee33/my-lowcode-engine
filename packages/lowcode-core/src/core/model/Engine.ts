@@ -1,7 +1,7 @@
 import { makeAutoObservable, reaction } from 'mobx';
 import { generateId } from '../../utils';
 import { find, map, findIndex, forEach } from 'lodash-es';
-import { $$_editor_json_schema } from '../../Editor/constants/cache';
+import { $$_editor_json_schema } from '../../editor/constants/cache';
 
 export type Element = {
 	/** uuid */
@@ -17,7 +17,7 @@ type SchemaControllerProps = {
 	schema?: Element[];
 };
 
-class EngineCore {
+class Engine {
 	static DefaultSchema = [
 		{
 			type: 'page',
@@ -34,9 +34,11 @@ class EngineCore {
 	private $schema: Element[];
 	private $disposers = [];
 
+	selectedId?: string;
+
 	constructor(props: SchemaControllerProps) {
 		makeAutoObservable(this);
-		this.$schema = props.schema ?? EngineCore.DefaultSchema;
+		this.$schema = props.schema ?? Engine.DefaultSchema;
 
 		const disposer = reaction(
 			() => {
@@ -121,8 +123,19 @@ class EngineCore {
 		return [null, []];
 	}
 
+	setElementProps(element: Element, value) {
+		element.props = {
+			...element.props,
+			...value,
+		};
+	}
+
 	reset() {
-		this.$schema = EngineCore.DefaultSchema;
+		this.$schema = Engine.DefaultSchema;
+	}
+
+	setSelectedId(id: string) {
+		this.selectedId = id;
 	}
 
 	destroy() {
@@ -132,4 +145,4 @@ class EngineCore {
 	}
 }
 
-export default EngineCore;
+export default Engine;

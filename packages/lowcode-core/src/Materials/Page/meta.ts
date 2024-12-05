@@ -24,6 +24,10 @@ export const meta: MetaData = {
 				},
 			},
 		],
-		// notShowInMenu: true,
+		notShowInMenu: true,
+	},
+	dev: {
+		dragable: false,
+		dropable: false,
 	},
 };

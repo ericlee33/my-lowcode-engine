@@ -3,7 +3,7 @@ import type { XYCoord } from 'react-dnd';
 import { useDragLayer } from 'react-dnd';
 
 // import { BoxDragPreview } from './BoxDragPreview';
-import Materials from '../../../../Materials';
+import Materials from '../../../../materials';
 import { ItemTypes } from '../../../ItemTypes';
 
 export function snapToGrid(x: number, y: number): [number, number] {

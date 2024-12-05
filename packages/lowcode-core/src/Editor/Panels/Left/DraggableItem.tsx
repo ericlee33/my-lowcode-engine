@@ -1,31 +1,33 @@
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from '../../ItemTypes';
 // import { Button } from '@arco-design/web-react';
-import { MetaData } from '../../../Materials/_types';
+import { MetaData } from '../../../materials/_types';
 import { generateId } from '../../../utils';
-import EngineCore from '../../../core/model/EngineCore';
+import Engine from '../../../core/model/Engine';
 import { useEffect } from 'react';
 import { getEmptyImage } from 'react-dnd-html5-backend';
+import styled from 'styled-components';
 
-const style = {
-	border: '1px dashed gray',
-	backgroundColor: 'white',
-	padding: '0.5rem 1rem',
-	marginRight: '1.5rem',
-	marginBottom: '1.5rem',
-	cursor: 'move',
-};
-
+const StyledMaterial = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #e1e1e1;
+	font-size: 12px;
+	white-space: nowrap;
+	background-color: white;
+	padding: 0.5rem 1rem;
+	cursor: move;
+	flex: 1;
+	height: 60px;
+`;
 interface IDraggableItemProps {
 	metaData: MetaData;
 	component: React.FC<any>;
-	engineCore: EngineCore;
+	engine: Engine;
 }
 
-const DraggableItem: React.FC<IDraggableItemProps> = ({
-	metaData,
-	engineCore,
-}) => {
+const DraggableItem: React.FC<IDraggableItemProps> = ({ metaData, engine }) => {
 	const [{ isDragging }, drag, preview] = useDrag(() => ({
 		type: ItemTypes.BOX,
 		// 传递的信息
@@ -34,7 +36,7 @@ const DraggableItem: React.FC<IDraggableItemProps> = ({
 			// 获取 drop 通过 drop 回调 return 的数据
 			const dropResult = monitor.getDropResult();
 			if (!monitor.didDrop()) {
-				engineCore.remove(item.id);
+				engine.remove(item.id);
 			}
 			if (item && dropResult) {
 				// console.log(item, 333, dropResult);
@@ -48,17 +50,16 @@ const DraggableItem: React.FC<IDraggableItemProps> = ({
 	}));
 
 	useEffect(() => {
+		if (isDragging) {
+			engine.setSelectedId('');
+		}
+	}, [isDragging]);
+
+	useEffect(() => {
 		preview(getEmptyImage(), { captureDraggingState: true });
 	}, []);
 
-	return (
-		<button
-			ref={drag}
-			style={style}
-		>
-			{metaData.title}
-		</button>
-	);
+	return <StyledMaterial ref={drag}>{metaData.title}</StyledMaterial>;
 };
 
 export default DraggableItem;
