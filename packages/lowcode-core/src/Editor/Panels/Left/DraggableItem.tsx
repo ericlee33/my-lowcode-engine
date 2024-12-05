@@ -46,8 +46,6 @@ const DraggableItem: React.FC<IDraggableItemProps> = ({
 			handlerId: monitor.getHandlerId(),
 		}),
 	}));
-	const opacity = isDragging ? 0 : 1;
-	console.log(opacity, 'opacity');
 
 	useEffect(() => {
 		preview(getEmptyImage(), { captureDraggingState: true });
@@ -56,7 +54,7 @@ const DraggableItem: React.FC<IDraggableItemProps> = ({
 	return (
 		<button
 			ref={drag}
-			style={{ ...style, opacity }}
+			style={style}
 		>
 			{metaData.title}
 		</button>
