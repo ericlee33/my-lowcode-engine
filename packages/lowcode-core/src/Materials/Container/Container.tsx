@@ -2,10 +2,13 @@ import React, { Children, forwardRef, useImperativeHandle } from 'react';
 import styled from 'styled-components';
 import { useDrop } from '../../editor/hooks/useDrop';
 import { ItemTypes } from '../../editor/ItemTypes';
+import Engine, { Element } from '../../core/model/Engine';
 
 interface IContainerProps {
 	className?: string;
 	style?: React.CSSProperties;
+	id: string;
+	parentId: string;
 }
 
 const Root = styled.div`
@@ -21,23 +24,21 @@ const Container = forwardRef<
 	} & {
 		children: React.ReactNode;
 	}
->(({ className, style, engine, parentId, ...props }, ref) => {
+>(({ className, style, engine, id, parentId, ...props }, ref) => {
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: ItemTypes.BOX,
-		onDrop: (
-			element,
-			item: {
-				type: string;
-			}
+		moveCard: (
+			element: Element,
+			id
 			// monitor
 		) => {
-			engine.add(element, parentId);
-
-			return {
-				test: '123',
-			};
+			const hasElement = engine.has(element.id);
+			if (!hasElement) {
+				engine.add(element, element.parentId);
+			}
 		},
-		deps: [engine],
+		deps: [engine, id],
+		id,
 	});
 
 	const { children } = props;

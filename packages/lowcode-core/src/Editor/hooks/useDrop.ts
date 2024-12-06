@@ -1,11 +1,12 @@
-import React, { useCallback } from 'react';
+import React, { RefAttributes, useCallback } from 'react';
 import { useDrop as useDropBase, DropTargetMonitor, XYCoord } from 'react-dnd';
 
 export const useDrop = (params: {
 	accept: string;
 	deps: any[];
 	moveCard: any;
-	ref;
+	ref?: undefined | RefAttributes;
+	/** hover 元素的 id */
 	id: string;
 }) => {
 	const { accept, deps, ref, moveCard, id } = params;
@@ -94,11 +95,17 @@ export const useDrop = (params: {
 		[deps]
 	);
 
+	let nodeRef = drop;
+
+	if (ref) {
+		nodeRef = drop(ref);
+	}
+
 	return [
 		{
 			isOver,
 			canDrop,
 		},
-		{ nodeRef: drop(ref) },
+		{ nodeRef },
 	];
 };
