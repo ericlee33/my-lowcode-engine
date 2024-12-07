@@ -32,7 +32,6 @@ const Page = forwardRef<{}, IContainerProps>((props, ref) => {
 			 * 2、如果此时拖拽的组件是 Card 组件，则 dragIndex 不为 undefined，此时替换 dragIndex 和 hoverIndex 位置的元素即可
 			 */
 			const hasElement = engine.has(element.id);
-			console.log(element.parentId, id, 'ididd');
 
 			if (!hasElement) {
 				engine.add({ ...element, parentId: id }, id);

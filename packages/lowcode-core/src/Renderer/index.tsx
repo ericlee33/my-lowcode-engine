@@ -43,6 +43,7 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
 						engine,
 						id: element.id,
 						componentConfig: element.props ?? {},
+						parentElement: element,
 					},
 					renderElements(element.children, element.id)
 				)

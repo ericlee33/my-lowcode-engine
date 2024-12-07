@@ -25,4 +25,8 @@ export const InputMeta: MetaData = {
 			},
 		],
 	},
+	dev: {
+		dragable: false,
+		dropable: false,
+	},
 };

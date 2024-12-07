@@ -57,6 +57,12 @@ class Engine {
 		return !!element;
 	}
 
+	hasInElement(id: string, rootElement?: Element) {
+		const rootElements = rootElement ? [rootElement] : this.$schema;
+		const element = this.traverse(rootElements, id)[0];
+		return !!element;
+	}
+
 	get(id: string): Element | null {
 		return this.traverse(this.$schema, id)[0];
 	}
@@ -64,6 +70,10 @@ class Engine {
 	add(compoent: Element, id: string) {
 		const [target] = this.traverse(this.$schema, id);
 		target.children.push(compoent);
+	}
+
+	addToElement(compoent: Element, rootElement: Element) {
+		rootElement.children.push(compoent);
 	}
 
 	remove(id: string) {

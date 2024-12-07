@@ -9,11 +9,13 @@ interface IContainerProps {
 	style?: React.CSSProperties;
 	id: string;
 	parentId: string;
+	parentElement: Element;
+	engine: Engine;
 }
 
 const Root = styled.div`
 	border: 1px solid #e1e1e1;
-	min-height: 30px;
+	min-height: 130px;
 	padding: 10px;
 `;
 
@@ -24,29 +26,36 @@ const Container = forwardRef<
 	} & {
 		children: React.ReactNode;
 	}
->(({ className, style, engine, id, parentId, ...props }, ref) => {
-	const [{ canDrop, isOver }, drop] = useDrop({
+>((props, ref) => {
+	const { className, style, engine, id, parentId, parentElement, children } =
+		props;
+
+	const [{ canDrop, isOver }, { nodeRef: _nodeRef }] = useDrop({
 		accept: ItemTypes.BOX,
 		moveCard: (
 			element: Element,
 			id
 			// monitor
 		) => {
-			const hasElement = engine.has(element.id);
-			if (!hasElement) {
-				engine.add(element, element.parentId);
+			const elementHasId = engine.hasInElement(element.id, parentElement);
+			const rootHasElement = engine.has(element.id);
+			console.log(engine.schmea, element.id, elementHasId, 'hasElement');
+			if (!rootHasElement) {
+				engine.addToElement(element, parentElement);
+			} else if (!elementHasId) {
+				engine.remove(element.id);
+				engine.addToElement(element, parentElement);
 			}
 		},
-		deps: [engine, id],
+		deps: [engine, id, parentElement],
 		id,
 	});
 
-	const { children } = props;
 	useImperativeHandle(ref, () => ({}));
 
 	return (
 		<Root
-			ref={drop}
+			ref={_nodeRef}
 			className={className}
 			style={style}
 			{...props}

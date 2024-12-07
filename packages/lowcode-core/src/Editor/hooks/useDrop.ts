@@ -1,19 +1,22 @@
-import React, { RefAttributes, useCallback } from 'react';
+import React, { useRef, RefAttributes, useCallback } from 'react';
 import { useDrop as useDropBase, DropTargetMonitor, XYCoord } from 'react-dnd';
 
 export const useDrop = (params: {
 	accept: string;
 	deps: any[];
 	moveCard: any;
-	ref?: undefined | RefAttributes;
+	ref?: undefined | RefAttributes<any>;
 	/** hover 元素的 id */
 	id: string;
 }) => {
 	const { accept, deps, ref, moveCard, id } = params;
+	const _nodeRef = useRef();
+
+	let nodeRef = ref ?? _nodeRef;
 
 	const handleHover = useCallback(
 		(item: any, monitor: DropTargetMonitor) => {
-			if (!ref.current) {
+			if (!nodeRef.current) {
 				return;
 			}
 			const dragId = item.id;
@@ -25,7 +28,7 @@ export const useDrop = (params: {
 			// }
 
 			// 确定屏幕上矩形范围
-			const hoverBoundingRect = ref.current!.getBoundingClientRect();
+			const hoverBoundingRect = nodeRef.current!.getBoundingClientRect();
 
 			// 获取中点垂直坐标
 			const hoverMiddleY =
@@ -67,7 +70,7 @@ export const useDrop = (params: {
 			// item.id = hoverId;
 			// }
 		},
-		[id, moveCard, ref]
+		[id, moveCard, nodeRef]
 	);
 
 	const [{ canDrop, isOver }, drop] = useDropBase(
@@ -95,11 +98,7 @@ export const useDrop = (params: {
 		[deps]
 	);
 
-	let nodeRef = drop;
-
-	if (ref) {
-		nodeRef = drop(ref);
-	}
+	nodeRef = drop(nodeRef);
 
 	return [
 		{
