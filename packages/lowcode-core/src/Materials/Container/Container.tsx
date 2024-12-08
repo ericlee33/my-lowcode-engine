@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useDrop } from '../../editor/hooks/useDrop';
 import { ItemTypes } from '../../editor/ItemTypes';
 import Engine, { Element } from '../../core/model/Engine';
+import { DropTargetMonitor } from 'react-dnd';
 
 interface IContainerProps {
 	className?: string;
@@ -32,14 +33,13 @@ const Container = forwardRef<
 
 	const [{ canDrop, isOver }, { nodeRef: _nodeRef }] = useDrop({
 		accept: ItemTypes.BOX,
-		moveCard: (
-			element: Element,
-			id
-			// monitor
-		) => {
+		moveCard: (element: Element, id, monitor: DropTargetMonitor) => {
 			const elementHasId = engine.hasInElement(element.id, parentElement);
 			const rootHasElement = engine.has(element.id);
-			console.log(engine.schmea, element.id, elementHasId, 'hasElement');
+			if (monitor.didDrop()) {
+				return;
+			}
+
 			if (!rootHasElement) {
 				engine.addToElement(element, parentElement);
 			} else if (!elementHasId) {
@@ -60,7 +60,7 @@ const Container = forwardRef<
 			style={style}
 			{...props}
 		>
-			{parentId}
+			{id}
 			{children}
 		</Root>
 	);

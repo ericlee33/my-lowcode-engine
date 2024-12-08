@@ -52,7 +52,7 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
 		return nodes;
 	};
 
-	return <>{renderElements(engine.schmea, undefined)}</>;
+	return <>{renderElements(engine.schema, undefined)}</>;
 });
 
 export default Renderer;

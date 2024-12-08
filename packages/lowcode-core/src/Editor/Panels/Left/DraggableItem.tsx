@@ -39,7 +39,7 @@ const DraggableItem: React.FC<IDraggableItemProps> = ({ metaData, engine }) => {
 			// 获取 drop 通过 drop 回调 return 的数据
 			const dropResult = monitor.getDropResult();
 			if (!monitor.didDrop()) {
-				engine.remove(item.id);
+				// engine.remove(item.id);
 			}
 			if (item && dropResult) {
 				// console.log(item, 333, dropResult);

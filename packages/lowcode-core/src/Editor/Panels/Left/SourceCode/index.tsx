@@ -79,7 +79,7 @@ const SourceCodePanel: React.FC<ISourceCodePanelProps> = observer(
 						onChange={onChange}
 						height="93vh"
 						language="json"
-						value={JSON.stringify(engine.schmea, null, 2)}
+						value={JSON.stringify(engine.schema, null, 2)}
 					/>
 				)}
 			</Root>

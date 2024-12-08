@@ -30,7 +30,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 				const dropResult = monitor.getDropResult();
 				if (!monitor.didDrop()) {
 					// console.log(item.id, 'ididd');
-					engine.remove(item.id);
+					// engine.remove(item.id);
 				}
 				if (item && dropResult) {
 					// console.log(item, 333, dropResult);
@@ -48,7 +48,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 
 	const [{ canDrop, isOver }, { nodeRef: _nodeRef }] = useDrop({
 		accept: ItemTypes.BOX,
-		deps: [engine, id],
+		deps: [engine, id, parentId],
 		moveCard: (
 			/** 抛来的 element */
 			element: Element,
@@ -56,8 +56,8 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 			id: string
 		) => {
 			const hasElement = engine.has(element.id);
+			console.log(engine.schema, 'schema', id);
 			if (element.id === id) {
-				// return engine.remove(element.id);
 				return;
 			}
 

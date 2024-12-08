@@ -27,7 +27,7 @@ class Engine {
 		},
 	];
 
-	get schmea() {
+	get schema() {
 		return this.$schema;
 	}
 

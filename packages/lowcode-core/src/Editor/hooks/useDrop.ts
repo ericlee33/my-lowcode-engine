@@ -60,7 +60,7 @@ export const useDrop = (params: {
 			// }
 
 			// 执行 move 回调函数
-			moveCard(item, hoverId);
+			moveCard(item, hoverId, monitor);
 
 			/**
 			 * 如果拖拽的组件为 Box，则 dragId 为 undefined，此时不对 item 的 index 进行修改
@@ -76,14 +76,14 @@ export const useDrop = (params: {
 	const [{ canDrop, isOver }, drop] = useDropBase(
 		() => ({
 			accept,
-			// drop: (item: Element, monitor) => {
-			//   // const didDrop = monitor.didDrop();
-			//   // if (didDrop) {
-			//   // 	return;
-			//   // }
-			//   moveCard(item, id);
-			// },
-			hover: (...rest) => handleHover(...rest),
+			drop: (item: Element, monitor) => {
+				const didDrop = monitor.didDrop();
+				if (didDrop) {
+					return;
+				}
+				moveCard(item, id);
+			},
+			// hover: (...rest) => handleHover(...rest),
 			collect: (monitor) => ({
 				isOver: monitor.isOver(),
 				canDrop: monitor.canDrop(),

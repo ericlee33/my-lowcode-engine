@@ -33,11 +33,12 @@ const Page = forwardRef<{}, IContainerProps>((props, ref) => {
 			 */
 			const hasElement = engine.has(element.id);
 
-			if (!hasElement) {
-				engine.add({ ...element, parentId: id }, id);
-				// 为拖拽中的元素注入 parentId，避免在拽到 button 移动顺序之后之后不符合预期
-				element.parentId = id;
+			if (hasElement) {
+				engine.remove(element.id);
 			}
+			engine.add({ ...element, parentId: id }, id);
+			// 为拖拽中的元素注入 parentId，避免在拽到 button 移动顺序之后之后不符合预期
+			element.parentId = id;
 		},
 		ref: nodeRef,
 		id,
