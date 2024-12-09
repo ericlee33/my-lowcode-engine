@@ -1,4 +1,4 @@
-import React, { Children, forwardRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import styled from 'styled-components';
 import { useDrop } from '../../editor/hooks/useDrop';
 import { ItemTypes } from '../../editor/ItemTypes';
@@ -17,7 +17,7 @@ interface IContainerProps {
 const Root = styled.div`
   border: 1px solid #e1e1e1;
   min-height: 130px;
-  padding: 40px 10px;
+  padding: 10px 10px;
 `;
 
 const Container = forwardRef<
@@ -58,7 +58,12 @@ const Container = forwardRef<
   useImperativeHandle(ref, () => ({}));
 
   return (
-    <Root ref={_nodeRef} className={className} style={style} {...props}>
+    <Root
+      ref={_nodeRef}
+      className={className}
+      style={{ ...style, border: isOver ? '1px solid blue' : '' }}
+      {...props}
+    >
       {id}
       {children}
     </Root>

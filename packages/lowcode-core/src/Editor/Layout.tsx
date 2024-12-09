@@ -5,7 +5,7 @@ import MaterialPanel from './panels/Left/Material';
 import DataSource from './panels/Left/DataSource';
 import RightPanels from './panels/Right';
 import '@arco-design/web-react/dist/css/arco.css';
-import { Button, Tabs } from '@arco-design/web-react';
+import { Button, Tabs, ResizeBox } from '@arco-design/web-react';
 import {
   IconStorage,
   IconApps,
@@ -55,7 +55,7 @@ const Root = styled.div`
   }
 
   .editor-area {
-    display: flex;
+    /* display: flex; */
 
     .left {
       width: 300px;
@@ -86,6 +86,48 @@ const Root = styled.div`
 const Editor: React.FC<IEditorProps> = (props) => {
   const { engine } = props;
 
+  const panels = [
+    {
+      min: '300px',
+      content: (
+        <Tabs defaultActiveTab="material" tabPosition="left" size="large">
+          <Tabs.TabPane key="material" title={<IconApps />}>
+            <MaterialPanel
+              style={{
+                marginTop: '10px',
+              }}
+              engine={engine}
+            />
+          </Tabs.TabPane>
+          <Tabs.TabPane key="dataSource" title={<IconStorage />}>
+            <DataSource
+              style={{
+                marginTop: '10px',
+              }}
+              engine={engine}
+            />
+          </Tabs.TabPane>
+          <Tabs.TabPane title={<IconSettings />}>
+            <SourceCodePanel engine={engine} />
+          </Tabs.TabPane>
+        </Tabs>
+      ),
+    },
+    {
+      content: <Renderer engine={engine} />,
+      size: 0.7,
+    },
+    {
+      content: <RightPanels engine={engine} />,
+    },
+
+    // <div className="center">
+    // </div>,
+    // <div className="right">
+    // <RightPanels engine={engine} />,
+    // </div>,
+  ];
+
   return (
     <Root>
       <div className="header">
@@ -96,38 +138,17 @@ const Editor: React.FC<IEditorProps> = (props) => {
           </Button>
         </span>
       </div>
-      <div className="left"></div>
-      <div className="editor-area">
-        <div className="left">
-          <Tabs defaultActiveTab="material" tabPosition="left" size="large">
-            <Tabs.TabPane key="material" title={<IconApps />}>
-              <MaterialPanel
-                style={{
-                  marginTop: '10px',
-                }}
-                engine={engine}
-              />
-            </Tabs.TabPane>
-            <Tabs.TabPane key="dataSource" title={<IconStorage />}>
-              <DataSource
-                style={{
-                  marginTop: '10px',
-                }}
-                engine={engine}
-              />
-            </Tabs.TabPane>
-            <Tabs.TabPane title={<IconSettings />}>
-              <SourceCodePanel engine={engine} />
-            </Tabs.TabPane>
-          </Tabs>
-        </div>
-        <div className="center">
-          <Renderer engine={engine} />
-        </div>
-        <div className="right">
-          <RightPanels engine={engine} />
-        </div>
-      </div>
+      {/* <div className="editor-area"> */}
+      <ResizeBox.SplitGroup
+        style={{
+          // height: 200,
+          // width: 500,
+          // border: '1px solid var(--color-border)',
+          height: '100%',
+        }}
+        panes={panels}
+      />
+      {/* </div> */}
     </Root>
   );
 };
