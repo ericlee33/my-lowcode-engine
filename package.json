@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "pnpm --filter lowcode-core dev"
+    "dev": "pnpm --filter lowcode-core dev",
+    "server": "pnpm --filter mock-server start:dev"
   },
   "keywords": [],
   "author": "",
