@@ -1,4 +1,7 @@
+import { DragType } from './_consts';
+
 export type MetaData = {
+	/** 物料类型 */
 	type: string;
 	title: string;
 	configure: {
@@ -23,5 +26,9 @@ export type MetaData = {
 	dev?: {
 		dragable?: boolean;
 		dropable?: boolean;
+		canvas: {
+			/** 拖拽类型 */
+			dragType: DragType;
+		};
 	};
 };

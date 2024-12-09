@@ -4,7 +4,7 @@ import { useDragLayer } from 'react-dnd';
 
 // import { BoxDragPreview } from './BoxDragPreview';
 import Materials from '../../../../materials';
-import { ItemTypes } from '../../../ItemTypes';
+import { DragType } from '../../../../materials/_consts';
 
 export function snapToGrid(x: number, y: number): [number, number] {
 	const snappedX = Math.round(x / 32) * 32;
@@ -71,10 +71,8 @@ export const CustomDragLayer: FC<CustomDragLayerProps> = (props) => {
 		const Component = material.component;
 
 		switch (itemType) {
-			case ItemTypes.BOX:
-				return <Component id={item.id} />;
 			default:
-				return null;
+				return <Component id={item.id} />;
 		}
 	}
 

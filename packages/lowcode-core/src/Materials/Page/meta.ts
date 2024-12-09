@@ -1,4 +1,5 @@
 import { MetaData } from '../_types';
+import { DragType } from '../_consts';
 
 export const meta: MetaData = {
 	type: 'page',
@@ -29,5 +30,8 @@ export const meta: MetaData = {
 	dev: {
 		dragable: false,
 		dropable: false,
+		canvas: {
+			dragType: DragType.Container,
+		},
 	},
 };

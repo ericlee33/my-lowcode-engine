@@ -1,4 +1,5 @@
 import { MetaData } from '../_types';
+import { DragType } from '../_consts';
 
 export const InputMeta: MetaData = {
 	type: 'Input',
@@ -24,5 +25,10 @@ export const InputMeta: MetaData = {
 				},
 			},
 		],
+	},
+	dev: {
+		canvas: {
+			dragType: DragType.Common,
+		},
 	},
 };

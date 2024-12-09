@@ -1,3 +1,3 @@
-import Page from './Page';
+import Page from './component';
 export { meta } from './meta';
 export const component = Page;

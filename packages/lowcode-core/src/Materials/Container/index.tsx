@@ -1,4 +1,4 @@
-import Container from './Container';
+import Container from './component';
 import { InputMeta } from './meta';
 
 export const meta = InputMeta;

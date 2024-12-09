@@ -1,5 +1,5 @@
 import { useDrag } from 'react-dnd';
-import { ItemTypes } from '../../ItemTypes';
+import { DragType } from '../../../materials/_consts';
 // import { Button } from '@arco-design/web-react';
 import { MetaData } from '../../../materials/_types';
 import { generateId } from '../../../utils';
@@ -30,9 +30,13 @@ interface IDraggableItemProps {
 	engine: Engine;
 }
 
-const DraggableItem: React.FC<IDraggableItemProps> = ({ metaData, engine }) => {
+// 容器接受容器，按钮接受非新物料
+const DraggableItem: React.FC<IDraggableItemProps> = (props) => {
+	const { metaData, engine } = props;
+	const dragType = metaData.dev.canvas.dragType;
+
 	const [{ isDragging }, drag, preview] = useDrag(() => ({
-		type: ItemTypes.BOX,
+		type: dragType,
 		// 传递的信息
 		item: () => ({ type: metaData.type, id: generateId(), children: [] }),
 		end: (item, monitor) => {

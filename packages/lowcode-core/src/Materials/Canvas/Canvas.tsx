@@ -1,5 +1,5 @@
 import { useDrop } from 'react-dnd';
-import { ItemTypes } from '../../editor/ItemTypes';
+import { DragType } from '../_consts';
 import materials from '../../editor';
 import Renderer from '../../renderer/legacy';
 import styled from 'styled-components';
@@ -34,7 +34,7 @@ interface ICanvasProps {
 const Canvas: React.FC<ICanvasProps> = ({ schema, onSave }) => {
 	const [{ canDrop, isOver }, drop] = useDrop(
 		() => ({
-			accept: ItemTypes.BOX,
+			accept: DragType.Common,
 			drop: (
 				item: {
 					type: string;
