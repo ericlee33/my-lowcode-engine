@@ -3,7 +3,7 @@ import { Button as ArcoButton } from '@arco-design/web-react';
 import { ItemTypes } from '../../ItemTypes';
 import Engine, { Element } from '../../../core/model/Engine';
 import { useDrop } from '../../hooks/useDrop';
-import { useDrag } from 'react-dnd';
+import { useDrag, DragSourceMonitor } from 'react-dnd';
 import { MetaData } from '../../../materials/_types';
 import { observer } from 'mobx-react';
 
@@ -43,7 +43,11 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
           // console.log(item, 333, dropResult);
         }
       },
-      canDrag: true,
+      canDrag: (item: DragSourceMonitor) => {
+        const isDragging = item.isDragging();
+        console.log(isDragging, id, 'id');
+        return !isDragging;
+      },
       collect: (monitor) => ({
         isDragging: monitor.isDragging(),
         handlerId: monitor.getHandlerId(),
@@ -140,9 +144,11 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
       }}
     >
       <div
-        style={{
-          pointerEvents: 'none',
-        }}
+        style={
+          {
+            // pointerEvents: 'none',
+          }
+        }
       >
         {children}
       </div>

@@ -88,7 +88,9 @@ const Editor: React.FC<IEditorProps> = (props) => {
 
   const panels = [
     {
-      min: '300px',
+      min: 0.2,
+      size: 0.2,
+      max: 0.5,
       content: (
         <Tabs defaultActiveTab="material" tabPosition="left" size="large">
           <Tabs.TabPane key="material" title={<IconApps />}>
@@ -114,10 +116,13 @@ const Editor: React.FC<IEditorProps> = (props) => {
       ),
     },
     {
+      size: 0.6,
       content: <Renderer engine={engine} />,
-      size: 0.7,
     },
     {
+      min: 0.2,
+      size: 0.2,
+      max: 0.3,
       content: <RightPanels engine={engine} />,
     },
 

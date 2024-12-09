@@ -30,6 +30,7 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
               id={element.id}
               engine={engine}
               dev={material.meta?.dev}
+              componentChildren={element.children}
             >
               {React.createElement(material.component, props)}
             </DropWrapper>
