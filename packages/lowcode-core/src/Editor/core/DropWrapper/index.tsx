@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { Button as ArcoButton } from '@arco-design/web-react';
+import React, { useEffect, useRef } from 'react';
 import { DragType } from '../../../materials/_consts';
 import Engine, { Element } from '../../../core/model/Engine';
 import { useDrop } from '../../hooks/useDrop';
@@ -66,12 +65,12 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 			id: string
 		) => {
 			const hasElement = engine.has(element.id);
-			console.log(
-				JSON.parse(JSON.stringify(engine.schema)),
-				hasElement,
-				'schema',
-				id
-			);
+			// console.log(
+			// 	JSON.parse(JSON.stringify(engine.schema)),
+			// 	hasElement,
+			// 	'schema',
+			// 	id
+			// );
 			if (element.id === id) {
 				return;
 			}
@@ -109,7 +108,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 		id: id,
 	});
 
-	let ref;
+	let ref = nodeRef;
 
 	if (dropable) {
 		ref = _nodeRef;
@@ -138,7 +137,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 				border,
 			}}
 			ref={ref}
-			onClick={() => {
+			onClickCapture={() => {
 				engine.setSelectedId(id);
 			}}
 		>

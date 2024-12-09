@@ -31,6 +31,6 @@ export const InputMeta: MetaData = {
 			dragType: DragType.Container,
 		},
 		dropable: false,
-		dragable: false,
+		// dragable: false,
 	},
 };

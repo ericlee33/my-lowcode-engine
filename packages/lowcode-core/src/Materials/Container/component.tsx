@@ -17,7 +17,7 @@ interface IContainerProps {
 const Root = styled.div`
 	border: 1px solid #e1e1e1;
 	min-height: 130px;
-	padding: 10px 10px;
+	padding: 40px 10px;
 `;
 
 const Container = forwardRef<
@@ -60,13 +60,13 @@ const Container = forwardRef<
 	return (
 		<Root
 			className={className}
-			ref={_nodeRef}
+			// ref={_nodeRef}
 			style={style}
 			{...props}
 		>
 			{id}
 			<div
-				// ref={_nodeRef}
+				ref={_nodeRef}
 				style={{ border: isOver ? '1px solid blue' : '' }}
 			>
 				{children}
