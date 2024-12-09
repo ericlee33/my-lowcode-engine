@@ -12,7 +12,7 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
   const { engine } = props;
 
   const renderElements = (
-    elements: Element[],
+    elements: Element[] = [],
     parentId: undefined | string
   ) => {
     const nodes: React.ReactElement[] = [];
@@ -44,6 +44,7 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
             id: element.id,
             componentConfig: element.props ?? {},
             parentElement: element,
+            componentChildren: element.children,
           },
           renderElements(element.children, element.id)
         )

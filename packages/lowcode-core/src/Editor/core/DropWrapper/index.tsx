@@ -13,10 +13,12 @@ interface IDropWrapper {
   parentId?: string;
   engine: Engine;
   dev?: MetaData['dev'];
+  componentChildren: any;
 }
 
 const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
-  const { type, id, engine, parentId, children, dev } = props;
+  const { type, id, engine, parentId, children, dev, componentChildren } =
+    props;
   const { dragable = true, dropable = true } = dev ?? {};
   const nodeRef = useRef();
 
@@ -24,7 +26,12 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
     () => ({
       type: ItemTypes.BOX,
       // 传递的信息
-      item: () => ({ type: type, id: id, children: [], parentId }),
+      item: () => ({
+        type: type,
+        id: id,
+        children: componentChildren,
+        parentId,
+      }),
       end: (item, monitor) => {
         // 获取 drop 通过 drop 回调 return 的数据
         const dropResult = monitor.getDropResult();
