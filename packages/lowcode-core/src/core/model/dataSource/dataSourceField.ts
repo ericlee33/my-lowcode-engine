@@ -1,8 +1,8 @@
 import { makeAutoObservable, reaction } from 'mobx';
-import { DataSourceField } from '../../types/dataSource';
+import { IDataSourceField } from '../../types/dataSource';
 
 class DataSourceField {
-	constructor(props: DataSourceField) {
+	constructor(props: IDataSourceField) {
 		makeAutoObservable(this);
 
 		this.init();

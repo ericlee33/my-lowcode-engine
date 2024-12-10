@@ -1,8 +1,13 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, {
+	forwardRef,
+	useEffect,
+	useImperativeHandle,
+	useRef,
+} from 'react';
 import styled from 'styled-components';
 import { DragType } from '../_consts';
+import { useDrop } from 'react-dnd';
 import { Engine, Element } from '../../core/model/engine';
-import { useDrop } from '../../editor/hooks/useDrop';
 
 interface IContainerProps {
 	className?: string;
@@ -20,34 +25,34 @@ const Root = styled.div`
 `;
 
 const Page = forwardRef<{}, IContainerProps>((props, ref) => {
-	const nodeRef = useRef();
 	const { className, style, children, engine, id } = props;
 
 	// -> hover 既放置，接下来做排序
-	const [{ canDrop, isOver }, { nodeRef: _nodeRef }] = useDrop({
-		accept: [DragType.Common, DragType.Container],
-		deps: [engine],
-		moveCard: (element: Element, id: string) => {
-			/**
-			 * 1、如果此时拖拽的组件是 Box 组件，则 dragIndex 为 undefined，则此时修改，则此时修改 cardList 中的占位元素的位置即可
-			 * 2、如果此时拖拽的组件是 Card 组件，则 dragIndex 不为 undefined，此时替换 dragIndex 和 hoverIndex 位置的元素即可
-			 */
-			const hasElement = engine.schemas.has(element.id);
+	const [{ isOver }, drop] = useDrop(
+		{
+			accept: [DragType.Common, DragType.Container],
+			drop: (element: Element) => {
+				const hasElement = engine.schemas.has(element.id);
 
-			if (hasElement) {
-				engine.schemas.remove(element.id);
-			}
-			engine.schemas.add({ ...element, parentId: id }, id);
-			// 为拖拽中的元素注入 parentId，避免在拽到 button 移动顺序之后之后不符合预期
-			element.parentId = id;
+				if (hasElement) {
+					engine.schemas.remove(element.id);
+				}
+				engine.schemas.add({ ...element, parentId: id }, id);
+				// 为拖拽中的元素注入 parentId，避免在拽到 button 移动顺序之后之后不符合预期
+				element.parentId = id;
+			},
+			collect: (monitor) => ({
+				isOver: monitor.isOver({
+					shallow: true,
+				}),
+			}),
 		},
-		ref: nodeRef,
-		id,
-	});
+		[engine, id]
+	);
 
 	return (
 		<Root
-			ref={_nodeRef}
+			ref={drop}
 			className={className}
 			style={{ ...style, border: isOver ? '1px solid blue' : '' }}
 			{...props}

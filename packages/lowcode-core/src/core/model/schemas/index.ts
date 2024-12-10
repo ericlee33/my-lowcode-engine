@@ -18,7 +18,7 @@ class Schemas {
 		] as ISchemas;
 
 	// dsl 入口
-	get root() {
+	get value() {
 		return this.$schema;
 	}
 
@@ -33,22 +33,22 @@ class Schemas {
 	}
 
 	has(id: string) {
-		const element = this.traverse(this.root, id)[0];
+		const element = this.traverse(this.value, id)[0];
 		return !!element;
 	}
 
 	hasInElement(id: string, rootElement?: Element) {
-		const rootElements = rootElement ? [rootElement] : this.root;
+		const rootElements = rootElement ? [rootElement] : this.value;
 		const element = this.traverse(rootElements, id)[0];
 		return !!element;
 	}
 
 	get(id: string): Element | null {
-		return this.traverse(this.root, id)[0];
+		return this.traverse(this.value, id)[0];
 	}
 
 	add(compoent: Element, id: string) {
-		const [target] = this.traverse(this.root, id);
+		const [target] = this.traverse(this.value, id);
 		target.children.push(compoent);
 	}
 
@@ -57,11 +57,11 @@ class Schemas {
 	}
 
 	remove(id: string) {
-		return this.$remove(this.root, id);
+		return this.$remove(this.value, id);
 	}
 
 	insertAfter(element: Element, id: string) {
-		const [, parent] = this.traverse(this.root, id);
+		const [, parent] = this.traverse(this.value, id);
 		const insertIndex = parent.findIndex((item) => item.id === id);
 		// console.log(parent[0].id, parent, id, insertIndex, 'insertIndex');
 		parent.splice(insertIndex, 0, element);
@@ -128,14 +128,14 @@ class Schemas {
 	}
 
 	// swap(aId: string, bId: string) {
-	// 	const [, aFatherNode] = this.traverse(this.root.schemas, aId);
-	// 	const [eleB] = this.traverse(this.root.schemas, bId);
+	// 	const [, aFatherNode] = this.traverse(this.value.schemas, aId);
+	// 	const [eleB] = this.traverse(this.value.schemas, bId);
 
 	// 	const aIdx = aFatherNode.findIndex((item) => item.id === aId);
 	// 	aFatherNode.splice(aIdx, 1, eleB);
 
-	// 	const [, bFatherNode] = this.traverse(this.root.schemas, bId);
-	// 	const [eleA] = this.traverse(this.root.schemas, aId);
+	// 	const [, bFatherNode] = this.traverse(this.value.schemas, bId);
+	// 	const [eleA] = this.traverse(this.value.schemas, aId);
 
 	// 	const bIdx = bFatherNode.findIndex((item) => item.id === bId);
 	// 	bFatherNode.splice(bIdx, 1, eleA);

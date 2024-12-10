@@ -1,8 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { DragType } from '../../../materials/_consts';
 import { Engine, Element } from '../../../core/model/engine';
-import { useDrop } from '../../hooks/useDrop';
-import { useDrag, DragSourceMonitor } from 'react-dnd';
+import {
+	useDrag,
+	useDrop,
+	DragSourceMonitor,
+	DropTargetMonitor,
+} from 'react-dnd';
 import { MetaData } from '../../../materials/_types';
 import { observer } from 'mobx-react-lite';
 import Toolbar from './Toolbar';
@@ -20,7 +24,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 	const { type, id, engine, parentId, children, dev, componentChildren } =
 		props;
 	const { dragable = true, dropable = true } = dev ?? {};
-	const nodeRef = useRef();
+	let nodeRef = useRef<HTMLDivElement>();
 
 	const [{ isDragging }, drag] = useDrag(
 		() => ({
@@ -49,8 +53,6 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 			},
 			collect: (monitor) => ({
 				isDragging: monitor.isDragging(),
-				handlerId: monitor.getHandlerId(),
-				opacity: monitor.isDragging() ? 0 : 1,
 			}),
 		}),
 		[id]
@@ -61,74 +63,74 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 		}
 	}, [isDragging]);
 
-	const [{ canDrop, isOver }, { nodeRef: _nodeRef }] = useDrop({
-		accept: [DragType.Common],
-		deps: [engine, id, parentId],
-		moveCard: (
-			/** 抛来的 element */
-			element: Element,
-			/** 当前被释放元素的 id */
-			id: string
-		) => {
-			const hasElement = engine.schemas.has(element.id);
-			// console.log(
-			// 	JSON.parse(JSON.stringify(engine.schemas.schema)),
-			// 	hasElement,
-			// 	'schema',
-			// 	id
-			// );
-			if (element.id === id) {
-				return;
-			}
-
-			if (!hasElement) {
-				engine.schemas.add({ ...element, parentId }, id);
-			} else {
-				// parent 相同，需要特殊处理
-				if (element.parentId === parentId) {
-					const parent = engine.schemas.get(element.parentId);
-					const dropIdx = parent.children.findIndex((item) => item.id === id);
-					const dragIdx = parent.children.findIndex(
-						(item) => item.id === element.id
-					);
-					console.log(element.id, 'test');
-					engine.schemas.remove(element.id);
-					console.log(element.id, 'test');
-
-					// 由于先删掉了，如果拖的元素在前面，需要补齐 index
-					// if (dragIdx < dropIdx) {
-					if (dragIdx + 1 < dropIdx) {
-						engine.schemas.insertAfterParentIdx(
-							element,
-							parent.children,
-							dropIdx + 1
-						);
-					} else {
-						engine.schemas.insertAfterParentIdx(
-							element,
-							parent.children,
-							dropIdx
-						);
-					}
+	const [{ isOver }, drop] = useDrop(
+		{
+			accept: [DragType.Common],
+			drop: (
+				/** 抛来的 element */
+				element: Element,
+				monitor: DropTargetMonitor
+			) => {
+				const didDrop = monitor.didDrop();
+				if (didDrop) {
 					return;
 				}
-				// 删除
-				engine.schemas.remove(element.id);
-				// 插入
-				engine.schemas.insertAfter({ ...element, parentId }, id);
-			}
-		},
-		ref: nodeRef,
-		id: id,
-	});
+				const hasElement = engine.schemas.has(element.id);
+				if (element.id === id) {
+					return;
+				}
 
-	let ref = nodeRef;
+				if (!hasElement) {
+					engine.schemas.add({ ...element, parentId }, id);
+				} else {
+					// parent 相同，需要特殊处理
+					if (element.parentId === parentId) {
+						const parent = engine.schemas.get(element.parentId);
+						const dropIdx = parent.children.findIndex((item) => item.id === id);
+						const dragIdx = parent.children.findIndex(
+							(item) => item.id === element.id
+						);
+						console.log(element.id, 'test');
+						engine.schemas.remove(element.id);
+						console.log(element.id, 'test');
+
+						// 由于先删掉了，如果拖的元素在前面，需要补齐 index
+						// if (dragIdx < dropIdx) {
+						if (dragIdx + 1 < dropIdx) {
+							engine.schemas.insertAfterParentIdx(
+								element,
+								parent.children,
+								dropIdx + 1
+							);
+						} else {
+							engine.schemas.insertAfterParentIdx(
+								element,
+								parent.children,
+								dropIdx
+							);
+						}
+						return;
+					}
+					// 删除
+					engine.schemas.remove(element.id);
+					// 插入
+					engine.schemas.insertAfter({ ...element, parentId }, id);
+				}
+			},
+			collect: (monitor) => ({
+				isOver: monitor.isOver({
+					shallow: true,
+				}),
+			}),
+		},
+		[engine, id, parentId]
+	);
 
 	if (dropable) {
-		ref = _nodeRef;
+		drop(nodeRef);
 	}
 	if (dragable) {
-		ref = drag(ref);
+		drag(nodeRef);
 	}
 
 	if (!dragable && !dragable) {
@@ -139,10 +141,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 
 	const isSelected = engine.schemas.selectedId === id;
 
-	if (isSelected) {
-		border = '1px solid blue';
-	}
-	if (isOver) {
+	if (isOver || isSelected) {
 		border = '1px solid blue';
 	}
 
@@ -152,7 +151,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 				marginBottom: 10,
 				border,
 			}}
-			ref={ref}
+			ref={nodeRef}
 			onClickCapture={() => {
 				engine.schemas.setSelectedId(id);
 			}}

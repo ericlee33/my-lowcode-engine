@@ -12,7 +12,7 @@ import {
 	IconSettings,
 } from '@arco-design/web-react/icon';
 import SourceCodePanel from './panels/Left/SourceCode';
-import '@arco-design/web-react/dist/css/arco.css';
+import '@arco-design/theme-line/index.less';
 import { Engine } from '../core/model/engine';
 import Renderer from '../renderer';
 

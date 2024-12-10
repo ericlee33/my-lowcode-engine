@@ -1,9 +1,8 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
 import styled from 'styled-components';
-import { useDrop } from '../../editor/hooks/useDrop';
 import { DragType } from '../_consts';
-import Engine, { Element } from '../../core/model/engine';
-import { DropTargetMonitor } from 'react-dnd';
+import { Engine, Element } from '../../core/model/engine';
+import { DropTargetMonitor, useDrop } from 'react-dnd';
 
 interface IContainerProps {
 	className?: string;
@@ -17,7 +16,7 @@ interface IContainerProps {
 const Root = styled.div`
 	border: 1px solid #e1e1e1;
 	min-height: 130px;
-	padding: 40px 10px;
+	padding: 10px 10px;
 `;
 
 const Container = forwardRef<
@@ -31,47 +30,51 @@ const Container = forwardRef<
 	const { className, style, engine, id, parentId, parentElement, children } =
 		props;
 
-	const [{ canDrop, isOver }, { nodeRef: _nodeRef }] = useDrop({
-		accept: [DragType.Common, DragType.Container],
-		moveCard: (element: Element, id, monitor: DropTargetMonitor) => {
-			const elementHasId = engine.schemas.hasInElement(
-				element.id,
-				parentElement
-			);
-			const rootHasElement = engine.schemas.has(element.id);
+	const [{ isOver }, drop] = useDrop(
+		{
+			accept: [DragType.Common, DragType.Container],
+			drop: (element: Element, monitor: DropTargetMonitor) => {
+				const elementHasId = engine.schemas.hasInElement(
+					element.id,
+					parentElement
+				);
+				const rootHasElement = engine.schemas.has(element.id);
 
-			console.log(rootHasElement, 'rootHasElement424');
+				if (monitor.didDrop()) {
+					return;
+				}
 
-			if (monitor.didDrop()) {
-				return;
-			}
-
-			// 从外部拖拽
-			// 根有 element
-			if (!rootHasElement) {
-				engine.schemas.addToElement(element, parentElement);
-				// 改变顺序
-			} else {
-				engine.schemas.remove(element.id);
-				engine.schemas.addToElement(element, parentElement);
-			}
+				// 从外部拖拽
+				// 根有 element
+				if (!rootHasElement) {
+					engine.schemas.addToElement(element, parentElement);
+					// 改变顺序
+				} else {
+					engine.schemas.remove(element.id);
+					engine.schemas.addToElement(element, parentElement);
+				}
+			},
+			collect: (monitor) => ({
+				isOver: monitor.isOver({
+					shallow: true,
+				}),
+			}),
 		},
-		deps: [engine, id, parentElement],
-		id,
-	});
+		[engine, id, parentElement]
+	);
 
 	useImperativeHandle(ref, () => ({}));
 
 	return (
 		<Root
 			className={className}
-			ref={_nodeRef}
+			ref={drop}
 			style={style}
 			{...props}
 		>
-			{id}
+			{/* {id} */}
 			<div
-				// ref={_nodeRef}
+				// ref={drop}
 				style={{ border: isOver ? '1px solid blue' : '' }}
 			>
 				{children}

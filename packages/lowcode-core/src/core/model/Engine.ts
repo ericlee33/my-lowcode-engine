@@ -36,6 +36,15 @@ export class Engine {
 		} as EngineSchemaRoot;
 	}
 
+	get rootSchema() {
+		const schema = {
+			...this.$schema,
+			schemas: this.schemas.value,
+			dataSource: this.dataSource.value,
+		};
+		return schema;
+	}
+
 	constructor(props: EngineProps) {
 		makeAutoObservable(this);
 		this.schemas = new Schemas(props);
@@ -44,9 +53,8 @@ export class Engine {
 			// 基础属性，version 等
 			props.schema ??
 			this.createDefaultSchema({
-				schemas: this.schemas.root,
-				// dataSource: this.dataSource ??
-				dataSource: [],
+				schemas: this.schemas.value,
+				dataSource: this.dataSource.value,
 			});
 
 		const disposer = reaction(
@@ -61,19 +69,12 @@ export class Engine {
 		this.$disposers.push(disposer);
 	}
 
-	get rootSchema() {
-		return {
-			...this.$schema,
-			schemas: this.schemas.root,
-			dataSource: this.dataSource,
-		};
-	}
-
 	reset() {
 		this.schemas.reset();
+		this.dataSource.reset();
 	}
 
 	destory() {
-		this.schemas.destroy();
+		this.$disposers.forEach((disposer) => disposer());
 	}
 }
