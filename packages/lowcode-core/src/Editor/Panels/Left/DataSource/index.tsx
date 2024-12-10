@@ -28,6 +28,7 @@ const DataSource: React.FC<IDataSourceProps> = observer((props) => {
 	return (
 		<div>
 			<Popover
+				trigger="click"
 				position="right"
 				title={'添加数据源'}
 				content={<RegisterDataSource />}
@@ -49,7 +50,7 @@ const DataSource: React.FC<IDataSourceProps> = observer((props) => {
 			<List
 				className="list-demo-actions"
 				style={{ width: 700, marginBottom: 48, marginTop: 10 }}
-				dataSource={engine.dataSource.value}
+				dataSource={engine.dataSource.value.map((item) => ({ ...item }))}
 				render={render.bind(null, [
 					// <span className='list-demo-actions-icon'>
 					//   <IconEdit />

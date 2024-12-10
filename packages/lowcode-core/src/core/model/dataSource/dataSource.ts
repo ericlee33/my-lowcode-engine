@@ -32,7 +32,8 @@ class DataSource {
 	}
 
 	add(field: IDataSourceField) {
-		this.$dataSource = [...this.$dataSource, field];
+		// this.$dataSource = [...this.$dataSource, field];
+		this.$dataSource.push(field);
 	}
 
 	remove(id: string) {
