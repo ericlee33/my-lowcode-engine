@@ -31,7 +31,10 @@ const MaterialPanel: React.FC<IMaterialPanelProps> = ({
 	engine,
 }) => {
 	return (
-		<Root>
+		<Root
+			className={className}
+			style={style}
+		>
 			<div>
 				<h3>物料列表</h3>
 				<div className="material-list">

@@ -2,7 +2,7 @@ import React, { forwardRef, useImperativeHandle } from 'react';
 import styled from 'styled-components';
 import { useDrop } from '../../editor/hooks/useDrop';
 import { DragType } from '../_consts';
-import Engine, { Element } from '../../core/model/Engine';
+import Engine, { Element } from '../../core/model/engine';
 import { DropTargetMonitor } from 'react-dnd';
 
 interface IContainerProps {
@@ -34,8 +34,13 @@ const Container = forwardRef<
 	const [{ canDrop, isOver }, { nodeRef: _nodeRef }] = useDrop({
 		accept: [DragType.Common, DragType.Container],
 		moveCard: (element: Element, id, monitor: DropTargetMonitor) => {
-			const elementHasId = engine.hasInElement(element.id, parentElement);
-			const rootHasElement = engine.has(element.id);
+			const elementHasId = engine.schema.hasInElement(
+				element.id,
+				parentElement
+			);
+			const rootHasElement = engine.schema.has(element.id);
+
+			console.log(rootHasElement, 'rootHasElement424');
 
 			if (monitor.didDrop()) {
 				return;
@@ -44,11 +49,11 @@ const Container = forwardRef<
 			// 从外部拖拽
 			// 根有 element
 			if (!rootHasElement) {
-				engine.addToElement(element, parentElement);
+				engine.schema.addToElement(element, parentElement);
 				// 改变顺序
 			} else {
-				engine.remove(element.id);
-				engine.addToElement(element, parentElement);
+				engine.schema.remove(element.id);
+				engine.schema.addToElement(element, parentElement);
 			}
 		},
 		deps: [engine, id, parentElement],
@@ -60,13 +65,13 @@ const Container = forwardRef<
 	return (
 		<Root
 			className={className}
-			// ref={_nodeRef}
+			ref={_nodeRef}
 			style={style}
 			{...props}
 		>
 			{id}
 			<div
-				ref={_nodeRef}
+				// ref={_nodeRef}
 				style={{ border: isOver ? '1px solid blue' : '' }}
 			>
 				{children}

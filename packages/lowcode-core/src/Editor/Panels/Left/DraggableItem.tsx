@@ -3,7 +3,7 @@ import { DragType } from '../../../materials/_consts';
 // import { Button } from '@arco-design/web-react';
 import { MetaData } from '../../../materials/_types';
 import { generateId } from '../../../utils';
-import Engine from '../../../core/model/Engine';
+import Engine from '../../../core/model/engine';
 import { useEffect } from 'react';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import styled from 'styled-components';
@@ -15,10 +15,10 @@ const StyledMaterial = styled.div`
 	justify-content: center;
 	border: 1px solid #d1d1d1;
 	border-radius: 2px;
-	font-size: 14px;
+	font-size: 12px;
 	white-space: nowrap;
 	background-color: white;
-	padding: 0.5rem 1rem;
+	padding: 10px;
 	cursor: move;
 	width: 46%;
 	height: 36px;
@@ -58,7 +58,7 @@ const DraggableItem: React.FC<IDraggableItemProps> = (props) => {
 
 	useEffect(() => {
 		if (isDragging) {
-			engine.setSelectedId('');
+			engine.schema.setSelectedId('');
 		}
 	}, [isDragging]);
 
@@ -70,7 +70,7 @@ const DraggableItem: React.FC<IDraggableItemProps> = (props) => {
 		<StyledMaterial ref={drag}>
 			<IconApps
 				style={{
-					marginRight: 14,
+					marginRight: 4,
 				}}
 			/>
 			{metaData.title}

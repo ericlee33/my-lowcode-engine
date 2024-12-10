@@ -1,13 +1,13 @@
 import { useDrop } from 'react-dnd';
 import { DragType } from '../_consts';
 import materials from '../../editor';
-import Renderer from '../../renderer/legacy';
+// import Renderer from '../../renderer/legacy';
 import styled from 'styled-components';
 import Layout, {
 	// Responsive as ResponsiveGridLayout,
 	WidthProvider,
 } from 'react-grid-layout';
-import Engine from '../../core/model/Engine';
+import Engine from '../../core/model/engine';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
@@ -96,7 +96,7 @@ const Canvas: React.FC<ICanvasProps> = ({ schema, onSave }) => {
 			ref={drop}
 			style={{ ...style, ...borderProps }}
 		>
-			<Renderer schema={schema} />
+			{/* <Renderer schema={schema} /> */}
 			{/* <GridLayout
 				className="layout"
 				layout={layout}

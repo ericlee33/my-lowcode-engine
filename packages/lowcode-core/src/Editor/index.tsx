@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Layout from './Layout';
-import Engine from '../core/model/Engine';
+import Engine from '../core/model/engine';
 import { $$_editor_json_schema } from './constants/cache';
+import { EngineContextProvider } from './hooks/useEngine';
 
 interface IEditorProps {}
 
@@ -21,7 +22,13 @@ const Editor: React.FC<IEditorProps> = () => {
 
 		setReady(true);
 	}, []);
-	return ready && <Layout engine={engine.current} />;
+	return (
+		ready && (
+			<EngineContextProvider engine={engine.current}>
+				<Layout engine={engine.current} />
+			</EngineContextProvider>
+		)
+	);
 };
 
 export default Editor;

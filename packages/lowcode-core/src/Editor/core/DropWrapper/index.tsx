@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { DragType } from '../../../materials/_consts';
-import Engine, { Element } from '../../../core/model/Engine';
+import Engine, { Element } from '../../../core/model/engine';
 import { useDrop } from '../../hooks/useDrop';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
 import { MetaData } from '../../../materials/_types';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
+import Toolbar from './Toolbar';
 
 interface IDropWrapper {
 	type: string;
@@ -21,7 +22,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 	const { dragable = true, dropable = true } = dev ?? {};
 	const nodeRef = useRef();
 
-	const [, drag] = useDrag(
+	const [{ isDragging }, drag] = useDrag(
 		() => ({
 			type: DragType.Common,
 			// 传递的信息
@@ -54,6 +55,11 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 		}),
 		[id]
 	);
+	useEffect(() => {
+		if (isDragging) {
+			engine.schema.setSelectedId('');
+		}
+	}, [isDragging]);
 
 	const [{ canDrop, isOver }, { nodeRef: _nodeRef }] = useDrop({
 		accept: [DragType.Common],
@@ -64,9 +70,9 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 			/** 当前被释放元素的 id */
 			id: string
 		) => {
-			const hasElement = engine.has(element.id);
+			const hasElement = engine.schema.has(element.id);
 			// console.log(
-			// 	JSON.parse(JSON.stringify(engine.schema)),
+			// 	JSON.parse(JSON.stringify(engine.schema.schema)),
 			// 	hasElement,
 			// 	'schema',
 			// 	id
@@ -76,32 +82,40 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 			}
 
 			if (!hasElement) {
-				engine.add({ ...element, parentId }, id);
+				engine.schema.add({ ...element, parentId }, id);
 			} else {
 				// parent 相同，需要特殊处理
 				if (element.parentId === parentId) {
-					const parent = engine.get(element.parentId);
+					const parent = engine.schema.get(element.parentId);
 					const dropIdx = parent.children.findIndex((item) => item.id === id);
 					const dragIdx = parent.children.findIndex(
 						(item) => item.id === element.id
 					);
 					console.log(element.id, 'test');
-					engine.remove(element.id);
+					engine.schema.remove(element.id);
 					console.log(element.id, 'test');
 
 					// 由于先删掉了，如果拖的元素在前面，需要补齐 index
 					// if (dragIdx < dropIdx) {
 					if (dragIdx + 1 < dropIdx) {
-						engine.insertAfterParentIdx(element, parent.children, dropIdx + 1);
+						engine.schema.insertAfterParentIdx(
+							element,
+							parent.children,
+							dropIdx + 1
+						);
 					} else {
-						engine.insertAfterParentIdx(element, parent.children, dropIdx);
+						engine.schema.insertAfterParentIdx(
+							element,
+							parent.children,
+							dropIdx
+						);
 					}
 					return;
 				}
 				// 删除
-				engine.remove(element.id);
+				engine.schema.remove(element.id);
 				// 插入
-				engine.insertAfter(element, id);
+				engine.schema.insertAfter(element, id);
 			}
 		},
 		ref: nodeRef,
@@ -117,13 +131,15 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 		ref = drag(ref);
 	}
 
-	if (!ref) {
+	if (!dragable && !dragable) {
 		return children;
 	}
 
 	let border = 'initial';
 
-	if (engine.selectedId === id) {
+	const isSelected = engine.schema.selectedId === id;
+
+	if (isSelected) {
 		border = '1px solid blue';
 	}
 	if (isOver) {
@@ -138,9 +154,18 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 			}}
 			ref={ref}
 			onClickCapture={() => {
-				engine.setSelectedId(id);
+				engine.schema.setSelectedId(id);
 			}}
 		>
+			{isSelected && (
+				<div
+					style={{
+						position: 'relative',
+					}}
+				>
+					<Toolbar />
+				</div>
+			)}
 			<div
 				style={
 					{

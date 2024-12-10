@@ -9,8 +9,8 @@ import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
 import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 import { loader } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor';
-import Engine from '../../../../core/model/Engine';
-import { observer } from 'mobx-react';
+import Engine from '../../../../core/model/engine';
+import { observer } from 'mobx-react-lite';
 
 self.MonacoEnvironment = {
 	getWorker(_, label) {

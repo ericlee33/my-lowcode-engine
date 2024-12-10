@@ -17,7 +17,7 @@ export const useDrop = (params: {
 	const [{ canDrop, isOver }, drop] = useDropBase(
 		() => ({
 			accept,
-			drop: (item: Element, monitor) => {
+			drop: (item: Element, monitor: DropTargetMonitor) => {
 				const didDrop = monitor.didDrop();
 				if (didDrop) {
 					return;
