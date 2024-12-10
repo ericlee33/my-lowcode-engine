@@ -9,7 +9,7 @@ import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
 import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 import { loader } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor';
-import Engine from '../../../../core/model/engine';
+import { Engine } from '../../../../core/model/engine';
 import { observer } from 'mobx-react-lite';
 
 self.MonacoEnvironment = {
@@ -48,7 +48,7 @@ const SourceCodePanel: React.FC<ISourceCodePanelProps> = observer(
 		}, []);
 
 		const onChange = (value) => {
-			engine.reset(JSON.parse(value));
+			engine.schemas.reset(JSON.parse(value));
 		};
 
 		return (
@@ -79,7 +79,7 @@ const SourceCodePanel: React.FC<ISourceCodePanelProps> = observer(
 						onChange={onChange}
 						height="93vh"
 						language="json"
-						value={JSON.stringify(engine.schema, null, 2)}
+						value={JSON.stringify(engine.rootSchema, null, 2)}
 					/>
 				)}
 			</Root>

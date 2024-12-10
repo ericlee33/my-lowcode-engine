@@ -30,7 +30,7 @@ export const InputMeta: MetaData = {
 		canvas: {
 			dragType: DragType.Container,
 		},
-		dropable: false,
-		dragable: false,
+		// dropable: false,
+		// dragable: false,
 	},
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Layout from './Layout';
-import Engine from '../core/model/engine';
+import { Engine } from '../core/model/engine';
 import { $$_editor_json_schema } from './constants/cache';
 import { EngineContextProvider } from './hooks/useEngine';
 

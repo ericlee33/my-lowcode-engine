@@ -54,7 +54,7 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
 		return nodes;
 	};
 
-	return <>{renderElements(engine.schema.root, undefined)}</>;
+	return <>{renderElements(engine.schemas.root, undefined)}</>;
 });
 
 export default Renderer;

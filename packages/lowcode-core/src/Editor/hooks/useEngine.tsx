@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Engine from '../../core/model/engine';
+import { Engine } from '../../core/model/engine';
 
 const EngineContext = React.createContext<{
 	engine: Engine;

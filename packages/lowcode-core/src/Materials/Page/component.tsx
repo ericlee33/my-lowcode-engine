@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import styled from 'styled-components';
 import { DragType } from '../_consts';
-import Engine, { Element } from '../../core/model/engine';
+import { Engine, Element } from '../../core/model/engine';
 import { useDrop } from '../../editor/hooks/useDrop';
 
 interface IContainerProps {
@@ -32,12 +32,12 @@ const Page = forwardRef<{}, IContainerProps>((props, ref) => {
 			 * 1、如果此时拖拽的组件是 Box 组件，则 dragIndex 为 undefined，则此时修改，则此时修改 cardList 中的占位元素的位置即可
 			 * 2、如果此时拖拽的组件是 Card 组件，则 dragIndex 不为 undefined，此时替换 dragIndex 和 hoverIndex 位置的元素即可
 			 */
-			const hasElement = engine.schema.has(element.id);
+			const hasElement = engine.schemas.has(element.id);
 
 			if (hasElement) {
-				engine.schema.remove(element.id);
+				engine.schemas.remove(element.id);
 			}
-			engine.schema.add({ ...element, parentId: id }, id);
+			engine.schemas.add({ ...element, parentId: id }, id);
 			// 为拖拽中的元素注入 parentId，避免在拽到 button 移动顺序之后之后不符合预期
 			element.parentId = id;
 		},

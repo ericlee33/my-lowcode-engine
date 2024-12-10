@@ -1,13 +1,16 @@
 import { makeAutoObservable, reaction } from 'mobx';
 import dataSourceField from './dataSourceField';
-import { DataSourceField } from './_types';
+import { DataSourceField } from '../../types/dataSource';
 import { forEach } from 'lodash-es';
+import { EngineProps } from '../engine';
 
 class DataSource {
 	fields: Record<string, any>[] = [];
+	$dataSource;
 
-	constructor() {
+	constructor(props: EngineProps) {
 		makeAutoObservable(this);
+		this.$dataSource = props.schema?.dataSource;
 
 		this.init();
 	}

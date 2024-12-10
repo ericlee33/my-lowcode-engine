@@ -1,1 +1,1 @@
-export { default as dataSource } from './dataSource';
+export { default as DataSource } from './dataSource';

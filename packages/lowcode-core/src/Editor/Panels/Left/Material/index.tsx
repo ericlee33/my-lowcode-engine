@@ -5,6 +5,7 @@ import MaterialItem from '../DraggableItem';
 import { CustomDragLayer } from './DraggableLayout';
 
 import { Button } from '@arco-design/web-react';
+import { useEngine } from '../../../hooks/useEngine';
 
 interface IMaterialPanelProps {
 	className?: string;
@@ -25,11 +26,8 @@ const Root = styled.div`
 	}
 `;
 
-const MaterialPanel: React.FC<IMaterialPanelProps> = ({
-	className,
-	style,
-	engine,
-}) => {
+const MaterialPanel: React.FC<IMaterialPanelProps> = ({ className, style }) => {
+	const { engine } = useEngine();
 	return (
 		<Root
 			className={className}
@@ -59,7 +57,7 @@ const MaterialPanel: React.FC<IMaterialPanelProps> = ({
 				}}
 				status="danger"
 				onClick={() => {
-					engine.reset();
+					engine.schemas.reset();
 				}}
 			>
 				清空

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { DragType } from '../../../materials/_consts';
-import Engine, { Element } from '../../../core/model/engine';
+import { Engine, Element } from '../../../core/model/engine';
 import { useDrop } from '../../hooks/useDrop';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
 import { MetaData } from '../../../materials/_types';
@@ -57,7 +57,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 	);
 	useEffect(() => {
 		if (isDragging) {
-			engine.schema.setSelectedId('');
+			engine.schemas.setSelectedId('');
 		}
 	}, [isDragging]);
 
@@ -70,9 +70,9 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 			/** 当前被释放元素的 id */
 			id: string
 		) => {
-			const hasElement = engine.schema.has(element.id);
+			const hasElement = engine.schemas.has(element.id);
 			// console.log(
-			// 	JSON.parse(JSON.stringify(engine.schema.schema)),
+			// 	JSON.parse(JSON.stringify(engine.schemas.schema)),
 			// 	hasElement,
 			// 	'schema',
 			// 	id
@@ -82,29 +82,29 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 			}
 
 			if (!hasElement) {
-				engine.schema.add({ ...element, parentId }, id);
+				engine.schemas.add({ ...element, parentId }, id);
 			} else {
 				// parent 相同，需要特殊处理
 				if (element.parentId === parentId) {
-					const parent = engine.schema.get(element.parentId);
+					const parent = engine.schemas.get(element.parentId);
 					const dropIdx = parent.children.findIndex((item) => item.id === id);
 					const dragIdx = parent.children.findIndex(
 						(item) => item.id === element.id
 					);
 					console.log(element.id, 'test');
-					engine.schema.remove(element.id);
+					engine.schemas.remove(element.id);
 					console.log(element.id, 'test');
 
 					// 由于先删掉了，如果拖的元素在前面，需要补齐 index
 					// if (dragIdx < dropIdx) {
 					if (dragIdx + 1 < dropIdx) {
-						engine.schema.insertAfterParentIdx(
+						engine.schemas.insertAfterParentIdx(
 							element,
 							parent.children,
 							dropIdx + 1
 						);
 					} else {
-						engine.schema.insertAfterParentIdx(
+						engine.schemas.insertAfterParentIdx(
 							element,
 							parent.children,
 							dropIdx
@@ -113,9 +113,9 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 					return;
 				}
 				// 删除
-				engine.schema.remove(element.id);
+				engine.schemas.remove(element.id);
 				// 插入
-				engine.schema.insertAfter(element, id);
+				engine.schemas.insertAfter({ ...element, parentId }, id);
 			}
 		},
 		ref: nodeRef,
@@ -137,7 +137,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 
 	let border = 'initial';
 
-	const isSelected = engine.schema.selectedId === id;
+	const isSelected = engine.schemas.selectedId === id;
 
 	if (isSelected) {
 		border = '1px solid blue';
@@ -154,7 +154,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 			}}
 			ref={ref}
 			onClickCapture={() => {
-				engine.schema.setSelectedId(id);
+				engine.schemas.setSelectedId(id);
 			}}
 		>
 			{isSelected && (

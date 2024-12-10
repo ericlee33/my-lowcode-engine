@@ -34,11 +34,11 @@ const Container = forwardRef<
 	const [{ canDrop, isOver }, { nodeRef: _nodeRef }] = useDrop({
 		accept: [DragType.Common, DragType.Container],
 		moveCard: (element: Element, id, monitor: DropTargetMonitor) => {
-			const elementHasId = engine.schema.hasInElement(
+			const elementHasId = engine.schemas.hasInElement(
 				element.id,
 				parentElement
 			);
-			const rootHasElement = engine.schema.has(element.id);
+			const rootHasElement = engine.schemas.has(element.id);
 
 			console.log(rootHasElement, 'rootHasElement424');
 
@@ -49,11 +49,11 @@ const Container = forwardRef<
 			// 从外部拖拽
 			// 根有 element
 			if (!rootHasElement) {
-				engine.schema.addToElement(element, parentElement);
+				engine.schemas.addToElement(element, parentElement);
 				// 改变顺序
 			} else {
-				engine.schema.remove(element.id);
-				engine.schema.addToElement(element, parentElement);
+				engine.schemas.remove(element.id);
+				engine.schemas.addToElement(element, parentElement);
 			}
 		},
 		deps: [engine, id, parentElement],

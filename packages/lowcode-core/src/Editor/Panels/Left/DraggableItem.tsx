@@ -3,7 +3,7 @@ import { DragType } from '../../../materials/_consts';
 // import { Button } from '@arco-design/web-react';
 import { MetaData } from '../../../materials/_types';
 import { generateId } from '../../../utils';
-import Engine from '../../../core/model/engine';
+import { Engine } from '../../../core/model/engine';
 import { useEffect } from 'react';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import styled from 'styled-components';
@@ -58,7 +58,7 @@ const DraggableItem: React.FC<IDraggableItemProps> = (props) => {
 
 	useEffect(() => {
 		if (isDragging) {
-			engine.schema.setSelectedId('');
+			engine.schemas.setSelectedId('');
 		}
 	}, [isDragging]);
 

@@ -3,72 +3,52 @@ import { generateId } from '../../../utils';
 import { find, findIndex, forEach } from 'lodash-es';
 import { $$_editor_json_schema } from '../../../editor/constants/cache';
 import { EngineProps } from '../Engine';
+import { ISchemas, Element } from '../../types/schema';
 
-export type Element = {
-	/** uuid */
-	id: string;
-	/** widget type */
-	type: string;
-	// 物料属性
-	props?: Record<string, any>;
-	children: Element[];
-	// 父亲 id，降低查询时间
-	parentId: string | null;
-};
-
-class Schema {
-	static DefaultSchema = [
-		{
-			type: 'page',
-			id: generateId(),
-			children: [],
-			parentId: null,
-		},
-	];
+// 页面 Schema
+class Schemas {
+	static createDefaultSchema = () =>
+		[
+			{
+				type: 'page',
+				id: generateId(),
+				children: [],
+				parentId: null,
+			},
+		] as ISchemas;
 
 	// dsl 入口
 	get root() {
 		return this.$schema;
 	}
 
-	private $schema: Element[];
+	private $schema: ISchemas;
 	private $disposers = [];
 
 	selectedId?: string;
 
 	constructor(props: EngineProps) {
 		makeAutoObservable(this);
-		this.$schema = props.schema ?? Schema.DefaultSchema;
-
-		const disposer = reaction(
-			() => {
-				return JSON.stringify(this.$schema);
-			},
-			($schema) => {
-				localStorage.setItem($$_editor_json_schema, $schema);
-			}
-		);
-
-		this.$disposers.push(disposer);
+		this.$schema = props.schema?.schemas ?? Schemas.createDefaultSchema();
 	}
 
 	has(id: string) {
-		const element = this.traverse(this.$schema, id)[0];
+		const element = this.traverse(this.root, id)[0];
 		return !!element;
 	}
 
 	hasInElement(id: string, rootElement?: Element) {
-		const rootElements = rootElement ? [rootElement] : this.$schema;
+		const rootElements = rootElement ? [rootElement] : this.root;
 		const element = this.traverse(rootElements, id)[0];
 		return !!element;
 	}
 
 	get(id: string): Element | null {
-		return this.traverse(this.$schema, id)[0];
+		return this.traverse(this.root, id)[0];
 	}
 
 	add(compoent: Element, id: string) {
-		const [target] = this.traverse(this.$schema, id);
+		const [target] = this.traverse(this.root, id);
 		target.children.push(compoent);
 	}
 
@@ -77,25 +57,11 @@ class Schema {
 	}
 
 	remove(id: string) {
-		return this.$remove(this.$schema, id);
+		return this.$remove(this.root, id);
 	}
 
-	// swap(aId: string, bId: string) {
-	// 	const [, aFatherNode] = this.traverse(this.$schema, aId);
-	// 	const [eleB] = this.traverse(this.$schema, bId);
-
-	// 	const aIdx = aFatherNode.findIndex((item) => item.id === aId);
-	// 	aFatherNode.splice(aIdx, 1, eleB);
-
-	// 	const [, bFatherNode] = this.traverse(this.$schema, bId);
-	// 	const [eleA] = this.traverse(this.$schema, aId);
-
-	// 	const bIdx = bFatherNode.findIndex((item) => item.id === bId);
-	// 	bFatherNode.splice(bIdx, 1, eleA);
-	// }
-
 	insertAfter(element: Element, id: string) {
-		const [, parent] = this.traverse(this.$schema, id);
+		const [, parent] = this.traverse(this.root, id);
 		const insertIndex = parent.findIndex((item) => item.id === id);
 		// console.log(parent[0].id, parent, id, insertIndex, 'insertIndex');
 		parent.splice(insertIndex, 0, element);
@@ -148,7 +114,7 @@ class Schema {
 	}
 
 	reset(schema?) {
-		this.$schema = schema ?? Schema.DefaultSchema;
+		this.$schema = schema ?? Schemas.createDefaultSchema();
 	}
 
 	setSelectedId(id: string) {
@@ -160,6 +126,20 @@ class Schema {
 			disposer();
 		});
 	}
+
+	// swap(aId: string, bId: string) {
+	// 	const [, aFatherNode] = this.traverse(this.root.schemas, aId);
+	// 	const [eleB] = this.traverse(this.root.schemas, bId);
+
+	// 	const aIdx = aFatherNode.findIndex((item) => item.id === aId);
+	// 	aFatherNode.splice(aIdx, 1, eleB);
+
+	// 	const [, bFatherNode] = this.traverse(this.root.schemas, bId);
+	// 	const [eleA] = this.traverse(this.root.schemas, aId);
+
+	// 	const bIdx = bFatherNode.findIndex((item) => item.id === bId);
+	// 	bFatherNode.splice(bIdx, 1, eleA);
+	// }
 }
 
-export default Schema;
+export default Schemas;

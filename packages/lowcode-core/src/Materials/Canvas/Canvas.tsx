@@ -7,7 +7,7 @@ import Layout, {
 	// Responsive as ResponsiveGridLayout,
 	WidthProvider,
 } from 'react-grid-layout';
-import Engine from '../../core/model/engine';
+import { Engine } from '../../core/model/engine';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
