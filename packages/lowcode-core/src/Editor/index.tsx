@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Layout from './Layout';
-import { Engine } from '../core/model/engine';
+import { Editor as EditorModel } from './model/editor';
 import { $$_editor_json_schema } from './constants/cache';
-import { EngineContextProvider } from './hooks/useEngine';
+import { EditorContextProvider } from './hooks/useEditor';
 
 interface IEditorProps {}
 
 const Editor: React.FC<IEditorProps> = () => {
 	const [ready, setReady] = useState(false);
-	const engine = useRef<Engine>();
+	const editor = useRef<EditorModel>();
 
 	useEffect(() => {
 		let cachedSchema;
@@ -16,7 +16,7 @@ const Editor: React.FC<IEditorProps> = () => {
 			cachedSchema = JSON.parse(localStorage.getItem($$_editor_json_schema));
 		} catch {}
 
-		engine.current = new Engine({
+		editor.current = new EditorModel({
 			schema: cachedSchema,
 		});
 
@@ -24,9 +24,9 @@ const Editor: React.FC<IEditorProps> = () => {
 	}, []);
 	return (
 		ready && (
-			<EngineContextProvider engine={engine.current}>
-				<Layout engine={engine.current} />
-			</EngineContextProvider>
+			<EditorContextProvider editor={editor.current}>
+				<Layout editor={editor.current} />
+			</EditorContextProvider>
 		)
 	);
 };

@@ -9,14 +9,14 @@ interface IRightPanelsProps {}
 const Root = styled(Tabs)``;
 
 const RightPanels: React.FC<IRightPanelsProps> = (props) => {
-	const { engine } = props;
+	const { editor } = props;
 	return (
 		<Root>
 			<Tabs.TabPane
 				key="config"
 				title="属性"
 			>
-				<ConfigPanel engine={engine} />
+				<ConfigPanel editor={editor} />
 			</Tabs.TabPane>
 			<Tabs.TabPane
 				key="event"

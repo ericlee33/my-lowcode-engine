@@ -15,7 +15,7 @@ export type Element = {
 
 export type ISchemas = Element[];
 
-export type EngineSchemaRoot = {
+export type EditorSchemaRoot = {
 	/** 数据源 */
 	dataSource: DataSourceField[];
 	/** 页面 schema */

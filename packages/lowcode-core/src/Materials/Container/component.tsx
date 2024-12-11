@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
 import styled from 'styled-components';
 import { DragType } from '../_consts';
-import { Engine, Element } from '../../core/model/engine';
+import { Editor, Element } from '../../editor/model/editor';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
 
 interface IContainerProps {
@@ -10,7 +10,7 @@ interface IContainerProps {
 	id: string;
 	parentId: string;
 	parentElement: Element;
-	engine: Engine;
+	editor: Editor;
 }
 
 const Root = styled.div`
@@ -27,18 +27,18 @@ const Container = forwardRef<
 		children: React.ReactNode;
 	}
 >((props, ref) => {
-	const { className, style, engine, id, parentId, parentElement, children } =
+	const { className, style, editor, id, parentId, parentElement, children } =
 		props;
 
 	const [{ isOver }, drop] = useDrop(
 		{
 			accept: [DragType.Common, DragType.Container],
 			drop: (element: Element, monitor: DropTargetMonitor) => {
-				const elementHasId = engine.schemas.hasInElement(
+				const elementHasId = editor.schemas.hasInElement(
 					element.id,
 					parentElement
 				);
-				const rootHasElement = engine.schemas.has(element.id);
+				const rootHasElement = editor.schemas.has(element.id);
 
 				if (monitor.didDrop()) {
 					return;
@@ -47,11 +47,11 @@ const Container = forwardRef<
 				// 从外部拖拽
 				// 根有 element
 				if (!rootHasElement) {
-					engine.schemas.addToElement(element, parentElement);
+					editor.schemas.addToElement(element, parentElement);
 					// 改变顺序
 				} else {
-					engine.schemas.remove(element.id);
-					engine.schemas.addToElement(element, parentElement);
+					editor.schemas.remove(element.id);
+					editor.schemas.addToElement(element, parentElement);
 				}
 			},
 			collect: (monitor) => ({
@@ -60,7 +60,7 @@ const Container = forwardRef<
 				}),
 			}),
 		},
-		[engine, id, parentElement]
+		[editor, id, parentElement]
 	);
 
 	useImperativeHandle(ref, () => ({}));

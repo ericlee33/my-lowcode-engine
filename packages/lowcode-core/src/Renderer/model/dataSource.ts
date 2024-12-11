@@ -2,9 +2,9 @@ import { makeAutoObservable } from 'mobx';
 import dataSourceField from './dataSourceField';
 import { IDataSourceField } from '../../types/dataSource';
 import { forEach } from 'lodash-es';
-import { EngineProps } from '../engine';
+import { EditorProps } from '../editor';
 
-class DataSource {
+export class DataSource {
 	// fields: Record<string, any>[] = [];
 	$dataSource: IDataSourceField[];
 
@@ -12,11 +12,9 @@ class DataSource {
 		return this.$dataSource;
 	}
 
-	constructor(props: EngineProps) {
+	constructor(props: EditorProps) {
 		makeAutoObservable(this);
 		this.$dataSource = props.schema?.dataSource ?? [];
-
-		console.log(this.$dataSource, 'datasource');
 
 		this.init();
 	}
@@ -30,19 +28,4 @@ class DataSource {
 	register(field: IDataSourceField) {
 		// this.fields.push(new dataSourceField(field));
 	}
-
-	add(field: IDataSourceField) {
-		// this.$dataSource = [...this.$dataSource, field];
-		this.$dataSource.push(field);
-	}
-
-	remove(id: string) {
-		this.$dataSource = this.$dataSource.filter((item) => item.id !== id);
-	}
-
-	reset() {
-		this.$dataSource = [];
-	}
 }
-
-export default DataSource;

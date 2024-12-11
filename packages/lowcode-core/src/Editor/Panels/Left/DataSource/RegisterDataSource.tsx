@@ -1,16 +1,16 @@
 import React from 'react';
 import { Form, Radio, Button, Input } from '@arco-design/web-react';
-import { useEngine } from '../../../hooks/useEngine';
+import { useEditor } from '../../../hooks/useEditor';
 import { generateId } from '../../../../utils';
 
 interface IRegisterDataSource {}
 
 const RegisterDataSource: React.FC<IRegisterDataSource> = (props) => {
-	const { engine } = useEngine();
+	const { editor } = useEditor();
 	return (
 		<Form
 			onSubmit={(values) => {
-				engine.dataSource.add(values);
+				editor.dataSource.add(values);
 			}}
 			initialValues={{
 				id: generateId(),

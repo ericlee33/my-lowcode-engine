@@ -7,7 +7,7 @@ import Layout, {
 	// Responsive as ResponsiveGridLayout,
 	WidthProvider,
 } from 'react-grid-layout';
-import { Engine } from '../../core/model/engine';
+import { Editor } from '../../editor/model/editor';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
@@ -27,7 +27,7 @@ const Root = styled.div`
 `;
 
 interface ICanvasProps {
-	schema: Engine;
+	schema: Editor;
 	onSave: (schemaConfig: any) => void;
 }
 

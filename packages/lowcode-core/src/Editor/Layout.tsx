@@ -13,13 +13,13 @@ import {
 } from '@arco-design/web-react/icon';
 import SourceCodePanel from './panels/Left/SourceCode';
 import '@arco-design/theme-line/index.less';
-import { Engine } from '../core/model/engine';
+import { Editor } from './model/editor';
 import Renderer from '../renderer';
 
 interface IEditorProps {
 	className?: string;
 	style?: React.CSSProperties;
-	engine: Engine;
+	editor: Editor;
 }
 
 const Root = styled.div`
@@ -84,7 +84,7 @@ const Root = styled.div`
 `;
 
 const Editor: React.FC<IEditorProps> = (props) => {
-	const { engine } = props;
+	const { editor } = props;
 
 	const panels = [
 		{
@@ -105,7 +105,7 @@ const Editor: React.FC<IEditorProps> = (props) => {
 							style={{
 								marginTop: '10px',
 							}}
-							engine={engine}
+							editor={editor}
 						/>
 					</Tabs.TabPane>
 					{/* <IconOrderedList /> */}
@@ -117,30 +117,30 @@ const Editor: React.FC<IEditorProps> = (props) => {
 							style={{
 								marginTop: '10px',
 							}}
-							engine={engine}
+							editor={editor}
 						/>
 					</Tabs.TabPane>
 					<Tabs.TabPane title={<IconSettings />}>
-						<SourceCodePanel engine={engine} />
+						<SourceCodePanel editor={editor} />
 					</Tabs.TabPane>
 				</Tabs>
 			),
 		},
 		{
 			size: 0.6,
-			content: <Renderer engine={engine} />,
+			content: <Renderer editor={editor} />,
 		},
 		{
 			min: 0.2,
 			size: 0.2,
 			max: 0.3,
-			content: <RightPanels engine={engine} />,
+			content: <RightPanels editor={editor} />,
 		},
 
 		// <div className="center">
 		// </div>,
 		// <div className="right">
-		// <RightPanels engine={engine} />,
+		// <RightPanels editor={editor} />,
 		// </div>,
 	];
 

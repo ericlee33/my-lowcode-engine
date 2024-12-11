@@ -5,7 +5,7 @@ import MaterialItem from '../DraggableItem';
 import { CustomDragLayer } from './DraggableLayout';
 
 import { Button } from '@arco-design/web-react';
-import { useEngine } from '../../../hooks/useEngine';
+import { useEditor } from '../../../hooks/useEditor';
 
 interface IMaterialPanelProps {
 	className?: string;
@@ -27,7 +27,7 @@ const Root = styled.div`
 `;
 
 const MaterialPanel: React.FC<IMaterialPanelProps> = ({ className, style }) => {
-	const { engine } = useEngine();
+	const { editor } = useEditor();
 	return (
 		<Root
 			className={className}
@@ -44,7 +44,7 @@ const MaterialPanel: React.FC<IMaterialPanelProps> = ({ className, style }) => {
 								metaData={material.meta}
 								component={material.component}
 								key={index}
-								engine={engine}
+								editor={editor}
 							/>
 						);
 					})}
@@ -57,7 +57,7 @@ const MaterialPanel: React.FC<IMaterialPanelProps> = ({ className, style }) => {
 				}}
 				status="danger"
 				onClick={() => {
-					engine.schemas.reset();
+					editor.schemas.reset();
 				}}
 			>
 				清空

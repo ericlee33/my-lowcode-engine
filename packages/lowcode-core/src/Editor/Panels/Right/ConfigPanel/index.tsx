@@ -4,13 +4,13 @@ import { Empty, Form } from '@arco-design/web-react';
 import { createSetter } from './SetterFactory';
 import { getMetaByType } from '../../../utils/materials';
 import { useDeepCompareEffect } from 'ahooks';
-import { Engine } from '../../../../core/model/engine';
+import { Editor } from '../../../model/editor';
 import { observer } from 'mobx-react-lite';
 import { Input } from '@arco-design/web-react';
 import { Divider } from '@arco-design/web-react';
 
 interface IConfigPanelProps {
-	engine: Engine;
+	editor: Editor;
 }
 
 const Root = styled.div`
@@ -18,9 +18,9 @@ const Root = styled.div`
 `;
 
 const ConfigPanel: React.FC<IConfigPanelProps> = observer((props) => {
-	const { engine } = props;
+	const { editor } = props;
 	const [form] = Form.useForm();
-	const element = engine.schemas.get(engine.schemas.selectedId);
+	const element = editor.schemas.get(editor.schemas.selectedId);
 	const meta = getMetaByType(element?.type);
 	const componentInfo = meta?.configure;
 
@@ -49,14 +49,14 @@ const ConfigPanel: React.FC<IConfigPanelProps> = observer((props) => {
 				}}
 				form={form}
 				onValuesChange={(_, values) => {
-					engine.schemas.setElementProps(element, values);
+					editor.schemas.setElementProps(element, values);
 				}}
 			>
 				<div>基本信息</div>
 				<Form.Item label="id">
 					<Input
 						disabled
-						value={engine.schemas.selectedId}
+						value={editor.schemas.selectedId}
 					/>
 				</Form.Item>
 				<div>组件配置</div>

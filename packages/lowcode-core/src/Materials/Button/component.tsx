@@ -1,14 +1,14 @@
 import React, { useRef } from 'react';
 import { Button as ArcoButton, ButtonProps } from '@arco-design/web-react';
-import { Engine } from '../../core/model/engine';
+import { Editor } from '../../editor/model/editor';
 
 interface IButtonProps extends ButtonProps {
 	id: string;
 	parentId?: string;
-	engine: Engine;
+	editor: Editor;
 }
 
-const Button: React.FC<IButtonProps> = ({ id, engine, parentId, ...props }) => {
+const Button: React.FC<IButtonProps> = ({ id, editor, parentId, ...props }) => {
 	return (
 		<ArcoButton
 			onClick={(e) => {

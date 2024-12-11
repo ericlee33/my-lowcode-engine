@@ -2,13 +2,13 @@ import React from 'react';
 import { List, Button, Popover } from '@arco-design/web-react';
 import { IconDelete } from '@arco-design/web-react/icon';
 import RegisterDataSource from './RegisterDataSource';
-import { useEngine } from '../../../hooks/useEngine';
+import { useEditor } from '../../../hooks/useEditor';
 import { observer } from 'mobx-react-lite';
 
 interface IDataSourceProps {}
 
 const DataSource: React.FC<IDataSourceProps> = observer((props) => {
-	const { engine } = useEngine();
+	const { editor } = useEditor();
 
 	const render = (actions, item, index) => (
 		<List.Item
@@ -18,12 +18,12 @@ const DataSource: React.FC<IDataSourceProps> = observer((props) => {
 			<List.Item.Meta title={item.name} />
 			<IconDelete
 				onClick={() => {
-					engine.dataSource.remove(item.id);
+					editor.dataSource.remove(item.id);
 				}}
 			/>
 		</List.Item>
 	);
-	console.log(engine.dataSource.value, 'value.value');
+	console.log(editor.dataSource.value, 'value.value');
 
 	return (
 		<div>
@@ -50,7 +50,7 @@ const DataSource: React.FC<IDataSourceProps> = observer((props) => {
 			<List
 				className="list-demo-actions"
 				style={{ width: 700, marginBottom: 48, marginTop: 10 }}
-				dataSource={engine.dataSource.value.map((item) => ({ ...item }))}
+				dataSource={editor.dataSource.value.map((item) => ({ ...item }))}
 				render={render.bind(null, [
 					// <span className='list-demo-actions-icon'>
 					//   <IconEdit />

@@ -1,9 +1,9 @@
 import { makeAutoObservable, reaction } from 'mobx';
 import Schemas from './schemas';
-import { DataSource } from './dataSource';
-import { EngineSchemaRoot } from '../types/schema';
+import { DataSourceResgister } from './dataSourceResgister';
+import { EditorSchemaRoot } from '../../types/schema';
 import { generateId } from '../../utils';
-import { $$_editor_json_schema } from '../../editor/constants/cache';
+import { $$_editor_json_schema } from '../constants/cache';
 
 export type Element = {
 	/** uuid */
@@ -17,23 +17,23 @@ export type Element = {
 	parentId: string | null;
 };
 
-export type EngineProps = {
-	schema?: EngineSchemaRoot;
+export type EditorProps = {
+	schema?: EditorSchemaRoot;
 };
 
-export class Engine {
+export class Editor {
 	schemas: Schemas;
-	dataSource: DataSource;
+	dataSource: DataSourceResgister;
 
-	private $schema: EngineSchemaRoot;
+	private $schema: EditorSchemaRoot;
 	private $disposers = [];
 
-	private createDefaultSchema(config: Partial<EngineSchemaRoot>) {
+	private createDefaultSchema(config: Partial<EditorSchemaRoot>) {
 		return {
 			version: 1,
 			createTimestamp: new Date().getTime(),
 			...config,
-		} as EngineSchemaRoot;
+		} as EditorSchemaRoot;
 	}
 
 	get rootSchema() {
@@ -45,10 +45,10 @@ export class Engine {
 		return schema;
 	}
 
-	constructor(props: EngineProps) {
+	constructor(props: EditorProps) {
 		makeAutoObservable(this);
 		this.schemas = new Schemas(props);
-		this.dataSource = new DataSource(props);
+		this.dataSource = new DataSourceResgister(props);
 		this.$schema =
 			// 基础属性，version 等
 			props.schema ??

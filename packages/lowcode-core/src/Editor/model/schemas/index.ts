@@ -1,9 +1,9 @@
 import { makeAutoObservable, reaction } from 'mobx';
 import { generateId } from '../../../utils';
 import { find, findIndex, forEach } from 'lodash-es';
-import { $$_editor_json_schema } from '../../../editor/constants/cache';
-import { EngineProps } from '../Engine';
-import { ISchemas, Element } from '../../types/schema';
+import { $$_editor_json_schema } from '../../constants/cache';
+import { EditorProps } from '../editor';
+import { ISchemas, Element } from '../../../types/schema';
 
 // 页面 Schema
 class Schemas {
@@ -27,7 +27,7 @@ class Schemas {
 
 	selectedId?: string;
 
-	constructor(props: EngineProps) {
+	constructor(props: EditorProps) {
 		makeAutoObservable(this);
 		this.$schema = props.schema?.schemas ?? Schemas.createDefaultSchema();
 	}

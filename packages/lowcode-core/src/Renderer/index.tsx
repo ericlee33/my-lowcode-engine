@@ -1,15 +1,15 @@
 import React from 'react';
-import Engine, { Element } from '../core/model/engine';
+import { Editor, Element } from '../editor/model/editor';
 import Materials from '../materials';
 import { observer } from 'mobx-react-lite';
 import DropWrapper from '../editor/core/DropWrapper';
 
 type IRendererProps = {
-	engine: Engine;
+	editor: Editor;
 };
 
 const Renderer: React.FC<IRendererProps> = observer((props) => {
-	const { engine } = props;
+	const { editor } = props;
 
 	const renderElements = (
 		elements: Element[] = [],
@@ -28,7 +28,7 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
 							type={material.meta.type}
 							parentId={parentId}
 							id={element.id}
-							engine={engine}
+							editor={editor}
 							dev={material.meta?.dev}
 							componentChildren={element.children}
 						>
@@ -41,7 +41,7 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
 					Component,
 					{
 						parentId,
-						engine,
+						editor,
 						id: element.id,
 						componentConfig: element.props ?? {},
 						parentElement: element,
@@ -54,7 +54,7 @@ const Renderer: React.FC<IRendererProps> = observer((props) => {
 		return nodes;
 	};
 
-	return <>{renderElements(engine.schemas.value, undefined)}</>;
+	return <>{renderElements(editor.schemas.value, undefined)}</>;
 });
 
 export default Renderer;

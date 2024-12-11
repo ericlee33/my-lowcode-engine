@@ -3,7 +3,7 @@ import { DragType } from '../../../materials/_consts';
 // import { Button } from '@arco-design/web-react';
 import { MetaData } from '../../../materials/_types';
 import { generateId } from '../../../utils';
-import { Engine } from '../../../core/model/engine';
+import { Editor } from '../../model/editor';
 import { useEffect } from 'react';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import styled from 'styled-components';
@@ -27,12 +27,12 @@ const StyledMaterial = styled.div`
 interface IDraggableItemProps {
 	metaData: MetaData;
 	component: React.FC<any>;
-	engine: Engine;
+	editor: Editor;
 }
 
 // 容器接受容器，按钮接受非新物料
 const DraggableItem: React.FC<IDraggableItemProps> = (props) => {
-	const { metaData, engine } = props;
+	const { metaData, editor } = props;
 	const dragType = metaData.dev.canvas.dragType;
 
 	const [{ isDragging }, drag, preview] = useDrag(() => ({
@@ -43,7 +43,7 @@ const DraggableItem: React.FC<IDraggableItemProps> = (props) => {
 			// 获取 drop 通过 drop 回调 return 的数据
 			const dropResult = monitor.getDropResult();
 			if (!monitor.didDrop()) {
-				// engine.remove(item.id);
+				// editor.remove(item.id);
 			}
 			if (item && dropResult) {
 				// console.log(item, 333, dropResult);
@@ -58,7 +58,7 @@ const DraggableItem: React.FC<IDraggableItemProps> = (props) => {
 
 	useEffect(() => {
 		if (isDragging) {
-			engine.schemas.setSelectedId('');
+			editor.schemas.setSelectedId('');
 		}
 	}, [isDragging]);
 

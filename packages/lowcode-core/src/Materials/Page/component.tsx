@@ -7,12 +7,12 @@ import React, {
 import styled from 'styled-components';
 import { DragType } from '../_consts';
 import { useDrop } from 'react-dnd';
-import { Engine, Element } from '../../core/model/engine';
+import { Editor, Element } from '../../editor/model/editor';
 
 interface IContainerProps {
 	className?: string;
 	style?: React.CSSProperties;
-	engine: Engine;
+	editor: Editor;
 	id: string;
 }
 
@@ -25,19 +25,19 @@ const Root = styled.div`
 `;
 
 const Page = forwardRef<{}, IContainerProps>((props, ref) => {
-	const { className, style, children, engine, id } = props;
+	const { className, style, children, editor, id } = props;
 
 	// -> hover 既放置，接下来做排序
 	const [{ isOver }, drop] = useDrop(
 		{
 			accept: [DragType.Common, DragType.Container],
 			drop: (element: Element) => {
-				const hasElement = engine.schemas.has(element.id);
+				const hasElement = editor.schemas.has(element.id);
 
 				if (hasElement) {
-					engine.schemas.remove(element.id);
+					editor.schemas.remove(element.id);
 				}
-				engine.schemas.add({ ...element, parentId: id }, id);
+				editor.schemas.add({ ...element, parentId: id }, id);
 				// 为拖拽中的元素注入 parentId，避免在拽到 button 移动顺序之后之后不符合预期
 				element.parentId = id;
 			},
@@ -47,7 +47,7 @@ const Page = forwardRef<{}, IContainerProps>((props, ref) => {
 				}),
 			}),
 		},
-		[engine, id]
+		[editor, id]
 	);
 
 	return (
