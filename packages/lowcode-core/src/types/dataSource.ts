@@ -1,20 +1,26 @@
-type FieldBase<T> = {
-	type: T;
-	name: string;
-	id: string;
-};
-
 type FieldType = 'func' | 'api' | '';
 
-export type IDataSourceField<T extends FieldType = ''> = FieldBase<T> &
+type FieldBase = {
+	type: FieldType;
+	name: string;
+	id: string;
+
+	initFirst: boolean;
+};
+
+export type ApiField = {
+	api: string;
+};
+
+export type FuncField = {
+	func: string;
+};
+
+export type IDataSourceField<T extends FieldType = ''> = FieldBase &
 	(T extends 'func'
-		? {
-				func: string;
-		  }
+		? FuncField
 		: T extends 'api'
-		? {
-				api: string;
-		  }
+		? ApiField
 		: {
 				// expression: string;
 		  });

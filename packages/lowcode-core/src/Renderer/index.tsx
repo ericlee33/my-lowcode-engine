@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Element, Editor } from '../editor/model/editor';
 import Materials from '../materials';
 import { observer } from 'mobx-react-lite';
 import DropWrapper from '../editor/core/DropWrapper';
 import { ElementProps } from './types/element';
+import { Engine } from './model/engine';
+import SchemasParser from './core/SchemasParser';
+import { Spin } from '@arco-design/web-react';
 
-type IRendererProps = {
+export type IRendererProps = {
 	/** 编辑器内使用 */
 	inEditor?: boolean;
 	/** dsl */
@@ -13,45 +16,38 @@ type IRendererProps = {
 };
 
 const Renderer: React.FC<IRendererProps> = observer((props) => {
-	const { inEditor, rootSchema } = props;
+	const [ready, setReady] = useState(false);
+	const engine = useRef<Engine>();
 
-	const renderElements = (elements: Element[] = []) => {
-		const nodes: React.ReactElement[] = [];
-		for (const element of elements) {
-			const componentInfo = Materials.find(
-				(material) => material.meta.type === element.type
-			);
-
-			const elementProps: ElementProps = {
-				element,
-				componentInfo,
-				componentConfig: element.props,
-			};
-
-			const renderInnerComponent = (props) =>
-				React.createElement(componentInfo.component, props);
-
-			let Component = !componentInfo
-				? () => <div>不存在{element.type}物料</div>
-				: (props) =>
-						inEditor ? (
-							<DropWrapper {...elementProps}>
-								{renderInnerComponent(props)}
-							</DropWrapper>
-						) : (
-							renderInnerComponent(props)
-						);
-
-			nodes.push(
-				<Component {...elementProps}>
-					{renderElements(element.children)}
-				</Component>
-			);
+	const initEngine = async () => {
+		if (!engine.current) {
+			engine.current = new Engine(props);
 		}
-		return nodes;
+		await engine.current.dataSource.init();
+		setReady(true);
 	};
 
-	return <>{renderElements(rootSchema.schemas)}</>;
+	useEffect(() => {
+		initEngine();
+	}, []);
+
+	return !ready ? (
+		<Spin
+			block
+			style={{
+				width: '100%',
+				height: '100%',
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+			}}
+		/>
+	) : (
+		<SchemasParser
+			{...props}
+			engine={engine.current}
+		/>
+	);
 });
 
 export default Renderer;

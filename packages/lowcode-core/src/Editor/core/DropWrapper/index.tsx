@@ -16,7 +16,7 @@ interface IDropWrapper extends ElementProps {}
 
 const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 	const { children, element, componentInfo } = props;
-	const { id, type, parentId, children: componentChildren } = element;
+	const { id, parentId } = element;
 	const { meta } = componentInfo;
 	const { dev } = meta;
 
@@ -28,12 +28,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 		() => ({
 			type: DragType.Common,
 			// 传递的信息
-			item: () => ({
-				type: type,
-				id: id,
-				children: componentChildren,
-				parentId,
-			}),
+			item: () => element,
 			end: (item, monitor) => {
 				// 获取 drop 通过 drop 回调 return 的数据
 				const dropResult = monitor.getDropResult();

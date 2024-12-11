@@ -3,7 +3,7 @@ import { DragType } from '../../../materials/_consts';
 // import { Button } from '@arco-design/web-react';
 import { MetaData } from '../../../materials/_types';
 import { generateId } from '../../../utils';
-import { Editor } from '../../model/editor';
+import { Editor, Element } from '../../model/editor';
 import { useEffect } from 'react';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import styled from 'styled-components';
@@ -38,12 +38,14 @@ const DraggableItem: React.FC<IDraggableItemProps> = (props) => {
 	const [{ isDragging }, drag, preview] = useDrag(() => ({
 		type: dragType,
 		// 传递的信息
-		item: () => ({
-			type: metaData.type,
-			id: generateId(),
-			children: [],
-			props: metaData.configure.defaultValues,
-		}),
+		item: () =>
+			({
+				type: metaData.type,
+				id: generateId(),
+				children: [],
+				props: metaData.configure.defaultValues,
+				parentId: null,
+			} as Element),
 		end: (item, monitor) => {
 			// 获取 drop 通过 drop 回调 return 的数据
 			const dropResult = monitor.getDropResult();

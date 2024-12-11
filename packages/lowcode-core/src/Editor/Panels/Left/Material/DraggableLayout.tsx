@@ -72,7 +72,12 @@ export const CustomDragLayer: FC<CustomDragLayerProps> = (props) => {
 
 		switch (itemType) {
 			default:
-				return <Component id={item.id} />;
+				return (
+					<Component
+						element={item}
+						componentConfig={item.props}
+					/>
+				);
 		}
 	}
 

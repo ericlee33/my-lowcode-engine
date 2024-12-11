@@ -1,31 +1,45 @@
 import { makeAutoObservable } from 'mobx';
-import dataSourceField from './dataSourceField';
 import { IDataSourceField } from '../../types/dataSource';
-import { forEach } from 'lodash-es';
-// import { EditorProps } from '../../editor';
+import { map, forEach } from 'lodash-es';
+import DataSourceField from './dataSourceField';
+import { IRendererProps } from '..';
 
 export class DataSource {
-	// fields: Record<string, any>[] = [];
+	fields: DataSourceField[] = [];
 	$dataSource: IDataSourceField[];
+
+	ready: boolean = false;
 
 	get value() {
 		return this.$dataSource;
 	}
 
-	constructor(props: EditorProps) {
+	get valueMap() {
+		return this.fields.reduce((map, field) => {
+			const { name, value } = field;
+			map[name] = value;
+			return map;
+		}, {});
+	}
+
+	constructor(props: IRendererProps) {
 		makeAutoObservable(this);
-		this.$dataSource = props.schema?.dataSource ?? [];
+		this.$dataSource = props.rootSchema?.dataSource ?? [];
 
-		this.init();
+		forEach(this.$dataSource, (field) => {
+			this.register(field);
+		});
 	}
 
-	private init() {
-		// forEach(this.fields, (field) => {
-		// 	field.init();
-		// });
+	private register(field: IDataSourceField) {
+		this.fields.push(new DataSourceField(field));
 	}
 
-	register(field: IDataSourceField) {
-		// this.fields.push(new dataSourceField(field));
+	async init() {
+		await Promise.all(
+			map(this.fields, (field) => {
+				return field.init();
+			})
+		);
 	}
 }
