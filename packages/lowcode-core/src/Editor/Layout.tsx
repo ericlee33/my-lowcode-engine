@@ -107,7 +107,12 @@ const Layout: React.FC<IEditorProps> = (props) => {
 		},
 		{
 			size: 0.6,
-			content: <Renderer editor={editor} />,
+			content: (
+				<Renderer
+					inEditor
+					rootSchema={editor.rootSchema}
+				/>
+			),
 		},
 		{
 			min: 0.2,

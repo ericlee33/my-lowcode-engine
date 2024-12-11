@@ -1,17 +1,12 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
 import styled from 'styled-components';
 import { DragType } from '../_consts';
-import { Editor, Element } from '../../editor/model/editor';
+import { Element } from '../../editor/model/editor';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
+import { useEditor } from '../../editor/hooks/useEditor';
+import { ElementProps } from '../../renderer/types/element';
 
-interface IContainerProps {
-	className?: string;
-	style?: React.CSSProperties;
-	id: string;
-	parentId: string;
-	parentElement: Element;
-	editor: Editor;
-}
+interface IContainerProps extends ElementProps {}
 
 const Root = styled.div`
 	border: 1px solid #e1e1e1;
@@ -19,39 +14,33 @@ const Root = styled.div`
 	padding: 10px 10px;
 `;
 
-const Container = forwardRef<
-	{},
-	IContainerProps & {
-		actions: any[];
-	} & {
-		children: React.ReactNode;
-	}
->((props, ref) => {
-	const { className, style, editor, id, parentId, parentElement, children } =
-		props;
+const Container = forwardRef<{}, IContainerProps>((props, ref) => {
+	const { element, children } = props;
+	const { id } = element;
+	const { editor } = useEditor();
 
 	const [{ isOver }, drop] = useDrop(
 		{
 			accept: [DragType.Common, DragType.Container],
-			drop: (element: Element, monitor: DropTargetMonitor) => {
-				const elementHasId = editor.schemas.hasInElement(
-					element.id,
-					parentElement
-				);
-				const rootHasElement = editor.schemas.has(element.id);
+			drop: (dropElement: Element, monitor: DropTargetMonitor) => {
+				// const elementHasId = editor.schemas.hasInElement(
+				// 	dropElement.id,
+				// 	parentElement
+				// );
+				const rootHasElement = editor.schemas.has(dropElement.id);
 
 				if (monitor.didDrop()) {
 					return;
 				}
 
 				// 从外部拖拽
-				// 根有 element
+				// 根有 dropElement
 				if (!rootHasElement) {
-					editor.schemas.addToElement(element, parentElement);
+					editor.schemas.addToElement(dropElement, element);
 					// 改变顺序
 				} else {
-					editor.schemas.remove(element.id);
-					editor.schemas.addToElement(element, parentElement);
+					editor.schemas.remove(dropElement.id);
+					editor.schemas.addToElement(dropElement, element);
 				}
 			},
 			collect: (monitor) => ({
@@ -60,18 +49,13 @@ const Container = forwardRef<
 				}),
 			}),
 		},
-		[editor, id, parentElement]
+		[editor, id, element]
 	);
 
 	useImperativeHandle(ref, () => ({}));
 
 	return (
-		<Root
-			className={className}
-			ref={drop}
-			style={style}
-			{...props}
-		>
+		<Root ref={drop}>
 			{/* {id} */}
 			<div
 				// ref={drop}

@@ -1,13 +1,11 @@
 import React, { useImperativeHandle } from 'react';
 import styled from 'styled-components';
 import { Input as ArcoInput, InputProps } from '@arco-design/web-react';
+import { ElementProps } from '../../renderer/types/element';
 
-interface IInputProps extends InputProps {
-	className?: string;
-	style?: React.CSSProperties;
-	initialValue: any;
-	value: any;
-	onChange: (value: any) => void;
+interface IInputProps extends ElementProps<InputProps> {
+	value?: any;
+	onChange?: (value: any) => void;
 }
 
 const Root = styled(ArcoInput)``;
@@ -15,12 +13,8 @@ const Root = styled(ArcoInput)``;
 const Input: React.FC<IInputProps> & {
 	actions: any[];
 } = (props) => {
-	const { onChange, style, className, componentConfig } = props;
-	const { initialValue } = componentConfig ?? {};
-
-	// const abc = () => {
-	// 	console.log('abc');
-	// };
+	const { onChange, componentConfig } = props;
+	const { placeholder } = componentConfig ?? {};
 
 	// const onClear = () => {
 	// 	const { onChange } = props;
@@ -28,17 +22,10 @@ const Input: React.FC<IInputProps> & {
 	// };
 
 	// useImperativeHandle(forwardedRef, () => ({
-	// 	abc,
 	// 	onClear,
 	// }));
 
-	return (
-		<Root
-			className={className}
-			style={style}
-			defaultValue={initialValue}
-		/>
-	);
+	return <Root placeholder={placeholder} />;
 };
 
 Input.actions = [

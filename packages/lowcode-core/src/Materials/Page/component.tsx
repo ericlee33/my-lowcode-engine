@@ -1,20 +1,12 @@
-import React, {
-	forwardRef,
-	useEffect,
-	useImperativeHandle,
-	useRef,
-} from 'react';
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import { DragType } from '../_consts';
 import { useDrop } from 'react-dnd';
-import { Editor, Element } from '../../editor/model/editor';
+import { Element } from '../../editor/model/editor';
+import { useEditor } from '../../editor/hooks/useEditor';
+import { ElementProps } from '../../renderer/types/element';
 
-interface IContainerProps {
-	className?: string;
-	style?: React.CSSProperties;
-	editor: Editor;
-	id: string;
-}
+interface IContainerProps extends ElementProps {}
 
 const Root = styled.div`
 	border: 1px solid #e1e1e1;
@@ -25,7 +17,9 @@ const Root = styled.div`
 `;
 
 const Page = forwardRef<{}, IContainerProps>((props, ref) => {
-	const { className, style, children, editor, id } = props;
+	const { editor } = useEditor();
+	const { children, element } = props;
+	const { id } = element;
 
 	// -> hover 既放置，接下来做排序
 	const [{ isOver }, drop] = useDrop(
@@ -53,9 +47,7 @@ const Page = forwardRef<{}, IContainerProps>((props, ref) => {
 	return (
 		<Root
 			ref={drop}
-			className={className}
-			style={{ ...style, border: isOver ? '1px solid blue' : '' }}
-			{...props}
+			style={{ border: isOver ? '1px solid blue' : '' }}
 		>
 			{children}
 		</Root>

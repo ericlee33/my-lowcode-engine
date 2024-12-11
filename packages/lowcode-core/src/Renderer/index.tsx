@@ -1,60 +1,57 @@
 import React from 'react';
-import { Editor, Element } from '../editor/model/editor';
+import { Element, Editor } from '../editor/model/editor';
 import Materials from '../materials';
 import { observer } from 'mobx-react-lite';
 import DropWrapper from '../editor/core/DropWrapper';
+import { ElementProps } from './types/element';
 
 type IRendererProps = {
-	editor: Editor;
+	/** 编辑器内使用 */
+	inEditor?: boolean;
+	/** dsl */
+	rootSchema: Editor['rootSchema'];
 };
 
 const Renderer: React.FC<IRendererProps> = observer((props) => {
-	const { editor } = props;
+	const { inEditor, rootSchema } = props;
 
-	const renderElements = (
-		elements: Element[] = [],
-		parentId: undefined | string
-	) => {
+	const renderElements = (elements: Element[] = []) => {
 		const nodes: React.ReactElement[] = [];
 		for (const element of elements) {
-			const material = Materials.find(
+			const componentInfo = Materials.find(
 				(material) => material.meta.type === element.type
 			);
 
-			const Component = !material
-				? () => <div>不存在${element.type}物料</div>
-				: (props) => (
-						<DropWrapper
-							type={material.meta.type}
-							parentId={parentId}
-							id={element.id}
-							editor={editor}
-							dev={material.meta?.dev}
-							componentChildren={element.children}
-						>
-							{React.createElement(material.component, props)}
-						</DropWrapper>
-				  );
+			const elementProps: ElementProps = {
+				element,
+				componentInfo,
+				componentConfig: element.props,
+			};
+
+			const renderInnerComponent = (props) =>
+				React.createElement(componentInfo.component, props);
+
+			let Component = !componentInfo
+				? () => <div>不存在{element.type}物料</div>
+				: (props) =>
+						inEditor ? (
+							<DropWrapper {...elementProps}>
+								{renderInnerComponent(props)}
+							</DropWrapper>
+						) : (
+							renderInnerComponent(props)
+						);
 
 			nodes.push(
-				React.createElement(
-					Component,
-					{
-						parentId,
-						editor,
-						id: element.id,
-						componentConfig: element.props ?? {},
-						parentElement: element,
-						componentChildren: element.children,
-					},
-					renderElements(element.children, element.id)
-				)
+				<Component {...elementProps}>
+					{renderElements(element.children)}
+				</Component>
 			);
 		}
 		return nodes;
 	};
 
-	return <>{renderElements(editor.schemas.value, undefined)}</>;
+	return <>{renderElements(rootSchema.schemas)}</>;
 });
 
 export default Renderer;

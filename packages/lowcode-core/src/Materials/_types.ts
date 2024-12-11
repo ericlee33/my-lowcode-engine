@@ -1,5 +1,4 @@
 import { DragType } from './_consts';
-import { Editor } from '../editor/model/editor';
 
 export type Props = {
 	name: string;
@@ -37,12 +36,4 @@ export type MetaData = {
 			dragType: DragType;
 		};
 	};
-};
-
-export type IComponentProps<P = any> = {
-	componentConfig: P;
-	id: string;
-	parentId: string;
-	parentElement: Element;
-	editor: Editor;
 };

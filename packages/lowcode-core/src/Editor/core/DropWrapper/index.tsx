@@ -1,29 +1,27 @@
 import React, { useEffect, useRef } from 'react';
 import { DragType } from '../../../materials/_consts';
-import { Editor, Element } from '../../model/editor';
+import { Element } from '../../model/editor';
+import { useEditor } from '../../hooks/useEditor';
 import {
 	useDrag,
 	useDrop,
 	DragSourceMonitor,
 	DropTargetMonitor,
 } from 'react-dnd';
-import { MetaData } from '../../../materials/_types';
 import { observer } from 'mobx-react-lite';
 import Toolbar from './Toolbar';
+import { ElementProps } from '../../../renderer/types/element';
 
-interface IDropWrapper {
-	type: string;
-	id: string;
-	parentId?: string;
-	editor: Editor;
-	dev?: MetaData['dev'];
-	componentChildren: any;
-}
+interface IDropWrapper extends ElementProps {}
 
 const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
-	const { type, id, editor, parentId, children, dev, componentChildren } =
-		props;
+	const { children, element, componentInfo } = props;
+	const { id, type, parentId, children: componentChildren } = element;
+	const { meta } = componentInfo;
+	const { dev } = meta;
+
 	const { dragable = true, dropable = true } = dev ?? {};
+	const { editor } = useEditor();
 	let nodeRef = useRef<HTMLDivElement>();
 
 	const [{ isDragging }, drag] = useDrag(
@@ -90,9 +88,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 						const dragIdx = parent.children.findIndex(
 							(item) => item.id === element.id
 						);
-						console.log(element.id, 'test');
 						editor.schemas.remove(element.id);
-						console.log(element.id, 'test');
 
 						// 由于先删掉了，如果拖的元素在前面，需要补齐 index
 						// if (dragIdx < dropIdx) {

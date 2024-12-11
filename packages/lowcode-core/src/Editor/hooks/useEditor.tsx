@@ -9,6 +9,7 @@ export const EditorContextProvider: React.FC<{
 	editor: Editor;
 }> = (props) => {
 	const { children, editor } = props;
+
 	return (
 		<EditorContext.Provider
 			value={{

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Empty, Table, TableProps } from '@arco-design/web-react';
-import { IComponentProps } from '../_types';
+import { ElementProps } from '../../renderer/types/element';
 
-interface ITableProps extends IComponentProps<TableProps> {}
+interface ITableProps extends ElementProps<TableProps> {}
 
 const Root = styled(Table)``;
 
