@@ -59,7 +59,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 	);
 	useEffect(() => {
 		if (isDragging) {
-			editor.schemas.setSelectedId('');
+			editor.canvas.setSelectedId('');
 		}
 	}, [isDragging]);
 
@@ -139,7 +139,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 
 	let border = 'initial';
 
-	const isSelected = editor.schemas.selectedId === id;
+	const isSelected = editor.canvas.selectedId === id;
 
 	if (isOver || isSelected) {
 		border = '1px solid blue';
@@ -153,7 +153,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
 			}}
 			ref={nodeRef}
 			onClickCapture={() => {
-				editor.schemas.setSelectedId(id);
+				editor.canvas.setSelectedId(id);
 			}}
 		>
 			{isSelected && (

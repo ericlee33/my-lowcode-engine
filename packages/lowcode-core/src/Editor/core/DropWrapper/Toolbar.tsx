@@ -1,6 +1,7 @@
 import React from 'react';
 import { IconDelete } from '@arco-design/web-react/icon';
 import styled from 'styled-components';
+import { useEditor } from '../../hooks/useEditor';
 
 const Root = styled.div`
 	position: absolute;
@@ -17,10 +18,15 @@ const Root = styled.div`
 interface IToolbar {}
 
 const Toolbar: React.FC<IToolbar> = (props) => {
+	const { editor } = useEditor();
+	const onDelete = () => {
+		editor.schemas.remove(editor.canvas.selectedId);
+	};
+
 	return (
 		<Root>
 			<IconDelete
-				// onClick={}
+				onClick={onDelete}
 				style={{
 					color: 'red',
 					background: '#fff',

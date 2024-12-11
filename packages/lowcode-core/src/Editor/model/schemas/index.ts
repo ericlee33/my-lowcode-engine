@@ -6,7 +6,7 @@ import { EditorProps } from '../editor';
 import { ISchemas, Element } from '../../../types/schema';
 
 // 页面 Schema
-class Schemas {
+export class Schemas {
 	static createDefaultSchema = () =>
 		[
 			{
@@ -24,8 +24,6 @@ class Schemas {
 
 	private $schema: ISchemas;
 	private $disposers = [];
-
-	selectedId?: string;
 
 	constructor(props: EditorProps) {
 		makeAutoObservable(this);
@@ -72,7 +70,7 @@ class Schemas {
 		parent.splice(idx, 0, element);
 	}
 
-	$remove(children: Element[], id: string) {
+	private $remove(children: Element[], id: string) {
 		const componentIndex = findIndex(
 			children,
 			(component) => component.id === id
@@ -117,10 +115,6 @@ class Schemas {
 		this.$schema = schema ?? Schemas.createDefaultSchema();
 	}
 
-	setSelectedId(id: string) {
-		this.selectedId = id;
-	}
-
 	destroy() {
 		forEach(this.$disposers, (disposer) => {
 			disposer();
@@ -141,5 +135,3 @@ class Schemas {
 	// 	bFatherNode.splice(bIdx, 1, eleA);
 	// }
 }
-
-export default Schemas;

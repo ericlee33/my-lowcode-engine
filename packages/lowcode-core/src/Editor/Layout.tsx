@@ -53,37 +53,16 @@ const Root = styled.div`
 			margin-right: 20px;
 		}
 	}
+`;
 
-	.editor-area {
-		/* display: flex; */
-
-		.left {
-			/* width: 300px; */
-			.arco-tabs-header-title {
-				padding: 8px 14px !important;
-				font-size: 18px !important;
-			}
-			.arco-tabs-content-vertical {
-				padding-left: 0;
-			}
-		}
-
-		/* .center {
-      min-height: 100vh;
-      flex: 1;
-    }
-
-    .right {
-      width: 280px;
-    } */
-
-		.arco-tabs {
-			height: 100%;
-		}
+const StyledTabs = styled(Tabs)`
+	.arco-tabs-header-title {
+		padding: 2px 10px !important;
+		font-size: 16px !important;
 	}
 `;
 
-const Editor: React.FC<IEditorProps> = (props) => {
+const Layout: React.FC<IEditorProps> = (props) => {
 	const { editor } = props;
 
 	const panels = [
@@ -92,7 +71,7 @@ const Editor: React.FC<IEditorProps> = (props) => {
 			size: 0.2,
 			max: 0.5,
 			content: (
-				<Tabs
+				<StyledTabs
 					defaultActiveTab="material"
 					tabPosition="left"
 					size="large"
@@ -123,7 +102,7 @@ const Editor: React.FC<IEditorProps> = (props) => {
 					<Tabs.TabPane title={<IconSettings />}>
 						<SourceCodePanel editor={editor} />
 					</Tabs.TabPane>
-				</Tabs>
+				</StyledTabs>
 			),
 		},
 		{
@@ -173,4 +152,4 @@ const Editor: React.FC<IEditorProps> = (props) => {
 	);
 };
 
-export default Editor;
+export default Layout;
