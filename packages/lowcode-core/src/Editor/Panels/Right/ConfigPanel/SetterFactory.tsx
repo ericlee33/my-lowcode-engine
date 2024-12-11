@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form } from '@arco-design/web-react';
 import InputSetter from './Setters/InputSetter';
+import JsonSetter from './Setters/JsonSetter';
 
 interface ISetterRendererProps {
   className?: string;
@@ -9,13 +10,23 @@ interface ISetterRendererProps {
   setter: any;
 }
 
-export const createSetter = ({ name, setter }: ISetterRendererProps) => {
+export const createSetter = (props: ISetterRendererProps) => {
+  const { name, setter } = props;
   const renderSetter = () => {
+    let SetterComponent;
     switch (setter.componentName) {
       case 'StringSetter': {
-        return <InputSetter />;
+        SetterComponent = InputSetter;
+        break;
+      }
+      case 'JsonSetter': {
+        SetterComponent = JsonSetter;
+        break;
       }
     }
+    console.log(setter.props, 'seeterProps');
+
+    return <SetterComponent {...(setter?.props ?? {})} />;
   };
 
   return (
