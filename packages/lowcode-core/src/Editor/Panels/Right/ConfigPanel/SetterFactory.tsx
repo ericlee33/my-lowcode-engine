@@ -24,7 +24,6 @@ export const createSetter = (props: ISetterRendererProps) => {
         break;
       }
     }
-    console.log(setter.props, 'seeterProps');
 
     return <SetterComponent {...(setter?.props ?? {})} />;
   };
