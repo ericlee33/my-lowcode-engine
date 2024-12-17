@@ -141,7 +141,7 @@ const DropWrapper: React.FC<IDropWrapper> = observer((props) => {
       style={{
         marginBottom: 10,
         border,
-        display: 'inline-flex',
+        // display: 'inline-flex',
         alignItems: 'flex-start',
       }}
       ref={nodeRef}
