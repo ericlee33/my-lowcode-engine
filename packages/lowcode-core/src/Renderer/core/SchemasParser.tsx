@@ -7,6 +7,7 @@ import { ElementProps } from '../types/element';
 import { IRendererProps } from '..';
 import { Engine } from '../model/engine';
 import { replaceVariable } from './utils';
+import ErrorBoundary from '../../components/ErrorBoundary';
 
 type ISchemasParser = IRendererProps & {
 	engine: Engine;
@@ -28,7 +29,6 @@ const SchemasParser: React.FC<ISchemasParser> = observer((props) => {
 			);
 			// console.log(componentConfig, engine.dataSource.valueMap);
 			// console.log(engine.dataSource.valueMap['test']);
-			console.log(componentConfig);
 			/** 上下文 */
 			const elementProps: ElementProps = {
 				element,
@@ -37,11 +37,13 @@ const SchemasParser: React.FC<ISchemasParser> = observer((props) => {
 			};
 
 			const withDropWrapper = (children) => {
-				return inEditor ? (
+				const wrappedChildren = inEditor ? (
 					<DropWrapper {...elementProps}>{children}</DropWrapper>
 				) : (
 					children
 				);
+
+				return <ErrorBoundary>{wrappedChildren}</ErrorBoundary>;
 			};
 
 			let Component = !componentInfo
