@@ -3,7 +3,7 @@ import Layout from './Layout';
 import { Editor as EditorModel } from './model/editor';
 import { $$_editor_json_schema } from './constants/cache';
 import { EditorContextProvider } from './hooks/useEditor';
-// import { useError } from './hooks/useError';
+import { useError } from './hooks/useError';
 
 interface IEditorProps {}
 
@@ -11,7 +11,7 @@ const Editor: React.FC<IEditorProps> = () => {
 	const [ready, setReady] = useState(false);
 	const editor = useRef<EditorModel>();
 
-	// useError();
+	useError();
 
 	useEffect(() => {
 		let cachedSchema;
