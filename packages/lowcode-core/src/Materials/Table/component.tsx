@@ -20,7 +20,7 @@ const TableComponent: React.FC<ITableProps> = (props) => {
 	}, [data]);
 
 	useEffect(() => {
-		throw new Error('123');
+		// throw new Error('123');
 	}, []);
 
 	return columns ? (

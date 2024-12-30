@@ -1,4 +1,4 @@
-import { DataSourceField } from './dataSource';
+import { IDataSourceField } from './dataSource';
 
 export type Element = {
 	// 物料类型
@@ -17,7 +17,7 @@ export type ISchemas = Element[];
 
 export type EditorSchemaRoot = {
 	/** 数据源 */
-	dataSource: DataSourceField[];
+	dataSource: IDataSourceField[];
 	/** 页面 schema */
 	schemas: ISchemas;
 	createTimestamp: number;

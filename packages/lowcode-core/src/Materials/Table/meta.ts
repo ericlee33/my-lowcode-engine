@@ -17,6 +17,19 @@ export const Meta: MetaData = {
 				},
 			},
 			{
+				name: 'calcBorder',
+				propType: 'string',
+				description: '这是用于描述姓名',
+				setter: {
+					componentName: 'JsSetter',
+					isRequired: false,
+					initialValue: '',
+					props: {
+						editorProps: {},
+					},
+				},
+			},
+			{
 				name: 'columns',
 				propType: 'string',
 				description: '这是用于描述姓名',
@@ -25,9 +38,7 @@ export const Meta: MetaData = {
 					isRequired: false,
 					initialValue: '',
 					props: {
-						editorProps: {
-							height: 900,
-						},
+						editorProps: {},
 					},
 				},
 			},

@@ -27,8 +27,6 @@ const SchemasParser: React.FC<ISchemasParser> = observer((props) => {
 				element.props,
 				engine.dataSource.valueMap
 			);
-			// console.log(componentConfig, engine.dataSource.valueMap);
-			// console.log(engine.dataSource.valueMap['test']);
 			/** 上下文 */
 			const elementProps: ElementProps = {
 				element,
@@ -37,13 +35,19 @@ const SchemasParser: React.FC<ISchemasParser> = observer((props) => {
 			};
 
 			const withDropWrapper = (children) => {
-				const wrappedChildren = inEditor ? (
-					<DropWrapper {...elementProps}>{children}</DropWrapper>
-				) : (
-					children
+				const withErrorBoundaryChildren = (
+					<ErrorBoundary>{children}</ErrorBoundary>
 				);
 
-				return <ErrorBoundary>{wrappedChildren}</ErrorBoundary>;
+				const wrappedChildren = inEditor ? (
+					<DropWrapper {...elementProps}>
+						{withErrorBoundaryChildren}
+					</DropWrapper>
+				) : (
+					withErrorBoundaryChildren
+				);
+
+				return wrappedChildren;
 			};
 
 			let Component = !componentInfo
