@@ -19,6 +19,8 @@ importers:
       '@typescript-eslint/parser': ^7.18.0
       '@vitejs/plugin-react-swc': ^3.7.1
       ahooks: ^3.8.1
+      echarts: ^5.6.0
+      echarts-for-react: ^3.0.2
       eslint: ^8.57.1
       eslint-plugin-react-hooks: ^4.6.2
       eslint-plugin-react-refresh: ^0.4.14
@@ -31,6 +33,7 @@ importers:
       react-dnd: ^16.0.1
       react-dnd-html5-backend: ^16.0.1
       react-dom: ^16.14.0
+      react-draggable: ^4.4.6
       react-frame-component: ^5.2.7
       react-grid-layout: ^1.5.0
       react-resizable: ^3.0.5
@@ -44,6 +47,8 @@ importers:
       '@arco-design/web-react': registry.npmmirror.com/@arco-design/web-react/2.64.1_eu6xtb7kyj6xprlfwv5vt4xwjy
       '@monaco-editor/react': registry.npmmirror.com/@monaco-editor/react/4.6.0_aqav23jxmanb7hehsvrcekfhqu
       ahooks: registry.npmmirror.com/ahooks/3.8.1_react@16.14.0
+      echarts: 5.6.0
+      echarts-for-react: 3.0.2_5kqv7pv5it52clnazpygmjzw6a
       lodash-es: registry.npmmirror.com/lodash-es/4.17.21
       mobx: registry.npmmirror.com/mobx/6.13.5
       mobx-react-lite: registry.npmmirror.com/mobx-react-lite/4.0.7_cvr33yxz7nhbxney4umws763gu
@@ -52,6 +57,7 @@ importers:
       react-dnd: registry.npmmirror.com/react-dnd/16.0.1_3jd5knsyk77j2tir3u5v3semqu
       react-dnd-html5-backend: registry.npmmirror.com/react-dnd-html5-backend/16.0.1
       react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
+      react-draggable: 4.4.6_wcqkhtmu7mswc6yz4uyexck3ty
       react-frame-component: 5.2.7_ccrd4luiijsxnlhe6bgkvyy2z4
       react-grid-layout: registry.npmmirror.com/react-grid-layout/1.5.0_wcqkhtmu7mswc6yz4uyexck3ty
       react-resizable: registry.npmmirror.com/react-resizable/3.0.5_wcqkhtmu7mswc6yz4uyexck3ty
@@ -2320,6 +2326,11 @@ packages:
     engines: {node: '>=0.8'}
     dev: true
 
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
+    dev: false
+
   /co/4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
     engines: {iojs: '>= 1.0.0', node: '>= 0.12.0'}
@@ -2562,6 +2573,25 @@ packages:
       call-bind-apply-helpers: 1.0.0
       es-errors: 1.3.0
       gopd: 1.2.0
+
+  /echarts-for-react/3.0.2_5kqv7pv5it52clnazpygmjzw6a:
+    resolution: {integrity: sha512-DRwIiTzx8JfwPOVgGttDytBqdp5VzCSyMRIxubgU/g2n9y3VLUmF2FK7Icmg/sNVkv4+rktmrLN9w22U2yy3fA==}
+    peerDependencies:
+      echarts: ^3.0.0 || ^4.0.0 || ^5.0.0
+      react: ^15.0.0 || >=16.0.0
+    dependencies:
+      echarts: 5.6.0
+      fast-deep-equal: 3.1.3
+      react: registry.npmmirror.com/react/16.14.0
+      size-sensor: 1.0.2
+    dev: false
+
+  /echarts/5.6.0:
+    resolution: {integrity: sha512-oTbVTsXfKuEhxftHqL5xprgLoc0k7uScAwtryCgWF6hPYFLRwOUHiFmHGCBKP5NPFNkDVopOieyUqYGH8Fa3kA==}
+    dependencies:
+      tslib: 2.3.0
+      zrender: 5.6.1
+    dev: false
 
   /ee-first/1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
@@ -2890,7 +2920,6 @@ packages:
 
   /fast-deep-equal/3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
-    dev: true
 
   /fast-diff/1.3.0:
     resolution: {integrity: sha512-VxPP4NqbUjj6MaAOafWeUn2cXWLcCtljklUtZf0Ind4XQ+QPtmA0b18zZy0jIQx+ExRVCR/ZQpBmik5lXshNsw==}
@@ -3181,6 +3210,7 @@ packages:
 
   /graceful-fs/4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
+    requiresBuild: true
     dev: true
 
   /graphemer/1.4.0:
@@ -4576,6 +4606,18 @@ packages:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
+  /react-draggable/4.4.6_wcqkhtmu7mswc6yz4uyexck3ty:
+    resolution: {integrity: sha512-LtY5Xw1zTPqHkVmtM3X8MUOxNDOUhv/khTgBgrUvwaS064bwVvxT+q5El0uUFNx5IEPKXuRejr7UqLwBIg5pdw==}
+    peerDependencies:
+      react: '>= 16.3.0'
+      react-dom: '>= 16.3.0'
+    dependencies:
+      clsx: 1.2.1
+      prop-types: 15.8.1
+      react: registry.npmmirror.com/react/16.14.0
+      react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
+    dev: false
+
   /react-frame-component/5.2.7_ccrd4luiijsxnlhe6bgkvyy2z4:
     resolution: {integrity: sha512-ROjHtSLoSVYUBfTieazj/nL8jIX9rZFmHC0yXEU+dx6Y82OcBEGgU9o7VyHMrBFUN9FuQ849MtIPNNLsb4krbg==}
     peerDependencies:
@@ -4837,6 +4879,10 @@ packages:
   /sisteransi/1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
     dev: true
+
+  /size-sensor/1.0.2:
+    resolution: {integrity: sha512-2NCmWxY7A9pYKGXNBfteo4hy14gWu47rg5692peVMst6lQLPKrVjhY+UTEsPI5ceFRJSl3gVgMYaUi/hKuaiKw==}
+    dev: false
 
   /slash/3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
@@ -5182,6 +5228,10 @@ packages:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
 
+  /tslib/2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+    dev: false
+
   /tslib/2.5.3:
     resolution: {integrity: sha512-mSxlJJwl3BMEQCUNnxXBU9jP4JBktcEGhURcPR6VQVlnP0FdDEsIaz0C35dXNGLyRfrATNofF0F5p2KPxQgB+w==}
 
@@ -5463,6 +5513,12 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zrender/5.6.1:
+    resolution: {integrity: sha512-OFXkDJKcrlx5su2XbzJvj/34Q3m6PvyCZkVPHGYpcCJ52ek4U/ymZyfuV1nKE23AyBJ51E/6Yr0mhZ7xGTO4ag==}
+    dependencies:
+      tslib: 2.3.0
+    dev: false
 
   registry.npmmirror.com/@arco-design/color/0.4.0:
     resolution: {integrity: sha512-s7p9MSwJgHeL8DwcATaXvWT3m2SigKpxx4JA1BGPHL4gfvaQsmQfrLBDpjOJFJuJ2jG2dMt3R3P8Pm9E65q18g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@arco-design/color/-/color-0.4.0.tgz}
@@ -6012,7 +6068,7 @@ packages:
     name: ajv
     version: 6.12.6
     dependencies:
-      fast-deep-equal: registry.npmmirror.com/fast-deep-equal/3.1.3
+      fast-deep-equal: 3.1.3
       fast-json-stable-stringify: registry.npmmirror.com/fast-json-stable-stringify/2.1.0
       json-schema-traverse: registry.npmmirror.com/json-schema-traverse/0.4.1
       uri-js: registry.npmmirror.com/uri-js/4.4.1
@@ -6104,13 +6160,6 @@ packages:
       ansi-styles: registry.npmmirror.com/ansi-styles/4.3.0
       supports-color: registry.npmmirror.com/supports-color/7.2.0
     dev: true
-
-  registry.npmmirror.com/clsx/1.2.1:
-    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/clsx/-/clsx-1.2.1.tgz}
-    name: clsx
-    version: 1.2.1
-    engines: {node: '>=6'}
-    dev: false
 
   registry.npmmirror.com/clsx/2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/clsx/-/clsx-2.1.1.tgz}
@@ -7162,21 +7211,6 @@ packages:
       scheduler: registry.npmmirror.com/scheduler/0.19.1
     dev: false
 
-  registry.npmmirror.com/react-draggable/4.4.6_wcqkhtmu7mswc6yz4uyexck3ty:
-    resolution: {integrity: sha512-LtY5Xw1zTPqHkVmtM3X8MUOxNDOUhv/khTgBgrUvwaS064bwVvxT+q5El0uUFNx5IEPKXuRejr7UqLwBIg5pdw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-draggable/-/react-draggable-4.4.6.tgz}
-    id: registry.npmmirror.com/react-draggable/4.4.6
-    name: react-draggable
-    version: 4.4.6
-    peerDependencies:
-      react: '>= 16.3.0'
-      react-dom: '>= 16.3.0'
-    dependencies:
-      clsx: registry.npmmirror.com/clsx/1.2.1
-      prop-types: registry.npmmirror.com/prop-types/15.8.1
-      react: registry.npmmirror.com/react/16.14.0
-      react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
-    dev: false
-
   registry.npmmirror.com/react-fast-compare/3.2.2:
     resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-fast-compare/-/react-fast-compare-3.2.2.tgz}
     name: react-fast-compare
@@ -7198,7 +7232,7 @@ packages:
       '@babel/runtime': registry.npmmirror.com/@babel/runtime/7.26.0
       '@types/react': registry.npmmirror.com/@types/react/16.14.62
       focus-lock: registry.npmmirror.com/focus-lock/1.3.5
-      prop-types: registry.npmmirror.com/prop-types/15.8.1
+      prop-types: 15.8.1
       react: registry.npmmirror.com/react/16.14.0
       react-clientside-effect: registry.npmmirror.com/react-clientside-effect/1.2.6_react@16.14.0
       use-callback-ref: registry.npmmirror.com/use-callback-ref/1.3.2_3jd5knsyk77j2tir3u5v3semqu
@@ -7219,7 +7253,7 @@ packages:
       prop-types: registry.npmmirror.com/prop-types/15.8.1
       react: registry.npmmirror.com/react/16.14.0
       react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
-      react-draggable: registry.npmmirror.com/react-draggable/4.4.6_wcqkhtmu7mswc6yz4uyexck3ty
+      react-draggable: 4.4.6_wcqkhtmu7mswc6yz4uyexck3ty
       react-resizable: registry.npmmirror.com/react-resizable/3.0.5_wcqkhtmu7mswc6yz4uyexck3ty
       resize-observer-polyfill: registry.npmmirror.com/resize-observer-polyfill/1.5.1
     dev: false
@@ -7246,7 +7280,7 @@ packages:
     dependencies:
       prop-types: registry.npmmirror.com/prop-types/15.8.1
       react: registry.npmmirror.com/react/16.14.0
-      react-draggable: registry.npmmirror.com/react-draggable/4.4.6_wcqkhtmu7mswc6yz4uyexck3ty
+      react-draggable: 4.4.6_wcqkhtmu7mswc6yz4uyexck3ty
     transitivePeerDependencies:
       - react-dom
     dev: false
@@ -7263,7 +7297,7 @@ packages:
       '@babel/runtime': registry.npmmirror.com/@babel/runtime/7.26.0
       dom-helpers: registry.npmmirror.com/dom-helpers/5.2.1
       loose-envify: registry.npmmirror.com/loose-envify/1.4.0
-      prop-types: registry.npmmirror.com/prop-types/15.8.1
+      prop-types: 15.8.1
       react: registry.npmmirror.com/react/16.14.0
       react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
     dev: false

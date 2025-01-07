@@ -16,6 +16,7 @@ import '@arco-design/theme-line/index.less';
 import { Editor } from './model/editor';
 import Renderer from '../renderer';
 import { FrameRender } from '../components/FrameRender';
+import Footer from './panels/Footer';
 import Frame from 'react-frame-component';
 
 interface IEditorProps {
@@ -28,6 +29,8 @@ const Root = styled.div`
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   .header {
     width: 100%;
@@ -55,6 +58,15 @@ const Root = styled.div`
     .btns {
       margin-right: 20px;
     }
+  }
+
+  .editor-area {
+    flex: 1;
+  }
+
+  .footer {
+    border-top: 1px solid #e1e1e1;
+    height: 24px;
   }
 `;
 
@@ -134,9 +146,11 @@ const Layout: React.FC<IEditorProps> = (props) => {
       {inEditor ? (
         <ResizeBox.SplitGroup
           className="editor-area"
-          style={{
-            height: '100%',
-          }}
+          style={
+            {
+              // height: '100%',
+            }
+          }
           panes={panels}
         />
       ) : (
@@ -151,6 +165,9 @@ const Layout: React.FC<IEditorProps> = (props) => {
           <Renderer rootSchema={editor.rootSchema} />
         </Frame>
       )}
+      <div className="footer">
+        <Footer />
+      </div>
     </Root>
   );
 };
