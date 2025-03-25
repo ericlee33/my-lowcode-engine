@@ -39,3 +39,11 @@
 
 - 响应式拖拽按钮之后，monaco 没更新
 - 点击左下角 reset 之后，页面没更新
+
+## 思考
+
+- 只深度监听底下的值，而不是 ref！！！比如 message 的变化不被监听，只监听 message.abc
+- 不要重新赋值，会导致响应式失效，所以要 extends
+
+you can't re-assign another value to the observable variable, it'll destroy the observable. You need to mutate the observable. For example, you can directly assign values to existing properties or use extendObservable for assigning new properties to observable object.
+https://stackoverflow.com/questions/49436754/mobx-observable-not-triggering-changes

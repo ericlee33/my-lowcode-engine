@@ -122,7 +122,7 @@ export class Schemas {
   reset(schema?) {
     const newSchemas = cloneDeep(schema ?? Schemas.createDefaultSchema());
     // this.$schema.length = 0
-    this.$schema = newSchemas;
+    Object.assign(this.$schema, newSchemas);
   }
 
   destroy() {
