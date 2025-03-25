@@ -9,69 +9,76 @@ import { ElementProps } from '../../renderer/types/element';
 interface IContainerProps extends ElementProps {}
 
 const Root = styled.div`
-	border: 1px solid #e1e1e1;
-	min-height: 130px;
-	padding: 10px 10px;
+  border: 1px solid #e1e1e1;
+  min-height: 130px;
+  padding: 10px 10px;
 `;
 
 const Container = forwardRef<{}, IContainerProps>((props, ref) => {
-	const { element, children } = props;
-	const { id } = element;
-	const { editor } = useEditor();
+  const { element, children } = props;
+  const { id } = element;
+  const { editor } = useEditor();
 
-	const [{ isOver }, drop] = useDrop(
-		{
-			accept: [DragType.Common, DragType.Container],
-			drop: (dropElement: Element, monitor: DropTargetMonitor) => {
-				// const elementHasId = editor.schemas.hasInElement(
-				// 	dropElement.id,
-				// 	parentElement
-				// );
-				const rootHasElement = editor.schemas.has(dropElement.id);
+  const [{ isOver }, drop] = useDrop(
+    {
+      accept: [DragType.Common, DragType.Container],
+      drop: (dropElement: Element, monitor: DropTargetMonitor) => {
+        // const elementHasId = editor.schemas.hasInElement(
+        // 	dropElement.id,
+        // 	parentElement
+        // );
+        const rootHasElement = editor.schemas.has(dropElement.id);
 
-				if (monitor.didDrop()) {
-					return;
-				}
+        if (monitor.didDrop()) {
+          return;
+        }
 
-				// 从外部拖拽
-				// 根有 dropElement
-				if (!rootHasElement) {
-					editor.schemas.addToElement(dropElement, element);
-					// 改变顺序
-				} else {
-					editor.schemas.remove(dropElement.id);
-					editor.schemas.addToElement(dropElement, element);
-				}
-			},
-			collect: (monitor) => ({
-				isOver: monitor.isOver({
-					shallow: true,
-				}),
-			}),
-		},
-		[editor, id, element]
-	);
+        // 从外部拖拽
+        // 根有 dropElement
+        if (!rootHasElement) {
+          // 要注入当前的 parentId
+          editor.schemas.addToElement(
+            { ...dropElement, parentId: id },
+            element
+          );
+          // 改变顺序
+        } else {
+          editor.schemas.remove(dropElement.id);
+          editor.schemas.addToElement(
+            { ...dropElement, parentId: id },
+            element
+          );
+        }
+      },
+      collect: (monitor) => ({
+        isOver: monitor.isOver({
+          shallow: true,
+        }),
+      }),
+    },
+    [editor, id, element]
+  );
 
-	useImperativeHandle(ref, () => ({}));
+  useImperativeHandle(ref, () => ({}));
 
-	return (
-		<Root ref={drop}>
-			{/* {id} */}
-			<div
-				// ref={drop}
-				style={{ border: isOver ? '1px solid blue' : '' }}
-			>
-				{children}
-			</div>
-		</Root>
-	);
+  return (
+    <Root ref={drop}>
+      {/* {id} */}
+      <div
+        // ref={drop}
+        style={{ border: isOver ? '1px solid blue' : '' }}
+      >
+        {children}
+      </div>
+    </Root>
+  );
 });
 
 Container.actions = [
-	{
-		label: '清空',
-		value: 'onClear',
-	},
+  {
+    label: '清空',
+    value: 'onClear',
+  },
 ];
 
 export default Container;

@@ -41,6 +41,7 @@ const Root = styled.div`
     border-bottom: 1px solid #e1e1e1;
 
     .logo {
+      user-select: none;
       margin-left: 4px;
       color: #b0b0b0;
       background: radial-gradient(
@@ -80,6 +81,20 @@ const StyledTabs = styled(Tabs)`
 const Layout: React.FC<IEditorProps> = (props) => {
   const [inEditor, setInEditor] = useState(true);
   const { editor } = props;
+
+  const styles = [].slice
+    .call(document.querySelectorAll('link[rel="stylesheet"], style'))
+    .map((el: any) => {
+      return el.outerHTML;
+    });
+
+  styles.push(
+    `<style>body {height:auto !important;min-height:100%;display: flex;flex-direction: column;}</style>`
+  );
+
+  const initialContent = `<!DOCTYPE html><html><head>${styles.join(
+    ''
+  )}</head><body><div class="ae-IFramePreview AMISCSSWrapper"></div></body></html>`;
 
   const panels = [
     {
@@ -160,7 +175,7 @@ const Layout: React.FC<IEditorProps> = (props) => {
           style={{
             border: 'none',
           }}
-          head={window.document.head}
+          initialContent={initialContent}
         >
           <Renderer rootSchema={editor.rootSchema} />
         </Frame>
