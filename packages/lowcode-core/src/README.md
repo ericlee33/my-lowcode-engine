@@ -47,3 +47,22 @@
 
 you can't re-assign another value to the observable variable, it'll destroy the observable. You need to mutate the observable. For example, you can directly assign values to existing properties or use extendObservable for assigning new properties to observable object.
 https://stackoverflow.com/questions/49436754/mobx-observable-not-triggering-changes
+
+换句话说，MobX 不会对以下情况做出反应：
+
+- 从可观察对象获得的值，但在跟踪函数之外
+  比如一个 reaction 函数，一定要读到对应的 keys 才行
+  跟踪函数很重要
+
+- 在异步调用的代码块中读取的可观察对象
+  异步函数内的赋值逻辑，一定要在 runInAction 或独立函数内
+
+自身理解：
+
+- 针对 object，会监听每一个 keys，无论一开始有没有
+  比如 { } -> { a: 1 }，
+
+通过以下赋值，也是可以监听到
+this.value.a = 1
+
+- 针对 array，监听 length 和内容变化
